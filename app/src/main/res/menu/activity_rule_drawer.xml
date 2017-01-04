@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_rules"
+            android:icon="@drawable/ic_label_black_24dp"
+            android:title="@string/rules" />
+        <item
+            android:id="@+id/nav_sensors"
+            android:icon="@drawable/ic_my_location_black_24dp"
+            android:title="@string/locations" />
+    </group>
+
+    <item android:title="@string/other">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="@string/settings" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="@string/about" />
+        </menu>
+    </item>
+
+</menu>

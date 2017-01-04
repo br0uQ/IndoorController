@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">IndoorController</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rules">Regeln</string>
+    <string name="locations">Orte</string>
+    <string name="settings">Einstellungen</string>
+    <string name="about">Info</string>
+    <string name="other">Sonstiges</string>
+    <string name="discard_label">Abbrechen</string>
+    <string name="save_label">Speichern</string>
+    <string name="ortsname">Ortsname</string>
+    <string name="regelname">Regelname</string>
+    <string name="ortsliste">Orstliste</string>
+    <string name="actions">Actions</string>
+    <string name="bearbeiten">Bearbeiten</string>
+    <string name="chooseActions">Wähle Actions</string>
+    <string name="chooseLocations">Wähle Orte</string>
+    <string name="noelements">Keine Elemente</string>
+    <string name="wifiliste">Wifi-Liste</string>
+    <string name="beaconTopLeft">Beacon links oben</string>
+    <string name="beaconTopRight">Beacon rechts oben</string>
+    <string name="beaconBottomRight">Beacon rechts unten</string>
+    <string name="beaconBottomLeft">Beacon links unten</string>
+    <string name="chooseNfcTag">Wähle einen NFC Tag aus</string>
+    <string name="searchingNfcTag">Suche nach NFC Tag...</string>
+    <string name="new_search">Neu suchen</string>
+    <string name="chooseWifis">Wähle WIFIs aus</string>
+    <string name="error">Fehler</string>
+    <string name="no_name_error">Kein Name eingegeben. Bitte geben Sie einen Namen für diesen Ort ein</string>
+    <string name="ok">OK</string>
+</resources>

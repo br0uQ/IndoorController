@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:divider="?android:attr/dividerVertical"
+    android:dividerPadding="12dp"
+    android:showDividers="middle">
+
+    <!-- id must match corresponding menu item id -->
+    <LinearLayout
+        android:id="@+id/action_cancel"
+        style="@style/EditEventCustomActionButton">
+
+        <ImageView
+
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            style="@style/EditEventCustomActionButtonImage" />
+        <TextView
+            android:text="@string/discard_label"
+            style="@style/EditEventCustomActionButtonText" />
+
+    </LinearLayout>
+
+    <!-- id must match corresponding menu item id -->
+    <LinearLayout
+        android:id="@+id/action_done"
+        style="@style/EditEventCustomActionButton">
+
+        <ImageView
+            android:src="@drawable/ic_done_white_24dp"
+            style="@style/EditEventCustomActionButtonImage" />
+        <TextView
+            android:text="@string/save_label"
+            style="@style/EditEventCustomActionButtonText" />
+
+    </LinearLayout>
+</LinearLayout>
