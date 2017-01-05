@@ -31,7 +31,7 @@ public class CreateOrtRaumFragment extends Fragment implements AdapterView.OnIte
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_ort_raum, container, false);
 
-        CreateOrtActivity activity = (CreateOrtActivity) getActivity();
+        IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
         IndoorService service = activity.getIndoorService();
 
         leftTop = (Spinner) view.findViewById(R.id.create_ort_raum_spinner_top_left);
@@ -80,6 +80,11 @@ public class CreateOrtRaumFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void setBeacons(BeaconSensor[] beacons) {
+        selectedBeacons = beacons;
+        //ToDo set Beacons in Spinner
     }
 
     public class BeaconAdapter extends BaseAdapter {

@@ -57,6 +57,10 @@ public class IndoorService extends Service {
         ortsManagement.addOrt(neuerOrt);
     }
 
+    public Ort getOrt(int locationId) {
+        return ortsManagement.getOrte().get(locationId);
+    }
+
     public class IndoorBinder extends Binder {
         public IndoorService getService() {
             return IndoorService.this;

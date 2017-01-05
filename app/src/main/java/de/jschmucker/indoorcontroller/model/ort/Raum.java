@@ -22,4 +22,8 @@ public class Raum extends Ort {
 		beaconSensors = sensors;
 	}
 
+
+	public BeaconSensor[] getBeacons() {
+		return beaconSensors;
+	}
 }//end Raum

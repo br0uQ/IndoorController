@@ -25,6 +25,9 @@ public class OrtsManagement {
 
 	public OrtsManagement(){
 		orte = new ArrayList<>();
+		addOrt(new Raum("TestRaum", null));
+		addOrt(new NFCSpot("TestNFCSpot", null));
+		addOrt(new WifiUmgebung("TestWifiUmgebung", null));
 	}
 
 	public String[] getOrtstypen() {

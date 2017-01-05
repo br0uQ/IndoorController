@@ -20,4 +20,8 @@ public class WifiUmgebung extends Ort {
 		wifiSensors = sensoren;
 		this.name = name;
 	}
+
+	public WifiSensor[] getWifis() {
+		return wifiSensors;
+	}
 }//end WifiUmgebung

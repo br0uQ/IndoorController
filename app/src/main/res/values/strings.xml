@@ -24,10 +24,10 @@
     <string name="chooseLocations">Wähle Orte</string>
     <string name="noelements">Keine Elemente</string>
     <string name="wifiliste">Wifi-Liste</string>
-    <string name="beaconTopLeft">Beacon links oben</string>
-    <string name="beaconTopRight">Beacon rechts oben</string>
-    <string name="beaconBottomRight">Beacon rechts unten</string>
-    <string name="beaconBottomLeft">Beacon links unten</string>
+    <string name="beaconTopLeft">Beacon 1</string>
+    <string name="beaconTopRight">Beacon 2</string>
+    <string name="beaconBottomRight">Beacon 4</string>
+    <string name="beaconBottomLeft">Beacon 3</string>
     <string name="chooseNfcTag">Wähle einen NFC Tag aus</string>
     <string name="searchingNfcTag">Suche nach NFC Tag...</string>
     <string name="new_search">Neu suchen</string>
@@ -35,4 +35,5 @@
     <string name="error">Fehler</string>
     <string name="no_name_error">Kein Name eingegeben. Bitte geben Sie einen Namen für diesen Ort ein</string>
     <string name="ok">OK</string>
+    <string name="title_activity_change_ort">ChangeOrtActivity</string>
 </resources>

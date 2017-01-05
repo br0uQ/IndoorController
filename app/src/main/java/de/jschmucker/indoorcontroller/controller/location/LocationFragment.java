@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import de.jschmucker.indoorcontroller.MainActivity;
@@ -40,6 +41,14 @@ public class LocationFragment extends Fragment {
         LocationAdapter adapter = new LocationAdapter(getActivity(), activity.getIndoorService().getOrtsManagement().getOrte());
         ListView listView = (ListView) view.findViewById(R.id.location_list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ChangeOrtActivity.class);
+                intent.putExtra(ChangeOrtActivity.LOCATION_ID, position);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

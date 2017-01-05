@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
 
 public class CreateOrtNfcFragment extends Fragment implements Observer {
@@ -36,7 +37,7 @@ public class CreateOrtNfcFragment extends Fragment implements Observer {
         textView = (TextView) view.findViewById(R.id.create_ort_nfc_fragment_textview);
         progressBar = (ProgressBar) view.findViewById(R.id.create_ort_nfc_progressbar);
 
-        CreateOrtActivity activity = (CreateOrtActivity) getActivity();
+        IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
         activity.getIndoorService().startSingleNfcScan(this);
 
         return view;
@@ -44,7 +45,7 @@ public class CreateOrtNfcFragment extends Fragment implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        CreateOrtActivity activity = (CreateOrtActivity) getActivity();
+        IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
         foundSensor = activity.getIndoorService().getFoundNfcSensor();
         refreshButton.setEnabled(true);
         refreshButton.setVisibility(View.VISIBLE);
@@ -64,5 +65,13 @@ public class CreateOrtNfcFragment extends Fragment implements Observer {
 
     public NFCSensor getFoundSensor() {
         return foundSensor;
+    }
+
+    public void setNfcSensor(NFCSensor nfcSensor) {
+        foundSensor = nfcSensor;
+        refreshButton.setEnabled(true);
+        refreshButton.setVisibility(View.VISIBLE);
+        textView.setText(foundSensor.toString());
+        progressBar.setEnabled(false);
     }
 }

@@ -15,4 +15,8 @@ public class NFCSpot extends Ort {
 		this.name = name;
 		nFCSensor = sensor;
 	}
+
+	public NFCSensor getNfcSensor() {
+		return  nFCSensor;
+	}
 }//end NFCSpot

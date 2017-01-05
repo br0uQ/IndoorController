@@ -38,7 +38,7 @@ public class CreateOrtWifiFragment extends Fragment {
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CreateOrtActivity createOrtActivity = (CreateOrtActivity) activity;
+                final IndoorServiceProvider createOrtActivity = (IndoorServiceProvider) activity;
                 final ArrayList<WifiSensor> wifis = createOrtActivity.getIndoorService().getWifiEnvironment();
 
 
@@ -88,5 +88,11 @@ public class CreateOrtWifiFragment extends Fragment {
 
     public ArrayList<WifiSensor> getSelectedWifis() {
         return selectedWifis;
+    }
+
+    public void setWifiList(WifiSensor[] wifis) {
+        for (WifiSensor wifi : wifis) {
+            selectedWifis.add(wifi);
+        }
     }
 }

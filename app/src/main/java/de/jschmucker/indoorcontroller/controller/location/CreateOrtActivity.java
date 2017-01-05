@@ -30,7 +30,7 @@ import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
 
-public class CreateOrtActivity extends AppCompatActivity {
+public class CreateOrtActivity extends AppCompatActivity implements IndoorServiceProvider {
     private EditText name;
     private Spinner ortsTypeChooser;
 
@@ -115,10 +115,6 @@ public class CreateOrtActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // Bind to Service
-        Intent intent = new Intent(this, IndoorService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
         name = (EditText) findViewById(R.id.textedit_ort_name);
         adapter = new ArrayAdapter<String>(this,

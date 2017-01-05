@@ -6,6 +6,12 @@
     android:paddingRight="16dp"
     android:layout_centerVertical="true">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:layout_centerVertical="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="72dp"
@@ -14,13 +20,5 @@
         android:text="hallo"
         style="@android:style/TextAppearance.Material.Body2"
         android:gravity="center" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/button_onoff_indicator_off"
-        android:id="@+id/location_item_indicator"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>
