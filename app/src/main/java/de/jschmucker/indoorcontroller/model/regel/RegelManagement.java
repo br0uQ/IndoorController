@@ -2,6 +2,8 @@ package de.jschmucker.indoorcontroller.model.regel;
 
 import java.util.ArrayList;
 
+import de.jschmucker.indoorcontroller.model.ort.Eigenschaft;
+import de.jschmucker.indoorcontroller.model.steuerung.Action;
 import de.jschmucker.indoorcontroller.model.steuerung.Steuerung;
 
 /**
@@ -15,7 +17,8 @@ public class RegelManagement {
 	private Steuerung steuerung;
 
 	public RegelManagement(){
-
+		regeln = new ArrayList<>();
+		addRule(new Ortsregel("TestRegel", new Eigenschaft[]{}, new Action[]{}));
 	}
 
 	/**
@@ -24,5 +27,9 @@ public class RegelManagement {
 	 */
 	public void addRule(Ortsregel regel){
 		regeln.add(regel);
+	}
+
+	public ArrayList<Ortsregel> getRegeln() {
+		return regeln;
 	}
 }//end RegelManagement

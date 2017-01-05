@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import de.jschmucker.indoorcontroller.MainActivity;
 import de.jschmucker.indoorcontroller.R;
 
 
@@ -35,6 +37,12 @@ public class RulesFragment extends Fragment {
                 openAddDialog(view);
             }
         });
+
+        MainActivity activity = (MainActivity) getActivity();
+        RulesAdapter adapter = new RulesAdapter(getActivity(), activity.getIndoorService().getRegelManagement().getRegeln());
+        ListView listView = (ListView) view.findViewById(R.id.rules_list);
+        listView.setAdapter(adapter);
+
         return view;
     }
 
