@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import de.jschmucker.indoorcontroller.MainActivity;
@@ -19,11 +20,9 @@ import de.jschmucker.indoorcontroller.R;
  */
 public class RulesFragment extends Fragment {
 
-
     public RulesFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +41,14 @@ public class RulesFragment extends Fragment {
         RulesAdapter adapter = new RulesAdapter(getActivity(), activity.getIndoorService().getRegelManagement().getRegeln());
         ListView listView = (ListView) view.findViewById(R.id.rules_list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ChangeRegelActivity.class);
+                intent.putExtra(ChangeRegelActivity.RULE_ID, position);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

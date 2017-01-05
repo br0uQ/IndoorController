@@ -14,6 +14,7 @@ import de.jschmucker.indoorcontroller.model.ort.OrtsManagement;
 import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
+import de.jschmucker.indoorcontroller.model.regel.Ortsregel;
 import de.jschmucker.indoorcontroller.model.regel.RegelManagement;
 import de.jschmucker.indoorcontroller.model.steuerung.Steuerung;
 
@@ -59,6 +60,10 @@ public class IndoorService extends Service {
 
     public Ort getOrt(int locationId) {
         return ortsManagement.getOrte().get(locationId);
+    }
+
+    public Ortsregel getRule(int ruleId) {
+        return regelManagement.getRegeln().get(ruleId);
     }
 
     public class IndoorBinder extends Binder {

@@ -14,7 +14,7 @@ public class Eigenschaft {
 
 	}
 
-	public Ort getOrt(){
+	public Ort getOrt() {
 		return ort;
 	}
 }//end Eigenschaft

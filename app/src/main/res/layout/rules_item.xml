@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/rules_item_on_off_switch" />
+        android:id="@+id/rules_item_on_off_switch"
+        android:focusable="false"/>
 
     <TextView
         android:layout_width="wrap_content"

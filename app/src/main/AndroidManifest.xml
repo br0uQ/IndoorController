@@ -42,7 +42,13 @@
         <activity android:name=".controller.rule.CreateRegelActivity" />
         <activity
             android:name=".controller.location.ChangeOrtActivity"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".controller.rule.ChangeRegelActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

@@ -52,14 +52,6 @@ public class LocationFragment extends Fragment {
         return view;
     }
 
-    /*private void openAddDialog(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-        /*Dialog dialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        dialog.setContentView(R.layout.frame_help);
-        dialog.show();*
-    }*/
-
     public void openAddDialog() {
         Intent intent = new Intent(getActivity(), CreateOrtActivity.class);
         startActivity(intent);

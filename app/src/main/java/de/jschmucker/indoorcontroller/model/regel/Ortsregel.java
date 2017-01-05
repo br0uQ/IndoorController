@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import de.jschmucker.indoorcontroller.model.ort.Ort;
 import de.jschmucker.indoorcontroller.model.steuerung.Action;
 import de.jschmucker.indoorcontroller.model.ort.Eigenschaft;
 
@@ -42,5 +43,14 @@ public class Ortsregel {
 
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	public Action[] getActions() {
+		return actions;
+	}
+
+	public Ort[] getLocations() {
+		//ToDo Orte Eigenschaten klären
+		return null;
 	}
 }//end Ortsregel
