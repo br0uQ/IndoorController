@@ -6,10 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,15 +26,20 @@ import java.util.ArrayList;
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
+import de.jschmucker.indoorcontroller.model.regel.Ortsregel;
 import de.jschmucker.indoorcontroller.model.steuerung.Action;
 
 public class CreateRegelActivity extends AppCompatActivity {
+    public static final String RULE_ID = "RULE_ID";
     private EditText name;
     private ImageButton configureOrtsliste;
     private ImageButton configureActions;
     private ListView ortsliste;
     private ListView actionsList;
     private boolean chooserReady = false;
+
+    private Ortsregel rule;
+    private int ruleId;
 
     final ArrayList<Ort> chosenOrte = new ArrayList<Ort>();
     final ArrayList<Action> chosenActions = new ArrayList<Action>();
@@ -44,11 +52,38 @@ public class CreateRegelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_regel);
 
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setCustomView(R.layout.abort_save_actionbar);
+        Intent intent = getIntent();
+        ruleId = intent.getIntExtra(RULE_ID, -1);
 
-        View v = getSupportActionBar().getCustomView();
+        if (ruleId == -1) {
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setCustomView(R.layout.abort_save_actionbar);
+
+            View v = getSupportActionBar().getCustomView();
+
+            LinearLayout cancel = (LinearLayout) v.findViewById(R.id.action_cancel);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
+            LinearLayout save = (LinearLayout) v.findViewById(R.id.action_done);
+            save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!name.getText().toString().matches("")) {
+                        finish();
+                    }
+                }
+            });
+        } else {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
         name = (EditText) findViewById(R.id.textedit_regel_name);
 
@@ -69,7 +104,7 @@ public class CreateRegelActivity extends AppCompatActivity {
 
                     final boolean[] checkedItems = new boolean[liste.length];
                     for (int i = 0; i < checkedItems.length; i++) {
-                        if (chosenOrte.contains(actions.get(i))) {
+                        if (chosenActions.contains(actions.get(i))) {
                             checkedItems[i] = true;
                         } else checkedItems[i] = false;
                     }
@@ -166,28 +201,36 @@ public class CreateRegelActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-        LinearLayout cancel = (LinearLayout) v.findViewById(R.id.action_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        if (ruleId == -1) {
+            return super.onCreateOptionsMenu(menu);
+        }
+        getMenuInflater().inflate(R.menu.change_ort_menu, menu);
+        return true;
+    }
 
-        LinearLayout save = (LinearLayout) v.findViewById(R.id.action_done);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!name.getText().toString().matches("")) {
-                    finish();
-                }
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        // Bind to Service
-        Intent intent = new Intent(this, IndoorService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.change_ort_menu_save) {
+            //ToDo save changes and exit activity
+            return true;
+        }
+        if (id == R.id.change_ort_menu_delete) {
+            //ToDo delete rule and exit activity
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -257,6 +300,28 @@ public class CreateRegelActivity extends AppCompatActivity {
             IndoorService.IndoorBinder binder = (IndoorService.IndoorBinder) service;
             indoorService = binder.getService();
             bound = true;
+
+            if (ruleId != -1) {
+                rule = indoorService.getRule(ruleId);
+
+                ArrayList<String> stringsActions = new ArrayList<String>();
+                for (Action action : rule.getActions()) {
+                    stringsActions.add(action.toString());
+                }
+
+                ArrayAdapter<String> adapterActions = new ArrayAdapter<>(CreateRegelActivity.this,
+                        android.R.layout.simple_list_item_1, stringsActions);
+                actionsList.setAdapter(adapterActions);
+
+                /*ArrayList<String> stringsLocations = new ArrayList<String>();
+                for (Ort ort : rule.getLocations()) {
+                    stringsLocations.add(ort.getName());
+                }
+
+                ArrayAdapter<String> adapterLocations = new ArrayAdapter<>(CreateRegelActivity.this,
+                        android.R.layout.simple_list_item_1, stringsLocations);
+                ortsliste.setAdapter(adapterLocations);*/
+            }
         }
 
         @Override

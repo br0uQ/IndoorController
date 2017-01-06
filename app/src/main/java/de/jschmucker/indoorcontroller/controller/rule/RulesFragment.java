@@ -44,8 +44,8 @@ public class RulesFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ChangeRegelActivity.class);
-                intent.putExtra(ChangeRegelActivity.RULE_ID, position);
+                Intent intent = new Intent(getActivity(), CreateRegelActivity.class);
+                intent.putExtra(CreateRegelActivity.RULE_ID, position);
                 startActivity(intent);
             }
         });
