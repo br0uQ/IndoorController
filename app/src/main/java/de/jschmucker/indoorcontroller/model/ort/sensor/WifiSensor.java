@@ -8,6 +8,7 @@ package de.jschmucker.indoorcontroller.model.ort.sensor;
  */
 public class WifiSensor extends LocationSensor {
 	private String ssid;
+	private String bssid;
 
 	public WifiSensor(){
 
@@ -15,5 +16,9 @@ public class WifiSensor extends LocationSensor {
 
 	public String getSsid() {
 		return ssid;
+	}
+
+	public String getBssid() {
+		return bssid;
 	}
 }//end WifiSensor

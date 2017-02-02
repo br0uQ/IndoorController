@@ -2,7 +2,7 @@ package de.jschmucker.indoorcontroller.model.steuerung;
 
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 13-Dez-2016 15:33:50
  */

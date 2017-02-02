@@ -1,7 +1,6 @@
-package de.jschmucker.indoorcontroller.model.ort;
+package de.jschmucker.indoorcontroller.model.ort.detections.roomdetection;
 
-import java.util.ArrayList;
-
+import de.jschmucker.indoorcontroller.model.ort.Ort;
 import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 
 /**
@@ -21,7 +20,6 @@ public class Raum extends Ort {
 		} */
 		beaconSensors = sensors;
 	}
-
 
 	public BeaconSensor[] getBeacons() {
 		return beaconSensors;

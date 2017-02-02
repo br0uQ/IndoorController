@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="de.jschmucker.indoorcontroller.controller.location.CreateOrtWifiFragment">
+    tools:context="de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.CreateOrtWifiFragment">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -10,8 +10,7 @@ import de.jschmucker.indoorcontroller.model.ort.sensor.SensorManagement;
  * @created 06-Dez-2016 14:18:19
  */
 public abstract class Ort {
-
-	private Eigenschaft[] eigenschaften;
+	protected boolean active;
 	private SensorManagement sensorManagement;
 	protected String name;
 
@@ -23,7 +22,7 @@ public abstract class Ort {
 		return name;
 	}
 
-	public Eigenschaft[] getEigenschaften(){
-		return eigenschaften;
+	public boolean isActive() {
+		return active;
 	}
 }//end Ort

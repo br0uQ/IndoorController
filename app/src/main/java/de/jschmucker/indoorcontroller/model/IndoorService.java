@@ -8,7 +8,6 @@ import android.os.IBinder;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import de.jschmucker.indoorcontroller.controller.location.CreateOrtNfcFragment;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
 import de.jschmucker.indoorcontroller.model.ort.OrtsManagement;
 import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;

@@ -2,7 +2,7 @@ package de.jschmucker.indoorcontroller.model.ort;
 
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */

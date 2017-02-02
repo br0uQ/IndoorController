@@ -16,12 +16,13 @@ import android.widget.TextView;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.NFCSpot;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.CreateOrtNfcFragment;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.Raum;
-import de.jschmucker.indoorcontroller.model.ort.WifiUmgebung;
-import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.CreateOrtWifiFragment;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.CreateOrtRaumFragment;
 
 public class ChangeOrtActivity extends AppCompatActivity implements IndoorServiceProvider {
     public static final String LOCATION_ID = "LOCATION_ID";

@@ -1,8 +1,7 @@
-package de.jschmucker.indoorcontroller.controller.location;
+package de.jschmucker.indoorcontroller.model.ort.detections.roomdetection;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.IndoorService;
+import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
 import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 
-public class CreateOrtRaumFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class CreateOrtRaumFragment extends LocationDetectionFragment implements AdapterView.OnItemSelectedListener {
     Spinner leftTop;
     Spinner rightTop;
     Spinner leftBottom;

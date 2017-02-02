@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.jschmucker.indoorcontroller.controller.location.CreateOrtRaumFragment"
+    tools:context=".model.ort.detections.roomdetection.CreateOrtRaumFragment"
     android:background="@drawable/room_border">
 
     <!-- TODO: Update blank fragment layout -->
@@ -45,12 +45,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beaconTopRight"
-                    android:layout_gravity="right"/>
+                    android:layout_gravity="end"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:id="@+id/create_ort_raum_spinner_top_right">
                 </Spinner>
 
@@ -93,12 +93,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beaconBottomRight"
-                    android:layout_gravity="right"/>
+                    android:layout_gravity="end"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:id="@+id/create_ort_raum_spinner_bottom_right">
                 </Spinner>
 

@@ -5,12 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
 
 /**
  * Created by jschmucker on 12/12/16.
@@ -18,24 +26,24 @@ import de.jschmucker.indoorcontroller.model.ort.Ort;
 
 public class LocationAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Ort> orte;
+    private ArrayList<LocationDetection> detections;
 
     private static LayoutInflater inflater = null;
 
-    public LocationAdapter(Context context, ArrayList<Ort> orte) {
+    public LocationAdapter(Context context, ArrayList<LocationDetection> detections) {
         this.context = context;
-        this.orte = orte;
+        this.detections = detections;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return orte.size();
+        return detections.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return orte.get(i);
+        return detections.get(i);
     }
 
     @Override
@@ -50,7 +58,16 @@ public class LocationAdapter extends BaseAdapter {
             v = inflater.inflate(R.layout.location_item, null);
         }
         TextView name = (TextView) v.findViewById(R.id.location_item_name);
-        name.setText(orte.get(i).getName());
+        name.setText(detections.get(i).getDetectionName());
+        ImageView imageView = (ImageView) v.findViewById(R.id.location_item_icon);
+        if (detections.get(i) instanceof RoomDetection) {
+            imageView.setImageResource(R.drawable.ic_room_white24dp);
+        } else if (detections.get(i) instanceof WifiDetection) {
+            imageView.setImageResource(R.drawable.ic_wifis_white24dp);
+        } else if (detections.get(i) instanceof NfcDetection) {
+            imageView.setImageResource(R.drawable.ic_nfc_spot_white24dp);
+        }
+
         return v;
     }
 }

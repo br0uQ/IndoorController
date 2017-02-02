@@ -36,4 +36,7 @@
     <string name="no_name_error">Kein Name eingegeben. Bitte geben Sie einen Namen für diesen Ort ein</string>
     <string name="ok">OK</string>
     <string name="title_activity_change_ort">ChangeOrtActivity</string>
+    <string name="room_detection_name">Raum</string>
+    <string name="nfc_detection_name">NFC Spot</string>
+    <string name="wifi_detection_name">Wifi Umgebung</string>
 </resources>

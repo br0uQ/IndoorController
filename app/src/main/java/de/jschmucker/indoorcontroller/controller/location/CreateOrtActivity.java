@@ -22,10 +22,14 @@ import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.NFCSpot;
+import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.CreateOrtNfcFragment;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.Raum;
-import de.jschmucker.indoorcontroller.model.ort.WifiUmgebung;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.CreateOrtWifiFragment;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.CreateOrtRaumFragment;
 import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
@@ -39,10 +43,9 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
     private IndoorService indoorService;
     private boolean bound = false;
 
-    private CreateOrtWifiFragment wifiFragment;
-    private CreateOrtRaumFragment raumFragment;
-    private CreateOrtNfcFragment nfcFragment;
     private Fragment actualFragment;
+    private LocationDetection[] detections;
+    private int selected = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,32 +72,8 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
                 String ortsName = name.getText().toString();
                 if (!name.getText().toString().matches("")) {
                     if (bound) {
-                        Ort neuerOrt = null;
-                        if (actualFragment == wifiFragment) {
-                            ArrayList<WifiSensor> wifis = wifiFragment.getSelectedWifis();
-                            if (wifis.size() > 0) {
-                                neuerOrt = new WifiUmgebung(ortsName, (WifiSensor[]) wifis.toArray());
-                            } else {
-                                //ToDo: Fehler keine Wifis ausgewählt
-                            }
-                        } else if (actualFragment == raumFragment) {
-                            BeaconSensor[] beacons = raumFragment.getSelectedBeacons();
-                            if ((beacons[0] != null) && (beacons[1] != null) && (beacons[2] != null)
-                                    && (beacons[3] != null)) {
-                                neuerOrt = new Raum(ortsName, beacons);
-                            } else {
-                                //ToDo: Fehler nicht vier Beacons ausgewählt
-                            }
-                        } else if (actualFragment == nfcFragment) {
-                            NFCSensor nfcSensor = nfcFragment.getFoundSensor();
-                            if (nfcSensor != null) {
-                                neuerOrt = new NFCSpot(ortsName, nfcSensor);
-                            } else {
-                                //ToDo: Fehler keine NFCSpot gefunden
-                            }
-                        }
-                        if (neuerOrt != null) {
-                            indoorService.addOrt(neuerOrt);
+                        if (selected != -1) {
+                            indoorService.addOrt(detections[selected].createLocation());
                             finish();
                         }
                     }
@@ -119,10 +98,6 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
         name = (EditText) findViewById(R.id.textedit_ort_name);
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item);
-
-        wifiFragment = new CreateOrtWifiFragment();
-        raumFragment = new CreateOrtRaumFragment();
-        nfcFragment = new CreateOrtNfcFragment();
     }
 
     @Override
@@ -161,24 +136,18 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
             indoorService = binder.getService();
             bound = true;
 
-            final String[] strings = indoorService.getOrtsManagement().getOrtstypen();
+            detections = indoorService.getOrtsManagement().getLocationDetections();
 
             ortsTypeChooser = (Spinner) findViewById(R.id.spinner_orts_type);
-            for (String string : strings) {
-                adapter.add(string);
+            for (LocationDetection detection : detections) {
+                adapter.add(detection.getDetectionName());
             }
             ortsTypeChooser.setAdapter(adapter);
 
             ortsTypeChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (strings[position].matches("Raum")) {
-                        actualFragment = raumFragment;
-                    } else if (strings[position].matches("WifiUmgebung")) {
-                        actualFragment = wifiFragment;
-                    } else if (strings[position].matches("NFCSpot")) {
-                        actualFragment = nfcFragment;
-                    }
+                    actualFragment = detections[position].getFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.create_ort_fragment_container, actualFragment);
                     transaction.commit();

@@ -120,8 +120,8 @@ public class CreateRegelActivity extends AppCompatActivity {
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    chosenActions.clear();
                                     for (int i = 0; i < checkedItems.length; i++) {
-                                        chosenActions.clear();
                                         if (checkedItems[i]) {
                                             chosenActions.add(actions.get(i));
                                         }
@@ -175,8 +175,8 @@ public class CreateRegelActivity extends AppCompatActivity {
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    chosenOrte.clear();
                                     for (int i = 0; i < checkedItems.length; i++) {
-                                        chosenOrte.clear();
                                         if (checkedItems[i]) {
                                             chosenOrte.add(orte.get(i));
                                         }
@@ -312,6 +312,8 @@ public class CreateRegelActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapterActions = new ArrayAdapter<>(CreateRegelActivity.this,
                         android.R.layout.simple_list_item_1, stringsActions);
                 actionsList.setAdapter(adapterActions);
+
+                name.setText(rule.getName());
 
                 /*ArrayList<String> stringsLocations = new ArrayList<String>();
                 for (Ort ort : rule.getLocations()) {

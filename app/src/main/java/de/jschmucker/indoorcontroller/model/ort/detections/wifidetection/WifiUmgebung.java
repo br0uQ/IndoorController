@@ -1,5 +1,6 @@
-package de.jschmucker.indoorcontroller.model.ort;
+package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
+import de.jschmucker.indoorcontroller.model.ort.Ort;
 import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
 
 /**

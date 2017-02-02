@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.controller.location;
+package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
+import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
 import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
 
 
-public class CreateOrtWifiFragment extends Fragment {
+public class CreateOrtWifiFragment extends LocationDetectionFragment {
     private ImageButton plusButton;
     private ListView listView;
     final ArrayList<WifiSensor> selectedWifis = new ArrayList<WifiSensor>();

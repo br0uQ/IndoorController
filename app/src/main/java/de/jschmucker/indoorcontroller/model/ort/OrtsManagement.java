@@ -1,12 +1,16 @@
 package de.jschmucker.indoorcontroller.model.ort;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.ort.sensor.LocationSensor;
-import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetection;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
 import de.jschmucker.indoorcontroller.model.ort.sensor.SensorManagement;
-import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
 
 /**
  * @author joshua
@@ -15,23 +19,25 @@ import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
  */
 public class OrtsManagement {
 
+	private Context context;
 	private ArrayList<Ort> orte;
 	private SensorManagement sensorManagement;
-	private String[] ortstypen = new String[] {
-			"Raum",
-			"NFCSpot",
-			"WifiUmgebung"
+	private LocationDetection[] detections = new LocationDetection[] {
+			new RoomDetection(context),
+			new WifiDetection(context),
+			new NfcDetection(context)
 	};
 
-	public OrtsManagement(){
+	public OrtsManagement(Context context){
+		this.context = context;
 		orte = new ArrayList<>();
 		addOrt(new Raum("TestRaum", null));
 		addOrt(new NFCSpot("TestNFCSpot", null));
 		addOrt(new WifiUmgebung("TestWifiUmgebung", null));
 	}
 
-	public String[] getOrtstypen() {
-		return ortstypen;
+	public LocationDetection[] getLocationDetections() {
+		return detections;
 	}
 
 	/**
