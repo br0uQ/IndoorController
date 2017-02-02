@@ -24,8 +24,9 @@ public class IndoorService extends Service {
     private RegelManagement regelManagement;
     private Steuerung steuerung;
 
-    public IndoorService() {
-        ortsManagement = new OrtsManagement();
+    @Override
+    public void onCreate() {
+        ortsManagement = new OrtsManagement(this);
         regelManagement = new RegelManagement();
         steuerung = new Steuerung();
     }

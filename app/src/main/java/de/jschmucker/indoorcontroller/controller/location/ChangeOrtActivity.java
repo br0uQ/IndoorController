@@ -23,6 +23,7 @@ import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.CreateOrtWifiFragment;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.CreateOrtRaumFragment;
+import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
 
 public class ChangeOrtActivity extends AppCompatActivity implements IndoorServiceProvider {
     public static final String LOCATION_ID = "LOCATION_ID";

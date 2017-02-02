@@ -8,11 +8,14 @@ import android.location.Location;
 
 public abstract class LocationDetection {
     protected LocationDetectionFragment fragment;
+    protected String name;
 
     public LocationDetectionFragment getFragment() {
         return fragment;
     }
 
-    public abstract String getDetectionName();
+    public String getDetectionName() {
+        return name;
+    }
     public abstract Ort createLocation();
 }

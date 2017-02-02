@@ -40,6 +40,10 @@ public class CreateOrtNfcFragment extends LocationDetectionFragment implements O
         textView = (TextView) view.findViewById(R.id.create_ort_nfc_fragment_textview);
         progressBar = (ProgressBar) view.findViewById(R.id.create_ort_nfc_progressbar);
 
+        if (foundSensor != null) {
+            setGuiHasSensor(true);
+        }
+
         IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
         activity.getIndoorService().startSingleNfcScan(this);
 
@@ -72,9 +76,12 @@ public class CreateOrtNfcFragment extends LocationDetectionFragment implements O
 
     public void setNfcSensor(NFCSensor nfcSensor) {
         foundSensor = nfcSensor;
-        refreshButton.setEnabled(true);
+    }
+
+    private void setGuiHasSensor(boolean b) {
+        refreshButton.setEnabled(b);
         refreshButton.setVisibility(View.VISIBLE);
         textView.setText(foundSensor.toString());
-        progressBar.setEnabled(false);
+        progressBar.setEnabled(!b);
     }
 }

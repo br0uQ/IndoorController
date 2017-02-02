@@ -26,24 +26,24 @@ import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmg
 
 public class LocationAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<LocationDetection> detections;
+    private ArrayList<Ort> orte;
 
     private static LayoutInflater inflater = null;
 
-    public LocationAdapter(Context context, ArrayList<LocationDetection> detections) {
+    public LocationAdapter(Context context, ArrayList<Ort> orte) {
         this.context = context;
-        this.detections = detections;
+        this.orte = orte;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return detections.size();
+        return orte.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return detections.get(i);
+        return orte.get(i);
     }
 
     @Override
@@ -58,13 +58,13 @@ public class LocationAdapter extends BaseAdapter {
             v = inflater.inflate(R.layout.location_item, null);
         }
         TextView name = (TextView) v.findViewById(R.id.location_item_name);
-        name.setText(detections.get(i).getDetectionName());
+        name.setText(orte.get(i).getName());
         ImageView imageView = (ImageView) v.findViewById(R.id.location_item_icon);
-        if (detections.get(i) instanceof RoomDetection) {
+        if (orte.get(i) instanceof Raum) {
             imageView.setImageResource(R.drawable.ic_room_white24dp);
-        } else if (detections.get(i) instanceof WifiDetection) {
+        } else if (orte.get(i) instanceof WifiUmgebung) {
             imageView.setImageResource(R.drawable.ic_wifis_white24dp);
-        } else if (detections.get(i) instanceof NfcDetection) {
+        } else if (orte.get(i) instanceof NFCSpot) {
             imageView.setImageResource(R.drawable.ic_nfc_spot_white24dp);
         }
 

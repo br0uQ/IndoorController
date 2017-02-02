@@ -16,10 +16,7 @@ public class NfcDetection extends LocationDetection {
     public NfcDetection(Context context) {
         this.context = context;
         fragment = new CreateOrtNfcFragment();
-    }
-    @Override
-    public String getDetectionName() {
-        return context.getString(R.string.nfc_detection_name);
+        name = context.getString(R.string.nfc_detection_name);
     }
 
     @Override

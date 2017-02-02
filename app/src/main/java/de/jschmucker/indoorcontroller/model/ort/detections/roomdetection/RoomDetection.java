@@ -15,12 +15,9 @@ public class RoomDetection extends LocationDetection {
 
     public RoomDetection(Context context) {
         this.context = context;
+        name = context.getString(R.string.room_detection_name);
         fragment = new CreateOrtRaumFragment();
         // ToDo Initialisation of the fragment...
-    }
-    @Override
-    public String getDetectionName() {
-        return context.getString(R.string.room_detection_name);
     }
 
     @Override

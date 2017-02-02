@@ -2,6 +2,7 @@ package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
@@ -15,13 +16,10 @@ import de.jschmucker.indoorcontroller.model.ort.OrtsManagement;
 public class WifiDetection extends LocationDetection {
     private Context context;
 
-    public WifiDetection(Context contex) {
+    public WifiDetection(Context context) {
         this.context = context;
         fragment = new CreateOrtWifiFragment();
-    }
-    @Override
-    public String getDetectionName() {
-        return context.getString(R.string.wifi_detection_name);
+        name = context.getString(R.string.wifi_detection_name);
     }
 
     @Override
