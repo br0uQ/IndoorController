@@ -31,7 +31,7 @@
     <string name="chooseNfcTag">Wähle einen NFC Tag aus</string>
     <string name="searchingNfcTag">Suche nach NFC Tag...</string>
     <string name="new_search">Neu suchen</string>
-    <string name="chooseWifis">Wähle WIFIs aus</string>
+    <string name="chooseWifis">Wähle WIFI aus der Liste aus</string>
     <string name="error">Fehler</string>
     <string name="no_name_error">Kein Name eingegeben. Bitte geben Sie einen Namen für diesen Ort ein</string>
     <string name="ok">OK</string>
@@ -39,4 +39,6 @@
     <string name="room_detection_name">Raum</string>
     <string name="nfc_detection_name">NFC Spot</string>
     <string name="wifi_detection_name">Wifi Umgebung</string>
+    <string name="refresh">Neu scannen</string>
+    <string name="scanning_for_wifis">Suche nach Wifis</string>
 </resources>

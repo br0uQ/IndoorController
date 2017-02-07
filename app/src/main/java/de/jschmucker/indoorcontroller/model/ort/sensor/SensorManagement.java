@@ -3,6 +3,10 @@ package de.jschmucker.indoorcontroller.model.ort.sensor;
 
 import java.util.ArrayList;
 
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
+
 /**
  * @author joshua
  * @version 1.0

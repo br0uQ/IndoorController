@@ -16,7 +16,6 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
-import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 
 public class CreateOrtRaumFragment extends LocationDetectionFragment implements AdapterView.OnItemSelectedListener {
     Spinner leftTop;

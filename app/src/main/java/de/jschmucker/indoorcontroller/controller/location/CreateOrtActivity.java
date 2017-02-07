@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,21 +19,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.CreateOrtNfcFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
-import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.CreateOrtWifiFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.CreateOrtRaumFragment;
-import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
-import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
 
 public class CreateOrtActivity extends AppCompatActivity implements IndoorServiceProvider {
     private EditText name;
@@ -70,10 +59,11 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
             @Override
             public void onClick(View v) {
                 String ortsName = name.getText().toString();
-                if (!name.getText().toString().matches("")) {
+                Log.d("CreateOrt", "clicked save");
+                if (!ortsName.matches("") && bound && (selected != -1)) {
                     if (bound) {
                         if (selected != -1) {
-                            indoorService.addOrt(detections[selected].createLocation());
+                            indoorService.addOrt(detections[selected].createLocation(ortsName));
                             finish();
                         }
                     }
@@ -136,6 +126,8 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
             indoorService = binder.getService();
             bound = true;
 
+            selected = 0;
+
             detections = indoorService.getOrtsManagement().getLocationDetections();
 
             ortsTypeChooser = (Spinner) findViewById(R.id.spinner_orts_type);
@@ -151,6 +143,7 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.create_ort_fragment_container, actualFragment);
                     transaction.commit();
+                    selected = position;
                 }
 
                 @Override

@@ -1,7 +1,6 @@
 package de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection;
 
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
 
 /**
  * @author joshua

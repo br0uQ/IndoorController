@@ -10,10 +10,10 @@ import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
-import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.ort.sensor.NFCSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSensor;
 import de.jschmucker.indoorcontroller.model.ort.sensor.SensorManagement;
-import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
 
 /**
  * @author joshua
@@ -38,7 +38,7 @@ public class OrtsManagement {
 		addOrt(new Raum("TestRaum", new BeaconSensor[] {new BeaconSensor(), new BeaconSensor(),
                 new BeaconSensor(), new BeaconSensor()}));
 		addOrt(new NFCSpot("TestNFCSpot", new NFCSensor()));
-		addOrt(new WifiUmgebung("TestWifiUmgebung", new WifiSensor[] {new WifiSensor()}));
+		addOrt(new WifiUmgebung("TestWifiUmgebung", new ArrayList<WifiSensor>()));
 	}
 
 	public LocationDetection[] getLocationDetections() {
@@ -59,5 +59,9 @@ public class OrtsManagement {
 
 	public SensorManagement getSensorManagement(){
 		return sensorManagement;
+	}
+
+	public void setOrte(ArrayList<Ort> orte) {
+		this.orte = orte;
 	}
 }//end OrtsManagement

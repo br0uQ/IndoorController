@@ -1,7 +1,6 @@
 package de.jschmucker.indoorcontroller.model.ort.detections.roomdetection;
 
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.sensor.BeaconSensor;
 
 /**
  * @author joshua

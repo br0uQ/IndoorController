@@ -1,7 +1,8 @@
 package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
+import java.util.ArrayList;
+
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
 
 /**
  * @author joshua
@@ -10,19 +11,19 @@ import de.jschmucker.indoorcontroller.model.ort.sensor.WifiSensor;
  */
 public class WifiUmgebung extends Ort {
 
-	private WifiSensor[] wifiSensors;
+	private ArrayList<WifiSensor> wifiSensors;
 
 	/**
 	 * 
 	 * @param name
 	 * @param sensoren    sensoren
 	 */
-	public WifiUmgebung(String name, WifiSensor[] sensoren){
+	public WifiUmgebung(String name, ArrayList<WifiSensor> sensoren){
 		wifiSensors = sensoren;
 		this.name = name;
 	}
 
-	public WifiSensor[] getWifis() {
+	public ArrayList<WifiSensor> getWifis() {
 		return wifiSensors;
 	}
 }//end WifiUmgebung
