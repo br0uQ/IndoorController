@@ -1,12 +1,7 @@
 package de.jschmucker.indoorcontroller.model.regel;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-
 import de.jschmucker.indoorcontroller.model.ort.Ort;
 import de.jschmucker.indoorcontroller.model.steuerung.Action;
-import de.jschmucker.indoorcontroller.model.ort.Eigenschaft;
 
 /**
  * @author joshua
@@ -16,19 +11,16 @@ import de.jschmucker.indoorcontroller.model.ort.Eigenschaft;
 public class Ortsregel {
 
 	private Action[] actions;
-	private Eigenschaft[] eigenschaften;
 	private String name;
 	private boolean enabled;
 
 	/**
 	 * 
 	 * @param name
-	 * @param eigenschaften
 	 * @param actions    actions
 	 */
-	public Ortsregel(String name, Eigenschaft[] eigenschaften, Action[] actions){
+	public Ortsregel(String name, Action[] actions){
 		this.name = name;
-		this.eigenschaften = eigenschaften;
 		this.actions = actions;
 		enabled = true;
 	}
