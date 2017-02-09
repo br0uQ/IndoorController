@@ -1,30 +1,31 @@
 package de.jschmucker.indoorcontroller.controller.location;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetection;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
 
 /**
  * Created by jschmucker on 12/12/16.
  */
 
-public class LocationAdapter extends BaseAdapter {
+public class LocationAdapter extends BaseAdapter implements Observer {
+    private final String TAG = getClass().getSimpleName();
     private Context context;
     private ArrayList<Ort> orte;
 
@@ -34,6 +35,9 @@ public class LocationAdapter extends BaseAdapter {
         this.context = context;
         this.orte = orte;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        for (Ort ort : orte) {
+            ort.addObserver(this);
+        }
     }
 
     @Override
@@ -69,5 +73,14 @@ public class LocationAdapter extends BaseAdapter {
         }
 
         return v;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        Log.d(TAG, "update");
+        Toast.makeText(context,
+                "Ort " + ((Ort) o).getName() + " hat sich geändert.",
+                Toast.LENGTH_SHORT).show();
+        notifyDataSetChanged();
     }
 }

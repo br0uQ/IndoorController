@@ -2,20 +2,12 @@ package de.jschmucker.indoorcontroller.model;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observer;
-import java.util.prefs.PreferenceChangeEvent;
 
 import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
 import de.jschmucker.indoorcontroller.model.ort.Ort;

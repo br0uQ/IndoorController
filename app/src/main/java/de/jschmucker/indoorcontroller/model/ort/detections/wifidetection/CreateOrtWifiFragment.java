@@ -1,7 +1,6 @@
 package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,8 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -27,7 +24,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
 
@@ -44,7 +40,6 @@ public class CreateOrtWifiFragment extends LocationDetectionFragment {
     private WifiAdapter selectedAdapter;
 
     private BroadcastReceiver receiver;
-    //WifiChooserAdapter chooserAdapter;
 
     Comparator<WifiSensor> wifiComparator = new Comparator<WifiSensor>() {
         @Override

@@ -1,30 +1,33 @@
 package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.location.Location;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.OrtsManagement;
 
 /**
  * Created by joshua on 01.02.17.
  */
 
 public class WifiDetection extends LocationDetection {
-    private Context context;
+    private static Context context;
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
+
+    private static WifiReceiver receiver;
+    private static Thread thread;
+    private static boolean running = false;
+    private static int sleepTimer = 1000;
 
     public WifiDetection(Context context) {
         this.context = context;
@@ -64,7 +67,45 @@ public class WifiDetection extends LocationDetection {
             if (json != null) {
                 WifiUmgebung obj = gson.fromJson(json, WifiUmgebung.class);
                 orte.add(obj);
+                receiver.addWifiUmgebung(obj);
             }
         }
+
+        if (count > 0) {
+            startDetection();
+        }
+    }
+
+    public static void startDetection() {
+        if (thread == null) {
+            final WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            receiver = new WifiReceiver();
+            context.registerReceiver(receiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+            running = true;
+            thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (running) {
+                        manager.startScan();
+                        try {
+                            Thread.sleep(sleepTimer);
+                        } catch (InterruptedException ie) {
+                            Log.d(getClass().getSimpleName(), ie.toString());
+                        }
+                    }
+                    thread = null;
+                }
+            });
+            thread.start();
+        }
+    }
+
+    public static void stopDetection() {
+        running = false;
+        context.unregisterReceiver(receiver);
+    }
+
+    public static void setTimer(int timer) {
+        sleepTimer = timer;
     }
 }

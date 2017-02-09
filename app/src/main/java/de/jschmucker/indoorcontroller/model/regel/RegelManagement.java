@@ -2,7 +2,6 @@ package de.jschmucker.indoorcontroller.model.regel;
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.steuerung.Action;
 import de.jschmucker.indoorcontroller.model.steuerung.Steuerung;
 
 /**
@@ -17,7 +16,7 @@ public class RegelManagement {
 
 	public RegelManagement(){
 		regeln = new ArrayList<>();
-		addRule(new Ortsregel("TestRegel", new Action[]{}));
+		//addRule(new Ortsregel("TestRegel", new Ort[]{new NFCSpot("TestRegelSpot", new NFCSensor())}, new Action[]{}));
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package de.jschmucker.indoorcontroller.model.ort;
 
-import java.util.ArrayList;
+import java.util.Observable;
 
 import de.jschmucker.indoorcontroller.model.ort.sensor.SensorManagement;
 
@@ -9,7 +9,7 @@ import de.jschmucker.indoorcontroller.model.ort.sensor.SensorManagement;
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
-public abstract class Ort {
+public abstract class Ort  extends Observable {
 	protected boolean active;
 	private SensorManagement sensorManagement;
 	protected String name;
@@ -24,5 +24,13 @@ public abstract class Ort {
 
 	public boolean isActive() {
 		return active;
+	}
+
+	public void setActive(boolean active) {
+		if (this.active != active) {
+			this.active = active;
+			setChanged();
+			notifyObservers();
+		}
 	}
 }//end Ort
