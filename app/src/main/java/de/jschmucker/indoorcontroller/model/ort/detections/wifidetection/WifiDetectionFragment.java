@@ -31,7 +31,7 @@ import de.jschmucker.indoorcontroller.model.ort.Location;
 public class WifiDetectionFragment extends LocationDetectionFragment {
     private ImageButton plusButton;
     private ListView listView;
-    final ArrayList<WifiSensor> selectedWifis = new ArrayList<WifiSensor>();
+    final ArrayList<WifiSensor> selectedWifis = new ArrayList<>();
     private final String TAG = getClass().getSimpleName();
 
     private WifiManager wifi;
@@ -40,7 +40,6 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
     private WifiAdapter selectedAdapter;
 
     private BroadcastReceiver receiver;
-    //WifiChooserAdapter chooserAdapter;
 
     Comparator<WifiSensor> wifiComparator = new Comparator<WifiSensor>() {
         @Override

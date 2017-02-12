@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.regel.Task;
+import de.jschmucker.indoorcontroller.model.task.Task;
 
 /**
  * Created by joshua on 04.01.17.

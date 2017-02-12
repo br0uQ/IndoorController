@@ -25,9 +25,9 @@ import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.Location;
-import de.jschmucker.indoorcontroller.model.regel.Task;
-import de.jschmucker.indoorcontroller.model.steuerung.Action;
+import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.task.Task;
+import de.jschmucker.indoorcontroller.model.actions.Action;
 
 public class CreateTaskActivity extends AppCompatActivity {
     public static final String RULE_ID = "RULE_ID";
@@ -316,8 +316,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                 name.setText(rule.getName());
 
                 /*ArrayList<String> stringsLocations = new ArrayList<String>();
-                for (Location ort : rule.getLocations()) {
-                    stringsLocations.add(ort.getName());
+                for (Location location : rule.getLocations()) {
+                    stringsLocations.add(location.getName());
                 }
 
                 ArrayAdapter<String> adapterLocations = new ArrayAdapter<>(CreateTaskActivity.this,
