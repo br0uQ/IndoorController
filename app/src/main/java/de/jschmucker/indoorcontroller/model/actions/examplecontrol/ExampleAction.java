@@ -1,9 +1,9 @@
-package de.jschmucker.indoorcontroller.model.steuerung.examplecontrol;
+package de.jschmucker.indoorcontroller.model.actions.examplecontrol;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import de.jschmucker.indoorcontroller.model.steuerung.Action;
+import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
  * Created by joshua on 12.02.17.

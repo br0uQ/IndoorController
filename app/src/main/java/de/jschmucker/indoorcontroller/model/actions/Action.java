@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.steuerung;
+package de.jschmucker.indoorcontroller.model.actions;
 
 
 import android.content.Context;

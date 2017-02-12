@@ -2,8 +2,8 @@ package de.jschmucker.indoorcontroller.model.task;
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.steuerung.Action;
-import de.jschmucker.indoorcontroller.model.steuerung.Control;
+import de.jschmucker.indoorcontroller.model.actions.Action;
+import de.jschmucker.indoorcontroller.model.actions.Control;
 
 /**
  * @author joshua

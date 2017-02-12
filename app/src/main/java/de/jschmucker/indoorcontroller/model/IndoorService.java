@@ -19,7 +19,7 @@ import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSen
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
 import de.jschmucker.indoorcontroller.model.task.Task;
 import de.jschmucker.indoorcontroller.model.task.TaskManagement;
-import de.jschmucker.indoorcontroller.model.steuerung.Control;
+import de.jschmucker.indoorcontroller.model.actions.Control;
 
 public class IndoorService extends Service {
     private final IBinder binder = new IndoorBinder();
