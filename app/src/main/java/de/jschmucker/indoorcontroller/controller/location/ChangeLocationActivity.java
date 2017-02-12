@@ -16,18 +16,17 @@ import android.widget.TextView;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.CreateOrtNfcFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
-import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.CreateOrtWifiFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.CreateOrtRaumFragment;
+import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetectionFragment;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSpot;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Room;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetectionFragment;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetectionFragment;
 
-public class ChangeOrtActivity extends AppCompatActivity implements IndoorServiceProvider {
+public class ChangeLocationActivity extends AppCompatActivity implements IndoorServiceProvider {
     public static final String LOCATION_ID = "LOCATION_ID";
-    private Ort ort;
+    private Location location;
     private IndoorService indoorService;
     private boolean bound = false;
     private int locationID;
@@ -47,7 +46,7 @@ public class ChangeOrtActivity extends AppCompatActivity implements IndoorServic
         Intent intent = getIntent();
         locationID = intent.getIntExtra(LOCATION_ID, -1);
         if (locationID == -1) {
-            //ToDo: Opened ChangeOrtActivity without specifying the Location ERROR and close
+            //ToDo: Opened ChangeLocationActivity without specifying the Location ERROR and close
         }
 
         name = (TextView) findViewById(R.id.textedit_change_ort_name);
@@ -75,7 +74,7 @@ public class ChangeOrtActivity extends AppCompatActivity implements IndoorServic
         }
         if (id == R.id.change_ort_menu_delete) {
             //ToDo delete location and exit activity
-            indoorService.getOrtsManagement().removeOrt(ort);
+            indoorService.getLocationManagement().removeOrt(location);
             finish();
             return true;
         }
@@ -115,33 +114,33 @@ public class ChangeOrtActivity extends AppCompatActivity implements IndoorServic
             indoorService = binder.getService();
             bound = true;
 
-            ort = indoorService.getOrt(locationID);
-            name.setText(ort.getName());
+            location = indoorService.getOrt(locationID);
+            name.setText(location.getName());
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if (ort instanceof Raum) {
-                fragment = new CreateOrtRaumFragment();
+            if (location instanceof Room) {
+                fragment = new RoomDetectionFragment();
                 transaction.replace(R.id.change_ort_fragment_container, fragment);
                 transaction.commit();
 
-                CreateOrtRaumFragment raumFragment = (CreateOrtRaumFragment) fragment;
-                Raum raum = (Raum) ort;
-                raumFragment.setBeacons(raum.getBeacons());
-            } else if (ort instanceof NFCSpot) {
-                fragment = new CreateOrtNfcFragment();
+                RoomDetectionFragment raumFragment = (RoomDetectionFragment) fragment;
+                Room room = (Room) location;
+                raumFragment.setBeacons(room.getBeacons());
+            } else if (location instanceof NfcSpot) {
+                fragment = new NfcDetectionFragment();
                 transaction.replace(R.id.change_ort_fragment_container, fragment);
                 transaction.commit();
 
-                CreateOrtNfcFragment nfcFragment = (CreateOrtNfcFragment) fragment;
-                NFCSpot nfcSpot = (NFCSpot) ort;
+                NfcDetectionFragment nfcFragment = (NfcDetectionFragment) fragment;
+                NfcSpot nfcSpot = (NfcSpot) location;
                 nfcFragment.setNfcSensor(nfcSpot.getNfcSensor());
-            } else if (ort instanceof WifiUmgebung) {
-                fragment = new CreateOrtWifiFragment();
+            } else if (location instanceof WifiEnvironment) {
+                fragment = new WifiDetectionFragment();
                 transaction.replace(R.id.change_ort_fragment_container, fragment);
                 transaction.commit();
 
-                CreateOrtWifiFragment wifiFragment = (CreateOrtWifiFragment) fragment;
-                WifiUmgebung wifiUmgebung = (WifiUmgebung) ort;
-                wifiFragment.setWifiList(wifiUmgebung.getWifis());
+                WifiDetectionFragment wifiFragment = (WifiDetectionFragment) fragment;
+                WifiEnvironment wifiEnvironment = (WifiEnvironment) location;
+                wifiFragment.setWifiList(wifiEnvironment.getWifis());
             }
         }
 

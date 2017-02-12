@@ -2,14 +2,14 @@ package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.ort.Ort;
+import de.jschmucker.indoorcontroller.model.ort.Location;
 
 /**
  * @author joshua
  * @version 1.0
  * @created 06-Dez-2016 14:18:20
  */
-public class WifiUmgebung extends Ort {
+public class WifiEnvironment extends Location {
 
     private ArrayList<WifiSensor> wifiSensors;
 
@@ -17,7 +17,7 @@ public class WifiUmgebung extends Ort {
      * @param name
      * @param sensoren sensoren
      */
-    public WifiUmgebung(String name, ArrayList<WifiSensor> sensoren) {
+    public WifiEnvironment(String name, ArrayList<WifiSensor> sensoren) {
         wifiSensors = sensoren;
         this.name = name;
     }
@@ -26,13 +26,13 @@ public class WifiUmgebung extends Ort {
         return wifiSensors;
     }
 
-    static String dataToString(WifiUmgebung wifiUmgebung) {
+    static String dataToString(WifiEnvironment wifiEnvironment) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(wifiUmgebung.getName());
+        sb.append(wifiEnvironment.getName());
         sb.append("\n");
 
-        for (WifiSensor sensor : wifiUmgebung.getWifis()) {
+        for (WifiSensor sensor : wifiEnvironment.getWifis()) {
             sb.append(sensor.getSsid());
             sb.append("\n");
             sb.append(sensor.getBssid());
@@ -42,7 +42,7 @@ public class WifiUmgebung extends Ort {
         return sb.toString();
     }
 
-    static WifiUmgebung stringToData(String data) {
+    static WifiEnvironment stringToData(String data) {
         ArrayList<WifiSensor> sensors = new ArrayList<>();
         String name;
 
@@ -52,6 +52,6 @@ public class WifiUmgebung extends Ort {
             WifiSensor sensor = new WifiSensor(dataArray[i], dataArray[i + 1]);
             sensors.add(sensor);
         }
-        return new WifiUmgebung(name, sensors);
+        return new WifiEnvironment(name, sensors);
     }
-}//end WifiUmgebung
+}//end WifiEnvironment

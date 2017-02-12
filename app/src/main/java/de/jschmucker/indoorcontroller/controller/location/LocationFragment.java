@@ -38,14 +38,14 @@ public class LocationFragment extends Fragment {
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        LocationAdapter adapter = new LocationAdapter(getActivity(), activity.getIndoorService().getOrtsManagement().getOrte());
+        LocationAdapter adapter = new LocationAdapter(getActivity(), activity.getIndoorService().getLocationManagement().getOrte());
         ListView listView = (ListView) view.findViewById(R.id.location_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ChangeOrtActivity.class);
-                intent.putExtra(ChangeOrtActivity.LOCATION_ID, position);
+                Intent intent = new Intent(getActivity(), ChangeLocationActivity.class);
+                intent.putExtra(ChangeLocationActivity.LOCATION_ID, position);
                 startActivity(intent);
             }
         });
@@ -53,7 +53,7 @@ public class LocationFragment extends Fragment {
     }
 
     public void openAddDialog() {
-        Intent intent = new Intent(getActivity(), CreateOrtActivity.class);
+        Intent intent = new Intent(getActivity(), CreateLocationActivity.class);
         startActivity(intent);
     }
 

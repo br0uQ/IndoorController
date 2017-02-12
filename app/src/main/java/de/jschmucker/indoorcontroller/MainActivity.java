@@ -22,7 +22,7 @@ import de.jschmucker.indoorcontroller.controller.InfoActivity;
 import de.jschmucker.indoorcontroller.controller.SettingsActivity;
 import de.jschmucker.indoorcontroller.controller.location.LocationFragment;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.controller.rule.RulesFragment;
+import de.jschmucker.indoorcontroller.controller.rule.TasksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
     private void saveFragmentSettings() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        if (fragment instanceof RulesFragment) {
+        if (fragment instanceof TasksFragment) {
             editor.putString(FRAGMENT_KEY, getString(R.string.rules));
         } else if (fragment instanceof LocationFragment) {
             editor.putString(FRAGMENT_KEY, getString(R.string.locations));
@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity
                 fragment = new LocationFragment();
                 setTitle(R.string.locations);
             } else if (fragmentString.matches(getString(R.string.rules))) {
-                fragment = new RulesFragment();
+                fragment = new TasksFragment();
                 setTitle(R.string.rules);
             }
         } else {
-            fragment = new RulesFragment();
+            fragment = new TasksFragment();
         }
 
         // Bind to Service
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_rules) {
-            fragment = new RulesFragment();
+            fragment = new TasksFragment();
             saveFragmentSettings();
             toolbar.setTitle(R.string.rules);
             setFragment();

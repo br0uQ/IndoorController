@@ -1,6 +1,8 @@
 package de.jschmucker.indoorcontroller.model.steuerung;
 
 
+import android.content.Context;
+
 /**
  * @author jschmucker
  * @version 1.0
@@ -8,6 +10,6 @@ package de.jschmucker.indoorcontroller.model.steuerung;
  */
 public interface Action {
 
-	public void execute();
+	public void execute(Context context);
 	public String toString();
 }

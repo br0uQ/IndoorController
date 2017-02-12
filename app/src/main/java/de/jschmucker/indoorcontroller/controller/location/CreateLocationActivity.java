@@ -23,7 +23,7 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
 
-public class CreateOrtActivity extends AppCompatActivity implements IndoorServiceProvider {
+public class CreateLocationActivity extends AppCompatActivity implements IndoorServiceProvider {
     private EditText name;
     private Spinner ortsTypeChooser;
 
@@ -68,7 +68,7 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
                         }
                     }
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateOrtActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateLocationActivity.this);
 
                     builder.setMessage(R.string.no_name_error)
                             .setTitle(R.string.error)
@@ -128,7 +128,7 @@ public class CreateOrtActivity extends AppCompatActivity implements IndoorServic
 
             selected = 0;
 
-            detections = indoorService.getOrtsManagement().getLocationDetections();
+            detections = indoorService.getLocationManagement().getLocationDetections();
 
             ortsTypeChooser = (Spinner) findViewById(R.id.spinner_orts_type);
             for (LocationDetection detection : detections) {

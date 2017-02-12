@@ -9,44 +9,44 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.OrtsManagement;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
+import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.ort.LocationManagement;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSpot;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSensor;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSensor;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Room;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
-import de.jschmucker.indoorcontroller.model.regel.Ortsregel;
-import de.jschmucker.indoorcontroller.model.regel.RegelManagement;
-import de.jschmucker.indoorcontroller.model.steuerung.Steuerung;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
+import de.jschmucker.indoorcontroller.model.regel.Task;
+import de.jschmucker.indoorcontroller.model.regel.TaskManagement;
+import de.jschmucker.indoorcontroller.model.steuerung.Control;
 
 public class IndoorService extends Service {
     private final IBinder binder = new IndoorBinder();
     private final String TAG = getClass().getSimpleName();
     public static final String KEY_ORTE = "KEY_ORTE";
 
-    private OrtsManagement ortsManagement;
-    private RegelManagement regelManagement;
-    private Steuerung steuerung;
+    private LocationManagement locationManagement;
+    private TaskManagement taskManagement;
+    private Control control;
 
     @Override
     public void onCreate() {
-        ortsManagement = new OrtsManagement(this);
-        regelManagement = new RegelManagement();
-        steuerung = new Steuerung();
+        locationManagement = new LocationManagement(this);
+        taskManagement = new TaskManagement();
+        control = new Control();
         Log.d(TAG, "Service onCreate");
 
         /* Load locations and start the detections */
-        ortsManagement.loadLocations();
-        ortsManagement.startDetection();
+        locationManagement.loadLocations();
+        locationManagement.startDetection();
 
         /* for test create one location of every type */
-        if (ortsManagement.getOrte().size() <= 0) {
-            addOrt(new Raum("TestRaum", new BeaconSensor[]{new BeaconSensor(), new BeaconSensor(),
+        if (locationManagement.getOrte().size() <= 0) {
+            addOrt(new Room("TestRaum", new BeaconSensor[]{new BeaconSensor(), new BeaconSensor(),
                     new BeaconSensor(), new BeaconSensor()}));
-            addOrt(new NFCSpot("TestNFCSpot", new NFCSensor()));
-            addOrt(new WifiUmgebung("TestWifiUmgebung", new ArrayList<WifiSensor>()));
+            addOrt(new NfcSpot("TestNFCSpot", new NfcSensor()));
+            addOrt(new WifiEnvironment("TestWifiUmgebung", new ArrayList<WifiSensor>()));
         }
     }
 
@@ -54,8 +54,8 @@ public class IndoorService extends Service {
     public void onDestroy() {
         Log.d(TAG, "onDestroy");
 
-        ortsManagement.saveLocations();
-        ortsManagement.stopDetection();
+        locationManagement.saveLocations();
+        locationManagement.stopDetection();
 
         super.onDestroy();
     }
@@ -75,7 +75,7 @@ public class IndoorService extends Service {
         //ToDo
     }
 
-    public NFCSensor getFoundNfcSensor() {
+    public NfcSensor getFoundNfcSensor() {
         //ToDo
         return null;
     }
@@ -89,16 +89,16 @@ public class IndoorService extends Service {
         return new ArrayList<>();
     }
 
-    public void addOrt(Ort neuerOrt) {
-        ortsManagement.addOrt(neuerOrt);
+    public void addOrt(Location neuerLocation) {
+        locationManagement.addOrt(neuerLocation);
     }
 
-    public Ort getOrt(int locationId) {
-        return ortsManagement.getOrte().get(locationId);
+    public Location getOrt(int locationId) {
+        return locationManagement.getOrte().get(locationId);
     }
 
-    public Ortsregel getRule(int ruleId) {
-        return regelManagement.getRegeln().get(ruleId);
+    public Task getRule(int ruleId) {
+        return taskManagement.getRegeln().get(ruleId);
     }
 
     public class IndoorBinder extends Binder {
@@ -112,15 +112,15 @@ public class IndoorService extends Service {
         return binder;
     }
 
-    public OrtsManagement getOrtsManagement() {
-        return ortsManagement;
+    public LocationManagement getLocationManagement() {
+        return locationManagement;
     }
 
-    public RegelManagement getRegelManagement() {
-        return regelManagement;
+    public TaskManagement getTaskManagement() {
+        return taskManagement;
     }
 
-    public Steuerung getSteuerung() {
-        return steuerung;
+    public Control getControl() {
+        return control;
     }
 }

@@ -1,10 +1,6 @@
 package de.jschmucker.indoorcontroller.controller.location;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
-import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSpot;
+import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Room;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
 
 /**
  * Created by jschmucker on 12/12/16.
@@ -29,11 +23,11 @@ import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmg
 public class LocationAdapter extends BaseAdapter {
     private final String TAG = getClass().getSimpleName();
     private Context context;
-    private ArrayList<Ort> orte;
+    private ArrayList<Location> orte;
 
     private static LayoutInflater inflater = null;
 
-    public LocationAdapter(Context context, ArrayList<Ort> orte) {
+    public LocationAdapter(Context context, ArrayList<Location> orte) {
         this.context = context;
         this.orte = orte;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,11 +57,11 @@ public class LocationAdapter extends BaseAdapter {
         TextView name = (TextView) v.findViewById(R.id.location_item_name);
         name.setText(orte.get(i).getName());
         ImageView imageView = (ImageView) v.findViewById(R.id.location_item_icon);
-        if (orte.get(i) instanceof Raum) {
+        if (orte.get(i) instanceof Room) {
             imageView.setImageResource(R.drawable.ic_room_white24dp);
-        } else if (orte.get(i) instanceof WifiUmgebung) {
+        } else if (orte.get(i) instanceof WifiEnvironment) {
             imageView.setImageResource(R.drawable.ic_wifis_white24dp);
-        } else if (orte.get(i) instanceof NFCSpot) {
+        } else if (orte.get(i) instanceof NfcSpot) {
             imageView.setImageResource(R.drawable.ic_nfc_spot_white24dp);
         }
 

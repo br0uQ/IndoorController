@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.CreateOrtNfcFragment">
+    tools:context="de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcDetectionFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

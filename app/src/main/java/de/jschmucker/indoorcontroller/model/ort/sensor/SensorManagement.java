@@ -3,7 +3,7 @@ package de.jschmucker.indoorcontroller.model.ort.sensor;
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSensor;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconSensor;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
 
@@ -15,7 +15,7 @@ import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSen
 public class SensorManagement {
 
 	private ArrayList<BeaconSensor> beaconSensors;
-	private ArrayList<NFCSensor> nFCSensors;
+	private ArrayList<NfcSensor> nFCSensors;
 	private ArrayList<WifiSensor> wifiSensors;
 
 	public SensorManagement(){
@@ -30,7 +30,7 @@ public class SensorManagement {
 		return beaconSensors;
 	}
 
-	public ArrayList<NFCSensor> getNFCSensors() {
+	public ArrayList<NfcSensor> getNFCSensors() {
 		return nFCSensors;
 	}
 }//end SensorManagement

@@ -7,11 +7,11 @@ import java.util.Observable;
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
-public abstract class Ort extends Observable {
+public abstract class Location extends Observable {
 	protected boolean active;
 	protected String name;
 
-	public Ort(){
+	public Location(){
 
 	}
 
@@ -29,4 +29,4 @@ public abstract class Ort extends Observable {
             notifyObservers();
         }
     }
-}//end Ort
+}//end Location

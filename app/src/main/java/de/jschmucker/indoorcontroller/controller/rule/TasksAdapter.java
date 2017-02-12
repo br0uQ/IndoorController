@@ -12,19 +12,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.regel.Ortsregel;
+import de.jschmucker.indoorcontroller.model.regel.Task;
 
 /**
  * Created by joshua on 04.01.17.
  */
 
-public class RulesAdapter extends BaseAdapter {
+public class TasksAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Ortsregel> regeln;
+    private ArrayList<Task> regeln;
 
     private static LayoutInflater inflater = null;
 
-    public RulesAdapter(Context context, ArrayList<Ortsregel> regeln) {
+    public TasksAdapter(Context context, ArrayList<Task> regeln) {
         this.context = context;
         this.regeln = regeln;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

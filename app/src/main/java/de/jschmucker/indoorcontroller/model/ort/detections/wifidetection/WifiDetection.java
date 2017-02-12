@@ -10,15 +10,12 @@ import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.model.ort.Location;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
-import de.jschmucker.indoorcontroller.model.ort.Ort;
 
 /**
  * Created by joshua on 01.02.17.
@@ -40,24 +37,24 @@ public class WifiDetection extends LocationDetection {
 
     public WifiDetection(Context context) {
         this.context = context;
-        fragment = new CreateOrtWifiFragment();
+        fragment = new WifiDetectionFragment();
         name = context.getString(R.string.wifi_detection_name);
     }
 
     @Override
-    public Ort createLocation(String name) {
-        return ((CreateOrtWifiFragment) fragment).createWifiUmgebung(name);
+    public Location createLocation(String name) {
+        return ((WifiDetectionFragment) fragment).createWifiUmgebung(name);
     }
 
     @Override
-    public void saveLocations(ArrayList<Ort> orte) {
+    public void saveLocations(ArrayList<Location> orte) {
         SharedPreferences.Editor editor =
                 PreferenceManager.getDefaultSharedPreferences(context).edit();
 
         int count = 0;
-        for (Ort ort : orte) {
-            if (ort instanceof WifiUmgebung) {
-                String data = WifiUmgebung.dataToString((WifiUmgebung) ort);
+        for (Location location : orte) {
+            if (location instanceof WifiEnvironment) {
+                String data = WifiEnvironment.dataToString((WifiEnvironment) location);
                 editor.putString(KEY_SAVE_OBJECT + count++, data);
             }
         }
@@ -66,7 +63,7 @@ public class WifiDetection extends LocationDetection {
     }
 
     @Override
-    public void loadLoactions(ArrayList<Ort> orte) {
+    public void loadLoactions(ArrayList<Location> orte) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         int count = preferences.getInt(KEY_SAVE_COUNT, 0);
@@ -75,14 +72,14 @@ public class WifiDetection extends LocationDetection {
             String data = preferences.getString(KEY_SAVE_OBJECT + i, null);
             if (data != null) {
                 Log.d(TAG, "Load data from String: " + data);
-                WifiUmgebung wifiUmgebung = WifiUmgebung.stringToData(data);
-                orte.add(wifiUmgebung);
+                WifiEnvironment wifiEnvironment = WifiEnvironment.stringToData(data);
+                orte.add(wifiEnvironment);
             }
         }
     }
 
     @Override
-    public void startDetection(final ArrayList<Ort> locations) {
+    public void startDetection(final ArrayList<Location> locations) {
         Log.d(TAG, "start Wifi detection");
 
         final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -95,9 +92,9 @@ public class WifiDetection extends LocationDetection {
                 List<ScanResult> results;
                 results = wifiManager.getScanResults();
 
-                for (Ort ort : locations) {
-                    if (ort instanceof WifiUmgebung) {
-                        ArrayList<WifiSensor> sensors = ((WifiUmgebung) ort).getWifis();
+                for (Location location : locations) {
+                    if (location instanceof WifiEnvironment) {
+                        ArrayList<WifiSensor> sensors = ((WifiEnvironment) location).getWifis();
                         boolean active = true;
                         for (WifiSensor sensor : sensors) {
                             boolean found = false;
@@ -115,8 +112,8 @@ public class WifiDetection extends LocationDetection {
                         }
 
                         String b = active ? "true" : "false";
-                        Log.d(TAG, "Set Ort \"" + ort.getName() + "\" active: " + b);
-                        ort.setActive(active);
+                        Log.d(TAG, "Set Location \"" + location.getName() + "\" active: " + b);
+                        location.setActive(active);
                     }
                 }
             }

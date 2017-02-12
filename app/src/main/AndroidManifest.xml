@@ -42,16 +42,16 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".controller.location.CreateOrtActivity" />
+        <activity android:name=".controller.location.CreateLocationActivity" />
         <activity
-            android:name=".controller.rule.CreateRegelActivity"
+            android:name=".controller.rule.CreateTaskActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".controller.location.ChangeOrtActivity"
+            android:name=".controller.location.ChangeLocationActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

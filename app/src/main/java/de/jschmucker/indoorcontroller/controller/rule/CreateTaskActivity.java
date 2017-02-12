@@ -25,11 +25,11 @@ import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.regel.Ortsregel;
+import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.regel.Task;
 import de.jschmucker.indoorcontroller.model.steuerung.Action;
 
-public class CreateRegelActivity extends AppCompatActivity {
+public class CreateTaskActivity extends AppCompatActivity {
     public static final String RULE_ID = "RULE_ID";
     private EditText name;
     private ImageButton configureOrtsliste;
@@ -38,10 +38,10 @@ public class CreateRegelActivity extends AppCompatActivity {
     private ListView actionsList;
     private boolean chooserReady = false;
 
-    private Ortsregel rule;
+    private Task rule;
     private int ruleId;
 
-    final ArrayList<Ort> chosenOrte = new ArrayList<Ort>();
+    final ArrayList<Location> chosenOrte = new ArrayList<Location>();
     final ArrayList<Action> chosenActions = new ArrayList<Action>();
 
     private IndoorService indoorService;
@@ -94,7 +94,7 @@ public class CreateRegelActivity extends AppCompatActivity {
         configureActions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<Action> actions = indoorService.getSteuerung().getActions();
+                final ArrayList<Action> actions = indoorService.getControl().getActions();
 
                 if (actions.size() > 0) {
                     String[] liste = new String[actions.size()];
@@ -109,7 +109,7 @@ public class CreateRegelActivity extends AppCompatActivity {
                         } else checkedItems[i] = false;
                     }
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateRegelActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateTaskActivity.this);
                     builder.setTitle(getString(R.string.chooseActions))
                             .setMultiChoiceItems(liste, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
@@ -131,7 +131,7 @@ public class CreateRegelActivity extends AppCompatActivity {
                                         strings.add(action.toString());
                                     }
 
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateRegelActivity.this,
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateTaskActivity.this,
                                             android.R.layout.simple_list_item_1, strings);
                                     ortsliste.setAdapter(adapter);
                                 }
@@ -150,7 +150,7 @@ public class CreateRegelActivity extends AppCompatActivity {
         configureOrtsliste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<Ort> orte = indoorService.getOrtsManagement().getOrte();
+                final ArrayList<Location> orte = indoorService.getLocationManagement().getOrte();
                 if (orte.size() > 0) {
                     String[] liste = new String[orte.size()];
                     for (int i = 0; i < orte.size(); i++) {
@@ -164,7 +164,7 @@ public class CreateRegelActivity extends AppCompatActivity {
                         } else checkedItems[i] = false;
                     }
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateRegelActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateTaskActivity.this);
                     builder.setTitle(getString(R.string.chooseLocations))
                             .setMultiChoiceItems(liste, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
@@ -182,11 +182,11 @@ public class CreateRegelActivity extends AppCompatActivity {
                                         }
                                     }
                                     ArrayList<String> strings = new ArrayList<String>();
-                                    for (Ort ort : chosenOrte) {
-                                        strings.add(ort.getName());
+                                    for (Location location : chosenOrte) {
+                                        strings.add(location.getName());
                                     }
 
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateRegelActivity.this,
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateTaskActivity.this,
                                             android.R.layout.simple_list_item_1, strings);
                                     ortsliste.setAdapter(adapter);
                                 }
@@ -309,18 +309,18 @@ public class CreateRegelActivity extends AppCompatActivity {
                     stringsActions.add(action.toString());
                 }
 
-                ArrayAdapter<String> adapterActions = new ArrayAdapter<>(CreateRegelActivity.this,
+                ArrayAdapter<String> adapterActions = new ArrayAdapter<>(CreateTaskActivity.this,
                         android.R.layout.simple_list_item_1, stringsActions);
                 actionsList.setAdapter(adapterActions);
 
                 name.setText(rule.getName());
 
                 /*ArrayList<String> stringsLocations = new ArrayList<String>();
-                for (Ort ort : rule.getLocations()) {
+                for (Location ort : rule.getLocations()) {
                     stringsLocations.add(ort.getName());
                 }
 
-                ArrayAdapter<String> adapterLocations = new ArrayAdapter<>(CreateRegelActivity.this,
+                ArrayAdapter<String> adapterLocations = new ArrayAdapter<>(CreateTaskActivity.this,
                         android.R.layout.simple_list_item_1, stringsLocations);
                 ortsliste.setAdapter(adapterLocations);*/
             }

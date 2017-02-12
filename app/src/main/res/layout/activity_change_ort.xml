@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="de.jschmucker.indoorcontroller.controller.location.ChangeOrtActivity">
+    tools:context="de.jschmucker.indoorcontroller.controller.location.ChangeLocationActivity">
 
     <EditText
         android:layout_width="wrap_content"

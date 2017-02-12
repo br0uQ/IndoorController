@@ -8,7 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="rules">Regeln</string>
+    <string name="rules">Tasks</string>
     <string name="locations">Orte</string>
     <string name="settings">Einstellungen</string>
     <string name="about">Info</string>
@@ -16,7 +16,7 @@
     <string name="discard_label">Abbrechen</string>
     <string name="save_label">Speichern</string>
     <string name="ortsname">Ortsname</string>
-    <string name="regelname">Regelname</string>
+    <string name="regelname">Taskname</string>
     <string name="ortsliste">Orstliste</string>
     <string name="actions">Actions</string>
     <string name="bearbeiten">Bearbeiten</string>
@@ -35,7 +35,7 @@
     <string name="error">Fehler</string>
     <string name="no_name_error">Kein Name eingegeben. Bitte geben Sie einen Namen für diesen Ort ein</string>
     <string name="ok">OK</string>
-    <string name="title_activity_change_ort">ChangeOrtActivity</string>
+    <string name="title_activity_change_ort">ChangeLocationActivity</string>
     <string name="room_detection_name">Raum</string>
     <string name="nfc_detection_name">NFC Spot</string>
     <string name="wifi_detection_name">Wifi Umgebung</string>

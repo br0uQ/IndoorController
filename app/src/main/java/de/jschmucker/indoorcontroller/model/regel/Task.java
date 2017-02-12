@@ -1,6 +1,6 @@
 package de.jschmucker.indoorcontroller.model.regel;
 
-import de.jschmucker.indoorcontroller.model.ort.Ort;
+import de.jschmucker.indoorcontroller.model.ort.Location;
 import de.jschmucker.indoorcontroller.model.steuerung.Action;
 
 /**
@@ -8,7 +8,7 @@ import de.jschmucker.indoorcontroller.model.steuerung.Action;
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
-public class Ortsregel {
+public class Task {
 
 	private Action[] actions;
 	private String name;
@@ -19,7 +19,7 @@ public class Ortsregel {
 	 * @param name
 	 * @param actions    actions
 	 */
-	public Ortsregel(String name, Action[] actions){
+	public Task(String name, Action[] actions){
 		this.name = name;
 		this.actions = actions;
 		enabled = true;
@@ -41,8 +41,8 @@ public class Ortsregel {
 		return actions;
 	}
 
-	public Ort[] getLocations() {
+	public Location[] getLocations() {
 		//ToDo Orte Eigenschaten klären
 		return null;
 	}
-}//end Ortsregel
+}//end Task

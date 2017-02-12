@@ -12,12 +12,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.controller.location.CreateOrtActivity;
+import de.jschmucker.indoorcontroller.controller.location.CreateLocationActivity;
 import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
 
-public class CreateOrtNfcFragment extends LocationDetectionFragment implements Observer {
-    private NFCSensor foundSensor = null;
+public class NfcDetectionFragment extends LocationDetectionFragment implements Observer {
+    private NfcSensor foundSensor = null;
     private Button refreshButton;
     private TextView textView;
     private ProgressBar progressBar;
@@ -63,15 +63,15 @@ public class CreateOrtNfcFragment extends LocationDetectionFragment implements O
         refreshButton.setVisibility(View.VISIBLE);
         progressBar.setEnabled(true);
 
-        CreateOrtActivity activity = (CreateOrtActivity) getActivity();
+        CreateLocationActivity activity = (CreateLocationActivity) getActivity();
         activity.getIndoorService().startSingleNfcScan(this);
     }
 
-    public NFCSensor getFoundSensor() {
+    public NfcSensor getFoundSensor() {
         return foundSensor;
     }
 
-    public void setNfcSensor(NFCSensor nfcSensor) {
+    public void setNfcSensor(NfcSensor nfcSensor) {
         foundSensor = nfcSensor;
     }
 

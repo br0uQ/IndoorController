@@ -18,9 +18,9 @@ import de.jschmucker.indoorcontroller.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RulesFragment extends Fragment {
+public class TasksFragment extends Fragment {
 
-    public RulesFragment() {
+    public TasksFragment() {
         // Required empty public constructor
     }
 
@@ -38,14 +38,14 @@ public class RulesFragment extends Fragment {
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        RulesAdapter adapter = new RulesAdapter(getActivity(), activity.getIndoorService().getRegelManagement().getRegeln());
+        TasksAdapter adapter = new TasksAdapter(getActivity(), activity.getIndoorService().getTaskManagement().getRegeln());
         ListView listView = (ListView) view.findViewById(R.id.rules_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), CreateRegelActivity.class);
-                intent.putExtra(CreateRegelActivity.RULE_ID, position);
+                Intent intent = new Intent(getActivity(), CreateTaskActivity.class);
+                intent.putExtra(CreateTaskActivity.RULE_ID, position);
                 startActivity(intent);
             }
         });
@@ -54,7 +54,7 @@ public class RulesFragment extends Fragment {
     }
 
     private void openAddDialog(View view) {
-        Intent intent = new Intent(getActivity(), CreateRegelActivity.class);
+        Intent intent = new Intent(getActivity(), CreateTaskActivity.class);
         startActivity(intent);
     }
 

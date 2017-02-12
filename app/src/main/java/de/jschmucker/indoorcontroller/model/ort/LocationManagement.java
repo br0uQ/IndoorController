@@ -1,7 +1,6 @@
 package de.jschmucker.indoorcontroller.model.ort;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -17,14 +16,14 @@ import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDet
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
-public class OrtsManagement implements Observer {
+public class LocationManagement implements Observer {
     private final String TAG = getClass().getSimpleName();
 
 	private Context context;
-	private ArrayList<Ort> orte;
+	private ArrayList<Location> orte;
 	private LocationDetection[] detections;
 
-	public OrtsManagement(Context context){
+	public LocationManagement(Context context){
 		this.context = context;
         orte = new ArrayList<>();
 
@@ -41,14 +40,14 @@ public class OrtsManagement implements Observer {
 
 	/**
 	 * 
-	 * @param ort    ort
+	 * @param location    location
 	 */
-	public void addOrt(Ort ort){
-		orte.add(ort);
-        ort.addObserver(this);
+	public void addOrt(Location location){
+		orte.add(location);
+        location.addObserver(this);
 	}
 
-	public ArrayList<Ort> getOrte(){
+	public ArrayList<Location> getOrte(){
 		return orte;
 	}
 
@@ -60,10 +59,6 @@ public class OrtsManagement implements Observer {
     public void loadLocations() {
         for (LocationDetection detection : detections) {
             detection.loadLoactions(orte);
-        }
-
-        for (Ort ort : orte) {
-            //ort.addObserver(this);
         }
     }
 
@@ -84,7 +79,7 @@ public class OrtsManagement implements Observer {
 
     }
 
-    public void removeOrt(Ort ort) {
-        orte.remove(ort);
+    public void removeOrt(Location location) {
+        orte.remove(location);
     }
-}//end OrtsManagement
+}//end LocationManagement
