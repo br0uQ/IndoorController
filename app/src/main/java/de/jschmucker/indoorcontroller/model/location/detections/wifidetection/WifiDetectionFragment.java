@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
+package de.jschmucker.indoorcontroller.model.location.detections.wifidetection;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -24,8 +24,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
-import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.Location;
 
 
 public class WifiDetectionFragment extends LocationDetectionFragment {

@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
+package de.jschmucker.indoorcontroller.model.location.detections.wifidetection;
 
 import android.content.Context;
 import android.view.LayoutInflater;

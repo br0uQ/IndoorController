@@ -21,7 +21,7 @@ import android.widget.Spinner;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
+import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 public class CreateLocationActivity extends AppCompatActivity implements IndoorServiceProvider {
     private EditText name;

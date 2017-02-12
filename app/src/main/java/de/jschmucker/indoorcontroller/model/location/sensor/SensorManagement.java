@@ -1,11 +1,11 @@
-package de.jschmucker.indoorcontroller.model.ort.sensor;
+package de.jschmucker.indoorcontroller.model.location.sensor;
 
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSensor;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
+import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSensor;
+import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.BeaconSensor;
+import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiSensor;
 
 /**
  * @author joshua

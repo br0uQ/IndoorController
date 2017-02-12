@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.roomdetection;
+package de.jschmucker.indoorcontroller.model.location.detections.nfcdetection;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,28 +7,27 @@ import android.preference.PreferenceManager;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
-import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
  * Created by joshua on 01.02.17.
  */
 
-public class RoomDetection extends LocationDetection {
+public class NfcDetection extends LocationDetection {
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
     private Context context;
 
-    public RoomDetection(Context context) {
+    public NfcDetection(Context context) {
         this.context = context;
-        name = context.getString(R.string.room_detection_name);
-        fragment = new RoomDetectionFragment();
-        // ToDo Initialisation of the fragment...
+        fragment = new NfcDetectionFragment();
+        name = context.getString(R.string.nfc_detection_name);
     }
 
     @Override
     public Location createLocation(String name) {
-        // ToDo: tell the fragment to create a location
+        // ToDo tell fragment to create Location
         return null;
     }
 
@@ -39,8 +38,8 @@ public class RoomDetection extends LocationDetection {
 
         int count = 0;
         for (Location location : orte) {
-            if (location instanceof Room) {
-                String data = Room.dataToString((Room) location);
+            if (location instanceof NfcSpot) {
+                String data = NfcSpot.dataToString((NfcSpot) location);
                 editor.putString(KEY_SAVE_OBJECT + count++, data);
             }
         }
@@ -57,8 +56,8 @@ public class RoomDetection extends LocationDetection {
         for (int i = 0; i < count; i++) {
             String data = preferences.getString(KEY_SAVE_OBJECT + i, null);
             if (data != null) {
-                Room room = Room.stringToData(data);
-                orte.add(room);
+                NfcSpot nfcSpot = NfcSpot.stringToData(data);
+                orte.add(nfcSpot);
             }
         }
     }

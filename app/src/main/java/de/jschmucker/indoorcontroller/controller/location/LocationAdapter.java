@@ -11,10 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSpot;
-import de.jschmucker.indoorcontroller.model.ort.Location;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Room;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
+import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
+import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Room;
+import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiEnvironment;
 
 /**
  * Created by jschmucker on 12/12/16.

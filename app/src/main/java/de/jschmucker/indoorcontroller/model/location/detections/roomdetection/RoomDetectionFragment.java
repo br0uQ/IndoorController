@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.roomdetection;
+package de.jschmucker.indoorcontroller.model.location.detections.roomdetection;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
 public class RoomDetectionFragment extends LocationDetectionFragment implements AdapterView.OnItemSelectedListener {
     Spinner leftTop;

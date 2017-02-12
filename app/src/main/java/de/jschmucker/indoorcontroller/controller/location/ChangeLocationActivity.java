@@ -16,13 +16,13 @@ import android.widget.TextView;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.ort.Location;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetectionFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcSpot;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Room;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetectionFragment;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
+import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Room;
+import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiEnvironment;
+import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.RoomDetectionFragment;
 
 public class ChangeLocationActivity extends AppCompatActivity implements IndoorServiceProvider {
     public static final String LOCATION_ID = "LOCATION_ID";

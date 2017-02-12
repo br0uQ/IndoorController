@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection;
+package de.jschmucker.indoorcontroller.model.location.detections.nfcdetection;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import java.util.Observer;
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.controller.location.CreateLocationActivity;
 import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
 public class NfcDetectionFragment extends LocationDetectionFragment implements Observer {
     private NfcSensor foundSensor = null;

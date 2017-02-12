@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort;
+package de.jschmucker.indoorcontroller.model.location;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetection;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetection;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetection;
+import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcDetection;
+import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.RoomDetection;
+import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiDetection;
 
 /**
  * @author joshua

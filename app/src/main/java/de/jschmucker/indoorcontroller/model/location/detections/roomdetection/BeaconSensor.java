@@ -1,7 +1,7 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.roomdetection;
+package de.jschmucker.indoorcontroller.model.location.detections.roomdetection;
 
 
-import de.jschmucker.indoorcontroller.model.ort.sensor.LocationSensor;
+import de.jschmucker.indoorcontroller.model.location.sensor.LocationSensor;
 
 /**
  * @author jschmucker

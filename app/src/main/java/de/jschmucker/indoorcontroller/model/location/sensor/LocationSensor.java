@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.sensor;
+package de.jschmucker.indoorcontroller.model.location.sensor;
 
 
 /**

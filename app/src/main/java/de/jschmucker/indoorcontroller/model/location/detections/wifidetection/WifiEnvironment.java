@@ -1,8 +1,8 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
+package de.jschmucker.indoorcontroller.model.location.detections.wifidetection;
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
  * @author joshua

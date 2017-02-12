@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.wifidetection;
+package de.jschmucker.indoorcontroller.model.location.detections.wifidetection;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.Location;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
+import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
  * Created by joshua on 01.02.17.

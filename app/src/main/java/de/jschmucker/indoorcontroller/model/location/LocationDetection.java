@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.ort;
+package de.jschmucker.indoorcontroller.model.location;
 
 import java.util.ArrayList;
 

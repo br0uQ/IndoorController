@@ -1,6 +1,6 @@
-package de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection;
+package de.jschmucker.indoorcontroller.model.location.detections.nfcdetection;
 
-import de.jschmucker.indoorcontroller.model.ort.Location;
+import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
  * @author joshua
