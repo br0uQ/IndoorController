@@ -44,7 +44,7 @@
 
         <activity android:name=".controller.location.CreateLocationActivity" />
         <activity
-            android:name=".controller.rule.CreateTaskActivity"
+            android:name=".controller.task.CreateTaskActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -22,7 +22,7 @@ import de.jschmucker.indoorcontroller.controller.InfoActivity;
 import de.jschmucker.indoorcontroller.controller.SettingsActivity;
 import de.jschmucker.indoorcontroller.controller.location.LocationFragment;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.controller.rule.TasksFragment;
+import de.jschmucker.indoorcontroller.controller.task.TasksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.controller.rule;
+package de.jschmucker.indoorcontroller.controller.task;
 
 import android.content.ComponentName;
 import android.content.Context;
