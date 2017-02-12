@@ -17,8 +17,8 @@ import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconS
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Room;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiEnvironment;
-import de.jschmucker.indoorcontroller.model.regel.Task;
-import de.jschmucker.indoorcontroller.model.regel.TaskManagement;
+import de.jschmucker.indoorcontroller.model.task.Task;
+import de.jschmucker.indoorcontroller.model.task.TaskManagement;
 import de.jschmucker.indoorcontroller.model.steuerung.Control;
 
 public class IndoorService extends Service {

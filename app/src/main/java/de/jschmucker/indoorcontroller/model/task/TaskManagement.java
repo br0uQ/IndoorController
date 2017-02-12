@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.regel;
+package de.jschmucker.indoorcontroller.model.task;
 
 import java.util.ArrayList;
 

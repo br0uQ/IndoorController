@@ -61,6 +61,7 @@ public class CreateLocationActivity extends AppCompatActivity implements IndoorS
                 String ortsName = name.getText().toString();
                 Log.d("CreateOrt", "clicked save");
                 if (!ortsName.matches("") && bound && (selected != -1)) {
+                    // ToDo: check name for double use
                     if (bound) {
                         if (selected != -1) {
                             indoorService.addOrt(detections[selected].createLocation(ortsName));
@@ -86,7 +87,7 @@ public class CreateLocationActivity extends AppCompatActivity implements IndoorS
         });
 
         name = (EditText) findViewById(R.id.textedit_ort_name);
-        adapter = new ArrayAdapter<String>(this,
+        adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item);
     }
 

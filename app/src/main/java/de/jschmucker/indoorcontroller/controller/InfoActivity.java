@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.steuerung.Action;
 
 public class InfoActivity extends AppCompatActivity {
 

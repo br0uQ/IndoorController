@@ -25,9 +25,9 @@ import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.ort.Location;
 import de.jschmucker.indoorcontroller.model.task.Task;
-import de.jschmucker.indoorcontroller.model.actions.Action;
+import de.jschmucker.indoorcontroller.model.steuerung.Action;
 
 public class CreateTaskActivity extends AppCompatActivity {
     public static final String RULE_ID = "RULE_ID";

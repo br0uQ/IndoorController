@@ -68,12 +68,11 @@ public class ChangeLocationActivity extends AppCompatActivity implements IndoorS
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.change_ort_menu_save) {
-            //ToDo save changes and exit activity
+            //ToDo save changes and exit activity also check name
             finish();
             return true;
         }
         if (id == R.id.change_ort_menu_delete) {
-            //ToDo delete location and exit activity
             indoorService.getLocationManagement().removeOrt(location);
             finish();
             return true;

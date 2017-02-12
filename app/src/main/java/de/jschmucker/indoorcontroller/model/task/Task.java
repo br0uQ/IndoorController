@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.model.regel;
+package de.jschmucker.indoorcontroller.model.task;
 
 import de.jschmucker.indoorcontroller.model.ort.Location;
 import de.jschmucker.indoorcontroller.model.steuerung.Action;
