@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
+import de.jschmucker.indoorcontroller.model.ort.LocationDetectionFragment;
 import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.CreateOrtNfcFragment;
 import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
@@ -69,10 +70,13 @@ public class ChangeOrtActivity extends AppCompatActivity implements IndoorServic
         //noinspection SimplifiableIfStatement
         if (id == R.id.change_ort_menu_save) {
             //ToDo save changes and exit activity
+            finish();
             return true;
         }
         if (id == R.id.change_ort_menu_delete) {
             //ToDo delete location and exit activity
+            indoorService.getOrtsManagement().removeOrt(ort);
+            finish();
             return true;
         }
 

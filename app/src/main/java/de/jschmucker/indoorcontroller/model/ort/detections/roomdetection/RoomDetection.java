@@ -39,11 +39,12 @@ public class RoomDetection extends LocationDetection {
     public void saveLocations(ArrayList<Ort> orte) {
         SharedPreferences.Editor editor =
                 PreferenceManager.getDefaultSharedPreferences(context).edit();
+
         int count = 0;
         for (Ort ort : orte) {
             if (ort instanceof Raum) {
-                String ortJSONString = new Gson().toJson(ort);
-                editor.putString(KEY_SAVE_OBJECT + count++, ortJSONString);
+                String data = Raum.dataToString((Raum) ort);
+                editor.putString(KEY_SAVE_OBJECT + count++, data);
             }
         }
         editor.putInt(KEY_SAVE_COUNT, count);
@@ -57,12 +58,21 @@ public class RoomDetection extends LocationDetection {
         int count = preferences.getInt(KEY_SAVE_COUNT, 0);
 
         for (int i = 0; i < count; i++) {
-            Gson gson = new Gson();
-            String json = preferences.getString(KEY_SAVE_OBJECT + i, null);
-            if (json != null) {
-                Raum obj = gson.fromJson(json, Raum.class);
-                orte.add(obj);
+            String data = preferences.getString(KEY_SAVE_OBJECT + i, null);
+            if (data != null) {
+                Raum raum = Raum.stringToData(data);
+                orte.add(raum);
             }
         }
+    }
+
+    @Override
+    public void startDetection(ArrayList<Ort> locations) {
+        // ToDo: Implement Detection
+    }
+
+    @Override
+    public void stopDetection() {
+        // ToDo: Implement Detection
     }
 }

@@ -2,27 +2,21 @@ package de.jschmucker.indoorcontroller.model;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observer;
-import java.util.prefs.PreferenceChangeEvent;
 
-import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
 import de.jschmucker.indoorcontroller.model.ort.OrtsManagement;
+import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.BeaconSensor;
 import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiSensor;
+import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
 import de.jschmucker.indoorcontroller.model.regel.Ortsregel;
 import de.jschmucker.indoorcontroller.model.regel.RegelManagement;
 import de.jschmucker.indoorcontroller.model.steuerung.Steuerung;
@@ -43,8 +37,16 @@ public class IndoorService extends Service {
         steuerung = new Steuerung();
         Log.d(TAG, "Service onCreate");
 
-        for (LocationDetection detection : ortsManagement.getLocationDetections()) {
-            detection.loadLoactions(ortsManagement.getOrte());
+        /* Load locations and start the detections */
+        ortsManagement.loadLocations();
+        ortsManagement.startDetection();
+
+        /* for test create one location of every type */
+        if (ortsManagement.getOrte().size() <= 0) {
+            addOrt(new Raum("TestRaum", new BeaconSensor[]{new BeaconSensor(), new BeaconSensor(),
+                    new BeaconSensor(), new BeaconSensor()}));
+            addOrt(new NFCSpot("TestNFCSpot", new NFCSensor()));
+            addOrt(new WifiUmgebung("TestWifiUmgebung", new ArrayList<WifiSensor>()));
         }
     }
 
@@ -52,9 +54,8 @@ public class IndoorService extends Service {
     public void onDestroy() {
         Log.d(TAG, "onDestroy");
 
-        for (LocationDetection detection : getOrtsManagement().getLocationDetections()) {
-            detection.saveLocations(ortsManagement.getOrte());
-        }
+        ortsManagement.saveLocations();
+        ortsManagement.stopDetection();
 
         super.onDestroy();
     }

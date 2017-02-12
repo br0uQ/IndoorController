@@ -38,11 +38,12 @@ public class NfcDetection extends LocationDetection {
     public void saveLocations(ArrayList<Ort> orte) {
         SharedPreferences.Editor editor =
                 PreferenceManager.getDefaultSharedPreferences(context).edit();
+
         int count = 0;
         for (Ort ort : orte) {
             if (ort instanceof NFCSpot) {
-                String ortJSONString = new Gson().toJson(ort);
-                editor.putString(KEY_SAVE_OBJECT + count++, ortJSONString);
+                String data = NFCSpot.dataToString((NFCSpot) ort);
+                editor.putString(KEY_SAVE_OBJECT + count++, data);
             }
         }
         editor.putInt(KEY_SAVE_COUNT, count);
@@ -56,12 +57,21 @@ public class NfcDetection extends LocationDetection {
         int count = preferences.getInt(KEY_SAVE_COUNT, 0);
 
         for (int i = 0; i < count; i++) {
-            Gson gson = new Gson();
-            String json = preferences.getString(KEY_SAVE_OBJECT + i, null);
-            if (json != null) {
-                NFCSpot obj = gson.fromJson(json, NFCSpot.class);
-                orte.add(obj);
+            String data = preferences.getString(KEY_SAVE_OBJECT + i, null);
+            if (data != null) {
+                NFCSpot nfcSpot = NFCSpot.stringToData(data);
+                orte.add(nfcSpot);
             }
         }
+    }
+
+    @Override
+    public void startDetection(ArrayList<Ort> locations) {
+        // ToDo: Implement Detection
+    }
+
+    @Override
+    public void stopDetection() {
+        // ToDo: Implement Detection
     }
 }

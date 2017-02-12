@@ -1,6 +1,10 @@
 package de.jschmucker.indoorcontroller.controller.location;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.ort.LocationDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NFCSpot;
 import de.jschmucker.indoorcontroller.model.ort.Ort;
-import de.jschmucker.indoorcontroller.model.ort.detections.nfcdetection.NfcDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.Raum;
-import de.jschmucker.indoorcontroller.model.ort.detections.roomdetection.RoomDetection;
-import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiDetection;
 import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmgebung;
 
 /**
@@ -25,6 +27,7 @@ import de.jschmucker.indoorcontroller.model.ort.detections.wifidetection.WifiUmg
  */
 
 public class LocationAdapter extends BaseAdapter {
+    private final String TAG = getClass().getSimpleName();
     private Context context;
     private ArrayList<Ort> orte;
 
