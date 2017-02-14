@@ -9,6 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Observer;
 
+import de.jschmucker.indoorcontroller.model.actions.Action;
+import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
+import de.jschmucker.indoorcontroller.model.actions.ActionManagement;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationManagement;
 import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
@@ -19,7 +22,6 @@ import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.Wi
 import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiEnvironment;
 import de.jschmucker.indoorcontroller.model.task.Task;
 import de.jschmucker.indoorcontroller.model.task.TaskManagement;
-import de.jschmucker.indoorcontroller.model.actions.Control;
 
 public class IndoorService extends Service {
     private final IBinder binder = new IndoorBinder();
@@ -28,13 +30,13 @@ public class IndoorService extends Service {
 
     private LocationManagement locationManagement;
     private TaskManagement taskManagement;
-    private Control control;
+    private ActionManagement actionManagement;
 
     @Override
     public void onCreate() {
         locationManagement = new LocationManagement(this);
         taskManagement = new TaskManagement();
-        control = new Control();
+        actionManagement = new ActionManagement();
         Log.d(TAG, "Service onCreate");
 
         /* Load locations and start the detections */
@@ -101,6 +103,22 @@ public class IndoorService extends Service {
         return taskManagement.getRegeln().get(ruleId);
     }
 
+    public ActionFragment[] getActionFragments() {
+        return actionManagement.getActionFragments();
+    }
+
+    public void setAction(Action action) {
+        actionManagement.setAction(action);
+    }
+
+    public Action getAction() {
+        return actionManagement.getAction();
+    }
+
+    public void addTask(Task newTask) {
+        taskManagement.addRule(newTask);
+    }
+
     public class IndoorBinder extends Binder {
         public IndoorService getService() {
             return IndoorService.this;
@@ -120,7 +138,7 @@ public class IndoorService extends Service {
         return taskManagement;
     }
 
-    public Control getControl() {
-        return control;
+    public ActionManagement getActionManagement() {
+        return actionManagement;
     }
 }

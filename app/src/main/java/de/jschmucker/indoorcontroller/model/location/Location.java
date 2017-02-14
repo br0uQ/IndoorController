@@ -26,6 +26,7 @@ public abstract class Location extends Observable {
     public void setActive(boolean active) {
         if (this.active != active) {
             this.active = active;
+			setChanged();
             notifyObservers();
         }
     }

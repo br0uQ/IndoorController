@@ -41,4 +41,8 @@
     <string name="wifi_detection_name">Wifi Umgebung</string>
     <string name="refresh">Neu scannen</string>
     <string name="scanning_for_wifis">Suche nach Wifis</string>
+    <string name="example_action_desc">Hiermit wird bei Aktivierung ein frei wählbarer Text angezeigt.</string>
+    <string name="example_action_choose_text">Text der angezeigt werden soll:</string>
+    <string name="actionname">Actionname</string>
+    <string name="example_action_name">Example Action</string>
 </resources>

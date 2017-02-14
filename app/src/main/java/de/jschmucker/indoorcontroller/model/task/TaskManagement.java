@@ -3,7 +3,7 @@ package de.jschmucker.indoorcontroller.model.task;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.model.actions.Action;
-import de.jschmucker.indoorcontroller.model.actions.Control;
+import de.jschmucker.indoorcontroller.model.actions.ActionManagement;
 
 /**
  * @author joshua
@@ -13,11 +13,11 @@ import de.jschmucker.indoorcontroller.model.actions.Control;
 public class TaskManagement {
 
 	private ArrayList<Task> regeln;
-	private Control control;
+	private ActionManagement actionManagement;
 
 	public TaskManagement(){
 		regeln = new ArrayList<>();
-		addRule(new Task("TestRegel", new Action[]{}));
+		//addRule(new Task("TestRegel", new Action[]{}));
 	}
 
 	/**

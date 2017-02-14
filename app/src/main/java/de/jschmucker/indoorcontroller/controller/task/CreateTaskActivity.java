@@ -22,9 +22,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
+import de.jschmucker.indoorcontroller.model.actions.ChooseActionActivity;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.task.Task;
 import de.jschmucker.indoorcontroller.model.actions.Action;
@@ -33,13 +36,15 @@ public class CreateTaskActivity extends AppCompatActivity {
     public static final String RULE_ID = "RULE_ID";
     private EditText name;
     private ImageButton configureOrtsliste;
-    private ImageButton configureActions;
+    private ImageButton addAction;
     private ListView ortsliste;
     private ListView actionsList;
     private boolean chooserReady = false;
 
     private Task rule;
     private int ruleId;
+
+    private ArrayList<Action> actions;
 
     final ArrayList<Location> chosenOrte = new ArrayList<Location>();
     final ArrayList<Action> chosenActions = new ArrayList<Action>();
@@ -75,6 +80,13 @@ public class CreateTaskActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (!name.getText().toString().matches("")) {
+                        Map<Location, Boolean> locationBooleanMap = new HashMap<Location, Boolean>();
+                        for (Location location : chosenOrte) {
+                            locationBooleanMap.put(location, true);
+                        }
+                        Task newTask = new Task(indoorService, name.getText().toString(),
+                                locationBooleanMap, actions);
+                        indoorService.addTask(newTask);
                         finish();
                     }
                 }
@@ -90,59 +102,13 @@ public class CreateTaskActivity extends AppCompatActivity {
         ortsliste = (ListView) findViewById(R.id.create_regel_ortsliste);
         actionsList = (ListView) findViewById(R.id.create_regel_actionliste);
 
-        configureActions = (ImageButton) findViewById(R.id.create_regel_configure_actions);
-        configureActions.setOnClickListener(new View.OnClickListener() {
+        addAction = (ImageButton) findViewById(R.id.create_regel_add_action);
+        addAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<Action> actions = indoorService.getControl().getActions();
-
-                if (actions.size() > 0) {
-                    String[] liste = new String[actions.size()];
-                    for (int i = 0; i < actions.size(); i++) {
-                        liste[i] = actions.get(i).toString();
-                    }
-
-                    final boolean[] checkedItems = new boolean[liste.length];
-                    for (int i = 0; i < checkedItems.length; i++) {
-                        if (chosenActions.contains(actions.get(i))) {
-                            checkedItems[i] = true;
-                        } else checkedItems[i] = false;
-                    }
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateTaskActivity.this);
-                    builder.setTitle(getString(R.string.chooseActions))
-                            .setMultiChoiceItems(liste, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                    checkedItems[which] = isChecked;
-                                }
-                            })
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    chosenActions.clear();
-                                    for (int i = 0; i < checkedItems.length; i++) {
-                                        if (checkedItems[i]) {
-                                            chosenActions.add(actions.get(i));
-                                        }
-                                    }
-                                    ArrayList<String> strings = new ArrayList<String>();
-                                    for (Action action : chosenActions) {
-                                        strings.add(action.toString());
-                                    }
-
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateTaskActivity.this,
-                                            android.R.layout.simple_list_item_1, strings);
-                                    ortsliste.setAdapter(adapter);
-                                }
-                            });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.chooseActions) + ": " +
-                            getString(R.string.noelements), Toast.LENGTH_SHORT).show();
-                }
+                // start Action creation
+                Intent intent = new Intent(CreateTaskActivity.this, ChooseActionActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -201,6 +167,8 @@ public class CreateTaskActivity extends AppCompatActivity {
 
             }
         });
+
+        actions = new ArrayList<>();
     }
 
     @Override
@@ -323,6 +291,14 @@ public class CreateTaskActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapterLocations = new ArrayAdapter<>(CreateTaskActivity.this,
                         android.R.layout.simple_list_item_1, stringsLocations);
                 ortsliste.setAdapter(adapterLocations);*/
+            } else {
+                Action action = indoorService.getAction();
+                if (action != null) {
+                    actions.add(action);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateTaskActivity.this,
+                            android.R.layout.simple_list_item_1, new String[] {action.getName()});
+                    actionsList.setAdapter(adapter);
+                }
             }
         }
 

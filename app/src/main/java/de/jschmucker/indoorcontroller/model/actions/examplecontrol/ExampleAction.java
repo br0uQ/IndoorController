@@ -9,11 +9,12 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
  * Created by joshua on 12.02.17.
  */
 
-public class ExampleAction implements Action {
+public class ExampleAction extends Action {
     String toPrint;
 
-    ExampleAction(String toPrint) {
-        this.toPrint = toPrint;
+    public ExampleAction(String name, String text) {
+        this.name = name;
+        toPrint = text;
     }
 
     @Override
