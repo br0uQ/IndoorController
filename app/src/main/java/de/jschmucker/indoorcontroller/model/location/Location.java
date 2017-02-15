@@ -30,4 +30,8 @@ public abstract class Location extends Observable {
             notifyObservers();
         }
     }
+
+	public void setName(String locationName) {
+		name = locationName;
+	}
 }//end Location

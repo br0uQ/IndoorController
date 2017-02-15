@@ -2,37 +2,34 @@ package de.jschmucker.indoorcontroller.controller.location;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
+import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.Location;
-import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcDetectionFragment;
-import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
-import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Room;
-import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiDetectionFragment;
-import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiEnvironment;
-import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.RoomDetectionFragment;
+import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
-public class ChangeLocationActivity extends AppCompatActivity implements IndoorServiceProvider {
+public class ChangeLocationActivity extends AppCompatActivity
+        implements IndoorServiceBound, Observer {
     public static final String LOCATION_ID = "LOCATION_ID";
     private Location location;
-    private IndoorService indoorService;
-    private boolean bound = false;
     private int locationID;
+    private LocationDetection detection;
 
     private TextView name;
     private Fragment fragment;
+
+    private IndoorServiceProvider indoorServiceProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +47,9 @@ public class ChangeLocationActivity extends AppCompatActivity implements IndoorS
         }
 
         name = (TextView) findViewById(R.id.textedit_change_ort_name);
+
+        indoorServiceProvider = new IndoorServiceProvider();
+        indoorServiceProvider.addObserver(this);
     }
 
     @Override
@@ -68,12 +68,17 @@ public class ChangeLocationActivity extends AppCompatActivity implements IndoorS
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.change_ort_menu_save) {
-            //ToDo save changes and exit activity also check name
-            finish();
+            String locationName = name.getText().toString();
+            if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(locationName)) {
+                detection.saveLocationValues(location);
+                location.setName(locationName);
+
+                finish();
+            }
             return true;
         }
         if (id == R.id.change_ort_menu_delete) {
-            indoorService.getLocationManagement().removeOrt(location);
+            indoorServiceProvider.getIndoorService().getLocationManagement().removeOrt(location);
             finish();
             return true;
         }
@@ -85,11 +90,7 @@ public class ChangeLocationActivity extends AppCompatActivity implements IndoorS
     protected void onResume() {
         super.onResume();
 
-        if (!bound) {
-            // Bind to Service
-            Intent intent = new Intent(this, IndoorService.class);
-            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        }
+        indoorServiceProvider.connectToService(this);
     }
 
     @Override
@@ -97,60 +98,32 @@ public class ChangeLocationActivity extends AppCompatActivity implements IndoorS
         super.onStop();
 
         // unbind from service
-        if (bound) {
-            unbindService(mConnection);
-            bound = false;
-        }
+        indoorServiceProvider.disconnectFromService(this);
     }
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
-            IndoorService.IndoorBinder binder = (IndoorService.IndoorBinder) service;
-            indoorService = binder.getService();
-            bound = true;
-
-            location = indoorService.getOrt(locationID);
-            name.setText(location.getName());
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if (location instanceof Room) {
-                fragment = new RoomDetectionFragment();
-                transaction.replace(R.id.change_ort_fragment_container, fragment);
-                transaction.commit();
-
-                RoomDetectionFragment raumFragment = (RoomDetectionFragment) fragment;
-                Room room = (Room) location;
-                raumFragment.setBeacons(room.getBeacons());
-            } else if (location instanceof NfcSpot) {
-                fragment = new NfcDetectionFragment();
-                transaction.replace(R.id.change_ort_fragment_container, fragment);
-                transaction.commit();
-
-                NfcDetectionFragment nfcFragment = (NfcDetectionFragment) fragment;
-                NfcSpot nfcSpot = (NfcSpot) location;
-                nfcFragment.setNfcSensor(nfcSpot.getNfcSensor());
-            } else if (location instanceof WifiEnvironment) {
-                fragment = new WifiDetectionFragment();
-                transaction.replace(R.id.change_ort_fragment_container, fragment);
-                transaction.commit();
-
-                WifiDetectionFragment wifiFragment = (WifiDetectionFragment) fragment;
-                WifiEnvironment wifiEnvironment = (WifiEnvironment) location;
-                wifiFragment.setWifiList(wifiEnvironment.getWifis());
-            }
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            bound = false;
-        }
-    };
 
     @Override
     public IndoorService getIndoorService() {
-        return indoorService;
+        return indoorServiceProvider.getIndoorService();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (((int) arg) == IndoorServiceProvider.CONNECTED) {
+            IndoorService indoorService = indoorServiceProvider.getIndoorService();
+            location = indoorService.getOrt(locationID);
+            detection = indoorService.getLocationDetection(location);
+
+            name.setText(location.getName());
+
+            fragment = detection.getFragment();
+            detection.setLocationValues(location);
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.change_ort_fragment_container, fragment);
+            transaction.commit();
+
+        } else if (((int) arg) == IndoorServiceProvider.NOT_CONNECTED) {
+
+        }
     }
 }

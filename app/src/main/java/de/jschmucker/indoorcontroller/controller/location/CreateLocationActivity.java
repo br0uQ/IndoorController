@@ -2,12 +2,7 @@ package de.jschmucker.indoorcontroller.controller.location;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,22 +14,26 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
+import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
-public class CreateLocationActivity extends AppCompatActivity implements IndoorServiceProvider {
+public class CreateLocationActivity extends AppCompatActivity
+        implements IndoorServiceBound, Observer {
     private EditText name;
     private Spinner ortsTypeChooser;
 
     private ArrayAdapter<String> adapter;
 
-    private IndoorService indoorService;
-    private boolean bound = false;
-
     private Fragment actualFragment;
     private LocationDetection[] detections;
     private int selected = -1;
+
+    private IndoorServiceProvider indoorServiceProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +59,21 @@ public class CreateLocationActivity extends AppCompatActivity implements IndoorS
             public void onClick(View v) {
                 String ortsName = name.getText().toString();
                 Log.d("CreateOrt", "clicked save");
-                if (!ortsName.matches("") && bound && (selected != -1)) {
+                if (!ortsName.matches("") && indoorServiceProvider.isBound() && (selected != -1)) {
                     // ToDo: check name for double use
-                    if (bound) {
-                        if (selected != -1) {
-                            indoorService.addOrt(detections[selected].createLocation(ortsName));
-                            finish();
-                        }
-                    }
+                    indoorServiceProvider.getIndoorService().addOrt(detections[selected].createLocation(ortsName));
+                    finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateLocationActivity.this);
 
                     builder.setMessage(R.string.no_name_error)
                             .setTitle(R.string.error)
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
+                                }
+                            });
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
@@ -89,17 +84,16 @@ public class CreateLocationActivity extends AppCompatActivity implements IndoorS
         name = (EditText) findViewById(R.id.textedit_ort_name);
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item);
+
+        indoorServiceProvider = new IndoorServiceProvider();
+        indoorServiceProvider.addObserver(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (!bound) {
-            // Bind to Service
-            Intent intent = new Intent(this, IndoorService.class);
-            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        }
+        indoorServiceProvider.connectToService(this);
     }
 
     @Override
@@ -107,25 +101,18 @@ public class CreateLocationActivity extends AppCompatActivity implements IndoorS
         super.onStop();
 
         // unbind from service
-        if (bound) {
-            unbindService(mConnection);
-            bound = false;
-        }
+        indoorServiceProvider.disconnectFromService(this);
     }
 
     public IndoorService getIndoorService() {
-        return indoorService;
+        return indoorServiceProvider.getIndoorService();
     }
 
-    private ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
-            IndoorService.IndoorBinder binder = (IndoorService.IndoorBinder) service;
-            indoorService = binder.getService();
-            bound = true;
+    @Override
+    public void update(Observable o, Object arg) {
+        int type = (int) arg;
+        if (type == IndoorServiceProvider.CONNECTED) {
+            IndoorService indoorService = indoorServiceProvider.getIndoorService();
 
             selected = 0;
 
@@ -152,11 +139,8 @@ public class CreateLocationActivity extends AppCompatActivity implements IndoorS
 
                 }
             });
-        }
+        } else if (type == IndoorServiceProvider.NOT_CONNECTED) {
 
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            bound = false;
         }
-    };
+    }
 }

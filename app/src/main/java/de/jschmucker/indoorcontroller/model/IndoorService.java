@@ -13,6 +13,7 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
 import de.jschmucker.indoorcontroller.model.actions.ActionManagement;
 import de.jschmucker.indoorcontroller.model.location.Location;
+import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 import de.jschmucker.indoorcontroller.model.location.LocationManagement;
 import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
 import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSensor;
@@ -107,8 +108,8 @@ public class IndoorService extends Service {
         return actionManagement.getActionFragments();
     }
 
-    public void setAction(Action action) {
-        actionManagement.setAction(action);
+    public void addAction(Action action) {
+        actionManagement.addAction(action);
     }
 
     public Action getAction() {
@@ -117,6 +118,18 @@ public class IndoorService extends Service {
 
     public void addTask(Task newTask) {
         taskManagement.addRule(newTask);
+    }
+
+    public int getLocationImage(Location location) {
+        return locationManagement.getLocationImage(location);
+    }
+
+    public ArrayList<Action> getActions() {
+        return actionManagement.getActions();
+    }
+
+    public LocationDetection getLocationDetection(Location location) {
+        return locationManagement.getLocationDetection(location);
     }
 
     public class IndoorBinder extends Binder {
@@ -140,5 +153,19 @@ public class IndoorService extends Service {
 
     public ActionManagement getActionManagement() {
         return actionManagement;
+    }
+
+    public boolean isLocationNameAvailable(String name) {
+        if (name.equals("")) {
+            return false;
+        }
+        return locationManagement.isNameAvailable(name);
+    }
+
+    public boolean isActionNameAvailable(String name) {
+        if (name.equals("")) {
+            return false;
+        }
+        return actionManagement.isNameAvailable(name);
     }
 }

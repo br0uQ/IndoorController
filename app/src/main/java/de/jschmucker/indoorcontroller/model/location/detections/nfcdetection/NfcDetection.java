@@ -71,4 +71,29 @@ public class NfcDetection extends LocationDetection {
     public void stopDetection() {
         // ToDo: Implement Detection
     }
+
+    @Override
+    public boolean isDetectionOfLocation(Location location) {
+        if (location instanceof NfcSpot) {
+            return true;
+        } else return false;
+    }
+
+    @Override
+    public int getLocationImage() {
+        return R.drawable.ic_nfc_spot_white24dp;
+    }
+
+    @Override
+    public void setLocationValues(Location location) {
+        NfcSpot nfcSpot = (NfcSpot) location;
+        NfcDetectionFragment nfcDetectionFragment = (NfcDetectionFragment) fragment;
+        NfcSensor nfcSensor = new NfcSensor();
+        nfcDetectionFragment.setNfcSensor(nfcSensor);
+    }
+
+    @Override
+    public void saveLocationValues(Location location) {
+        ((NfcDetectionFragment) fragment).saveLocationValues((NfcSpot) location);
+    }
 }

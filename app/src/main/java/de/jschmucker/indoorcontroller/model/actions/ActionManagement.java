@@ -12,6 +12,7 @@ import de.jschmucker.indoorcontroller.model.actions.examplecontrol.ExampleAction
  */
 public class ActionManagement {
     private Action action;
+    private ArrayList<Action> actions = new ArrayList<>();
 	private ActionFragment[] actionFragments = new ActionFragment[] {
 			new ExampleActionFragment()
 	};
@@ -24,7 +25,8 @@ public class ActionManagement {
 
 	}
 
-    public void setAction(Action action) {
+    public void addAction(Action action) {
+        actions.add(action);
         this.action = action;
     }
 
@@ -32,5 +34,18 @@ public class ActionManagement {
         Action ret = action;
         action = null;
         return ret;
+    }
+
+    public boolean isNameAvailable(String name) {
+        for (Action a : actions) {
+            if (a.getName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<Action> getActions() {
+        return actions;
     }
 }//end Control

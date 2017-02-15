@@ -51,4 +51,8 @@ public class Room extends Location {
 
 		return new Room(name, sensors);
 	}
+
+	public void setBeacons(BeaconSensor[] beacons) {
+		beaconSensors = beacons;
+	}
 }//end Room

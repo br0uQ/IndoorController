@@ -59,19 +59,21 @@ public class Task implements Observer {
 		return actions;
 	}
 
-	public Location[] getLocations() {
+	public Map<Location, Boolean> getLocations() {
 		//ToDo Orte Eigenschaten klären
-		return null;
+		return locations;
 	}
 
     @Override
     public void update(Observable o, Object arg) {
         Log.d(getClass().getSimpleName(), "Task \"" + name + "\": update");
-        Location source = (Location) o;
-        if (locations.get(source)) {
-            for (Action action : actions) {
-                action.execute(context);
-            }
-        }
+		if (enabled) {
+			Location source = (Location) o;
+			if (locations.get(source)) {
+				for (Action action : actions) {
+					action.execute(context);
+				}
+			}
+		}
     }
 }//end Task

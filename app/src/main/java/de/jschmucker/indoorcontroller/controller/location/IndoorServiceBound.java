@@ -6,6 +6,6 @@ import de.jschmucker.indoorcontroller.model.IndoorService;
  * Created by joshua on 05.01.17.
  */
 
-public interface IndoorServiceProvider {
+public interface IndoorServiceBound {
     public IndoorService getIndoorService();
 }

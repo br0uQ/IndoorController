@@ -142,4 +142,8 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
         getActivity().unregisterReceiver(receiver);
         super.onStop();
     }
+
+    public void saveLocationValues(WifiEnvironment location) {
+        location.setWifis(selectedWifis);
+    }
 }

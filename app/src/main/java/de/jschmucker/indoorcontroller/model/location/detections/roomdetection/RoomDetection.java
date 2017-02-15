@@ -72,4 +72,32 @@ public class RoomDetection extends LocationDetection {
     public void stopDetection() {
         // ToDo: Implement Detection
     }
+
+    @Override
+    public boolean isDetectionOfLocation(Location location) {
+        if (location instanceof Room) {
+            return true;
+        } else return false;
+    }
+
+    @Override
+    public int getLocationImage() {
+        return R.drawable.ic_room_white24dp;
+    }
+
+    @Override
+    public void setLocationValues(Location location) {
+        RoomDetectionFragment roomDetectionFragment = (RoomDetectionFragment) fragment;
+        Room room = (Room) location;
+        BeaconSensor[] beaconSensors = new BeaconSensor[room.getBeacons().length];
+        for (int i = 0; i < beaconSensors.length; i++) {
+            beaconSensors[i] = room.getBeacons()[i];
+        }
+        roomDetectionFragment.setBeacons(beaconSensors);
+    }
+
+    @Override
+    public void saveLocationValues(Location location) {
+        ((RoomDetectionFragment) fragment).saveLocationValues((Room) location);
+    }
 }

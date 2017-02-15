@@ -39,4 +39,12 @@ public abstract class LocationDetection {
 
     public abstract void startDetection(ArrayList<Location> locations);
     public abstract void stopDetection();
+
+    public abstract boolean isDetectionOfLocation(Location location);
+
+    public abstract int getLocationImage();
+
+    public abstract void setLocationValues(Location location);
+
+    public abstract void saveLocationValues(Location location);
 }

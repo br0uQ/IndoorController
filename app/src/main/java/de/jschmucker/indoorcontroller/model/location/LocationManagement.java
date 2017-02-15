@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcDetection;
 import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.RoomDetection;
 import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiDetection;
@@ -81,5 +82,32 @@ public class LocationManagement implements Observer {
 
     public void removeOrt(Location location) {
         orte.remove(location);
+    }
+
+    public int getLocationImage(Location location) {
+        for (LocationDetection detection : detections) {
+            if (detection.isDetectionOfLocation(location)) {
+                return detection.getLocationImage();
+            }
+        }
+        return R.drawable.ic_my_location_black_24dp;
+    }
+
+    public boolean isNameAvailable(String name) {
+        for (Location location : orte) {
+            if (location.getName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public LocationDetection getLocationDetection(Location location) {
+        for (LocationDetection detection : detections) {
+            if (detection.isDetectionOfLocation(location)) {
+                return detection;
+            }
+        }
+        return null;
     }
 }//end LocationManagement

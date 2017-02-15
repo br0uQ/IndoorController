@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
+import de.jschmucker.indoorcontroller.controller.location.IndoorServiceBound;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
@@ -31,7 +31,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_ort_raum, container, false);
 
-        IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
+        IndoorServiceBound activity = (IndoorServiceBound) getActivity();
         IndoorService service = activity.getIndoorService();
 
         leftTop = (Spinner) view.findViewById(R.id.create_ort_raum_spinner_top_left);
@@ -85,6 +85,10 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
     public void setBeacons(BeaconSensor[] beacons) {
         selectedBeacons = beacons;
         //ToDo set Beacons in Spinner
+    }
+
+    public void saveLocationValues(Room location) {
+        location.setBeacons(selectedBeacons);
     }
 
     public class BeaconAdapter extends BaseAdapter {

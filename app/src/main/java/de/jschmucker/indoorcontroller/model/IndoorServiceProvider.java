@@ -1,4 +1,4 @@
-package de.jschmucker.indoorcontroller.controller;
+package de.jschmucker.indoorcontroller.model;
 
 import android.content.ComponentName;
 import android.content.Context;

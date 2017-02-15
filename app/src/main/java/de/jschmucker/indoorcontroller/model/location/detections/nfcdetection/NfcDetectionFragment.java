@@ -13,7 +13,7 @@ import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.controller.location.CreateLocationActivity;
-import de.jschmucker.indoorcontroller.controller.location.IndoorServiceProvider;
+import de.jschmucker.indoorcontroller.controller.location.IndoorServiceBound;
 import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
 public class NfcDetectionFragment extends LocationDetectionFragment implements Observer {
@@ -41,7 +41,7 @@ public class NfcDetectionFragment extends LocationDetectionFragment implements O
             setGuiHasSensor(true);
         }
 
-        IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
+        IndoorServiceBound activity = (IndoorServiceBound) getActivity();
         activity.getIndoorService().startSingleNfcScan(this);
 
         return view;
@@ -49,7 +49,7 @@ public class NfcDetectionFragment extends LocationDetectionFragment implements O
 
     @Override
     public void update(Observable o, Object arg) {
-        IndoorServiceProvider activity = (IndoorServiceProvider) getActivity();
+        IndoorServiceBound activity = (IndoorServiceBound) getActivity();
         foundSensor = activity.getIndoorService().getFoundNfcSensor();
         refreshButton.setEnabled(true);
         refreshButton.setVisibility(View.VISIBLE);
@@ -80,5 +80,9 @@ public class NfcDetectionFragment extends LocationDetectionFragment implements O
         refreshButton.setVisibility(View.VISIBLE);
         textView.setText(foundSensor.toString());
         progressBar.setEnabled(!b);
+    }
+
+    public void saveLocationValues(NfcSpot location) {
+        location.setNfcSensor(foundSensor);
     }
 }

@@ -148,4 +148,32 @@ public class WifiDetection extends LocationDetection {
 
         context.unregisterReceiver(receiver);
     }
+
+    @Override
+    public boolean isDetectionOfLocation(Location location) {
+        if (location instanceof WifiEnvironment) {
+            return true;
+        } else return false;
+    }
+
+    @Override
+    public int getLocationImage() {
+        return R.drawable.ic_wifis_white24dp;
+    }
+
+    @Override
+    public void setLocationValues(Location location) {
+        WifiDetectionFragment wifiDetectionFragment = (WifiDetectionFragment) fragment;
+        WifiEnvironment environment = (WifiEnvironment) location;
+        ArrayList<WifiSensor> wifis = new ArrayList<>();
+        for (WifiSensor sensor : environment.getWifis()) {
+            wifis.add(sensor);
+        }
+        wifiDetectionFragment.setWifiList(wifis);
+    }
+
+    @Override
+    public void saveLocationValues(Location location) {
+        ((WifiDetectionFragment) fragment).saveLocationValues((WifiEnvironment) location);
+    }
 }

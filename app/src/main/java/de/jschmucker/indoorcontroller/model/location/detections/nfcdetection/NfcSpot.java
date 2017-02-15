@@ -42,4 +42,8 @@ public class NfcSpot extends Location {
 
 		return new NfcSpot(name, sensor);
 	}
+
+	public void setNfcSensor(NfcSensor nfcSensor) {
+		nFCSensor = nfcSensor;
+	}
 }//end NfcSpot

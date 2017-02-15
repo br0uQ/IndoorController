@@ -54,4 +54,8 @@ public class WifiEnvironment extends Location {
         }
         return new WifiEnvironment(name, sensors);
     }
+
+    public void setWifis(ArrayList<WifiSensor> selectedWifis) {
+        wifiSensors = selectedWifis;
+    }
 }//end WifiEnvironment

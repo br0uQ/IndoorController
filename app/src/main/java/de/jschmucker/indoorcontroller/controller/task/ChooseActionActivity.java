@@ -1,8 +1,7 @@
-package de.jschmucker.indoorcontroller.model.actions;
+package de.jschmucker.indoorcontroller.controller.task;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.controller.IndoorServiceProvider;
+import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
+import de.jschmucker.indoorcontroller.model.actions.Action;
+import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
 
 /**
  * Created by joshua on 13.02.17.
@@ -57,10 +58,11 @@ public class ChooseActionActivity extends AppCompatActivity implements Observer 
             public void onClick(View v) {
                 String actionName = actionNameEditText.getText().toString();
                 Log.d(getClass().getSimpleName(), "clicked save");
-                if (!actionName.matches("") && indoorServiceProvider.isBound() && (selectedAction != -1)) {
+                if (indoorServiceProvider.getIndoorService().isActionNameAvailable(actionName)
+                        && indoorServiceProvider.isBound() && (selectedAction != -1)) {
                     // ToDo: check name for double use
                     Action action = fragment.createAction(actionName);
-                    indoorServiceProvider.getIndoorService().setAction(action);
+                    indoorServiceProvider.getIndoorService().addAction(action);
 
                     finish();
                 } else {

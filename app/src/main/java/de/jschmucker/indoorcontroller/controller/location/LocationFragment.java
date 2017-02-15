@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import de.jschmucker.indoorcontroller.MainActivity;
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.model.location.Location;
 
 
 /**
@@ -38,7 +41,13 @@ public class LocationFragment extends Fragment {
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        LocationAdapter adapter = new LocationAdapter(getActivity(), activity.getIndoorService().getLocationManagement().getOrte());
+        ArrayList<Location> locations = activity.getIndoorService().getLocationManagement().getOrte();
+        ArrayList<Integer> imgRes = new ArrayList<>();
+        for (Location location : locations) {
+            imgRes.add(activity.getIndoorService().getLocationImage(location));
+        }
+        LocationAdapter adapter = new LocationAdapter(activity,
+                locations, imgRes);
         ListView listView = (ListView) view.findViewById(R.id.location_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

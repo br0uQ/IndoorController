@@ -33,7 +33,7 @@
     <string name="new_search">Neu suchen</string>
     <string name="chooseWifis">Wähle WIFI aus der Liste aus</string>
     <string name="error">Fehler</string>
-    <string name="no_name_error">Kein Name eingegeben. Bitte geben Sie einen Namen für diesen Ort ein</string>
+    <string name="no_name_error">Kein Name eingegeben oder Name schon vorhanden. Bitte geben Sie einen Namen für diesen Ort ein</string>
     <string name="ok">OK</string>
     <string name="title_activity_change_ort">ChangeLocationActivity</string>
     <string name="room_detection_name">Raum</string>
@@ -45,4 +45,6 @@
     <string name="example_action_choose_text">Text der angezeigt werden soll:</string>
     <string name="actionname">Actionname</string>
     <string name="example_action_name">Example Action</string>
+    <string name="create_new_action">Erstelle neue Action...</string>
+    <string name="active">Aktiv:</string>
 </resources>
