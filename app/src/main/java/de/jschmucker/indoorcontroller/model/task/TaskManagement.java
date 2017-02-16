@@ -31,4 +31,8 @@ public class TaskManagement {
 	public ArrayList<Task> getRegeln() {
 		return regeln;
 	}
+
+	public void removeTask(Task rule) {
+		regeln.remove(rule);
+	}
 }//end TaskManagement

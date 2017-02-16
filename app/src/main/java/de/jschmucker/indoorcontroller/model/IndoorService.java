@@ -48,7 +48,7 @@ public class IndoorService extends Service {
         if (locationManagement.getOrte().size() <= 0) {
             addOrt(new Room("TestRaum", new BeaconSensor[]{new BeaconSensor(), new BeaconSensor(),
                     new BeaconSensor(), new BeaconSensor()}));
-            addOrt(new NfcSpot("TestNFCSpot", new NfcSensor()));
+            addOrt(new NfcSpot("TestNFCSpot", new NfcSensor("Test")));
             addOrt(new WifiEnvironment("TestWifiUmgebung", new ArrayList<WifiSensor>()));
         }
     }
@@ -85,11 +85,6 @@ public class IndoorService extends Service {
 
     public void startSingleNfcScan(Observer observer) {
         //ToDo
-    }
-
-    public ArrayList<WifiSensor> getWifiEnvironment() {
-        //ToDo
-        return new ArrayList<>();
     }
 
     public void addOrt(Location neuerLocation) {
@@ -130,6 +125,10 @@ public class IndoorService extends Service {
 
     public LocationDetection getLocationDetection(Location location) {
         return locationManagement.getLocationDetection(location);
+    }
+
+    public void removeTask(Task rule) {
+        taskManagement.removeTask(rule);
     }
 
     public class IndoorBinder extends Binder {

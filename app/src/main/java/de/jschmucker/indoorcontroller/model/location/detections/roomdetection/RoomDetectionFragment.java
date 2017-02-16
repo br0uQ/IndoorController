@@ -29,7 +29,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_create_ort_raum, container, false);
+        View view = inflater.inflate(R.layout.fragment_detection_room, container, false);
 
         IndoorServiceBound activity = (IndoorServiceBound) getActivity();
         IndoorService service = activity.getIndoorService();
@@ -54,7 +54,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         leftBottom.setOnItemSelectedListener(this);
         rightBottom.setOnItemSelectedListener(this);
 
-        return inflater.inflate(R.layout.fragment_create_ort_raum, container, false);
+        return inflater.inflate(R.layout.fragment_detection_room, container, false);
     }
 
     public BeaconSensor[] getSelectedBeacons() {

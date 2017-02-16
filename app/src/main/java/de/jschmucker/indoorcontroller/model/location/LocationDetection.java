@@ -1,5 +1,7 @@
 package de.jschmucker.indoorcontroller.model.location;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
 
 /**
@@ -47,4 +49,11 @@ public abstract class LocationDetection {
     public abstract void setLocationValues(Location location);
 
     public abstract void saveLocationValues(Location location);
+
+    public void handleNewIntent(Intent intent) {
+        /* does nothing
+        Detection that wants to use onNewIntent() of the Activity
+        can override this function
+         */
+    }
 }

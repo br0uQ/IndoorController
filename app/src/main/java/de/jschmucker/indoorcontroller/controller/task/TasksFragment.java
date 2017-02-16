@@ -28,7 +28,7 @@ public class TasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_rules, container, false);
+        View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_add_rule);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class TasksFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CreateTaskActivity.class);
-                intent.putExtra(CreateTaskActivity.RULE_ID, position);
+                intent.putExtra(CreateTaskActivity.TASK_ID, position);
                 startActivity(intent);
             }
         });

@@ -26,8 +26,7 @@ public class NfcSpot extends Location {
 		sb.append(nfcSpot.getName());
 		sb.append("\n");
 
-		// ToDo: save real nfc sensor data
-		sb.append(nfcSpot.getNfcSensor().toString());
+		sb.append(nfcSpot.getNfcSensor().getSerialNumber());
 		sb.append("\n");
 
 		return sb.toString();
@@ -37,8 +36,7 @@ public class NfcSpot extends Location {
 		String[] dataArray = data.split("\n");
 		String name = dataArray[0];
 
-		// ToDo: load real nfc sensor data
-		NfcSensor sensor = new NfcSensor();
+		NfcSensor sensor = new NfcSensor(dataArray[1]);
 
 		return new NfcSpot(name, sensor);
 	}

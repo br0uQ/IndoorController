@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class CreateLocationActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_ort);
+        setContentView(R.layout.activity_create_location);
 
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -59,8 +60,9 @@ public class CreateLocationActivity extends AppCompatActivity
             public void onClick(View v) {
                 String ortsName = name.getText().toString();
                 Log.d("CreateOrt", "clicked save");
-                if (!ortsName.matches("") && indoorServiceProvider.isBound() && (selected != -1)) {
-                    // ToDo: check name for double use
+                if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(ortsName)
+                        && indoorServiceProvider.isBound()
+                        && (selected != -1)) {
                     indoorServiceProvider.getIndoorService().addOrt(detections[selected].createLocation(ortsName));
                     finish();
                 } else {
@@ -141,6 +143,16 @@ public class CreateLocationActivity extends AppCompatActivity
             });
         } else if (type == IndoorServiceProvider.NOT_CONNECTED) {
 
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if ((selected != -1)
+                && (detections != null)) {
+            if (detections[selected] != null) {
+                detections[selected].handleNewIntent(intent);
+            }
         }
     }
 }

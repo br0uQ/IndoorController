@@ -5,7 +5,6 @@
     tools:context=".model.location.detections.roomdetection.RoomDetectionFragment"
     android:background="@drawable/room_border">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

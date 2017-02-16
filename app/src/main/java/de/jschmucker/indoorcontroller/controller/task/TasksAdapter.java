@@ -49,7 +49,7 @@ public class TasksAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = inflater.inflate(R.layout.rules_item, null);
+            view = inflater.inflate(R.layout.task_item, null);
         }
 
         TextView name = (TextView) view.findViewById(R.id.rules_item_name);

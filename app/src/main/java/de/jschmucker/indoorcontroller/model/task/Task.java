@@ -60,7 +60,6 @@ public class Task implements Observer {
 	}
 
 	public Map<Location, Boolean> getLocations() {
-		//ToDo Orte Eigenschaten klären
 		return locations;
 	}
 
@@ -75,5 +74,17 @@ public class Task implements Observer {
 				}
 			}
 		}
+    }
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+    public void setLocations(Map<Location, Boolean> locationBooleanMap) {
+        locations = locationBooleanMap;
+    }
+
+    public void setActions(ArrayList<Action> actions) {
+        this.actions = actions;
     }
 }//end Task

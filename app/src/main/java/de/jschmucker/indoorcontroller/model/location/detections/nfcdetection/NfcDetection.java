@@ -1,8 +1,13 @@
 package de.jschmucker.indoorcontroller.model.location.detections.nfcdetection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -15,9 +20,12 @@ import de.jschmucker.indoorcontroller.model.location.LocationDetection;
  */
 
 public class NfcDetection extends LocationDetection {
+    private final String TAG = getClass().getSimpleName();
+
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
     private Context context;
+    private boolean detectionToFragment = false;
 
     public NfcDetection(Context context) {
         this.context = context;
@@ -27,8 +35,7 @@ public class NfcDetection extends LocationDetection {
 
     @Override
     public Location createLocation(String name) {
-        // ToDo tell fragment to create Location
-        return null;
+        return ((NfcDetectionFragment) fragment).createLocation(name);
     }
 
     @Override
@@ -88,12 +95,43 @@ public class NfcDetection extends LocationDetection {
     public void setLocationValues(Location location) {
         NfcSpot nfcSpot = (NfcSpot) location;
         NfcDetectionFragment nfcDetectionFragment = (NfcDetectionFragment) fragment;
-        NfcSensor nfcSensor = new NfcSensor();
-        nfcDetectionFragment.setNfcSensor(nfcSensor);
+        NfcSensor nfcSensor = new NfcSensor(nfcSpot.getNfcSensor().getSerialNumber());
+        nfcDetectionFragment.setNfcValue(nfcSensor);
     }
 
     @Override
     public void saveLocationValues(Location location) {
         ((NfcDetectionFragment) fragment).saveLocationValues((NfcSpot) location);
+    }
+
+    public void setNfcDetectToFragment(boolean b) {
+        detectionToFragment = b;
+    }
+
+    @Override
+    public void handleNewIntent(Intent intent) {
+        Log.d(TAG, "handleNewIntent");
+        String action = intent.getAction();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
+                && detectionToFragment) {
+            Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+            byte[] extraID = tagFromIntent.getId();
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : extraID) {
+                sb.append(String.format("%02X", b));
+                sb.append(":");
+            };
+
+            sb.deleteCharAt(sb.length() -1);
+
+            String nfcTagSerialNum = sb.toString();
+
+            ((NfcDetectionFragment) fragment).setNfcSensor(new NfcSensor(nfcTagSerialNum));
+            detectionToFragment = false;
+        }
     }
 }

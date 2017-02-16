@@ -34,7 +34,7 @@ public class ChangeLocationActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_ort);
+        setContentView(R.layout.activity_change_location);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -124,6 +124,13 @@ public class ChangeLocationActivity extends AppCompatActivity
 
         } else if (((int) arg) == IndoorServiceProvider.NOT_CONNECTED) {
 
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (detection != null) {
+            detection.handleNewIntent(intent);
         }
     }
 }

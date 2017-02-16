@@ -60,7 +60,6 @@ public class ChooseActionActivity extends AppCompatActivity implements Observer 
                 Log.d(getClass().getSimpleName(), "clicked save");
                 if (indoorServiceProvider.getIndoorService().isActionNameAvailable(actionName)
                         && indoorServiceProvider.isBound() && (selectedAction != -1)) {
-                    // ToDo: check name for double use
                     Action action = fragment.createAction(actionName);
                     indoorServiceProvider.getIndoorService().addAction(action);
 
@@ -104,7 +103,6 @@ public class ChooseActionActivity extends AppCompatActivity implements Observer 
     @Override
     public void update(Observable o, Object arg) {
         if (((int) arg) == IndoorServiceProvider.CONNECTED) {
-            // ToDo:
             actionFragments = indoorServiceProvider.getIndoorService().getActionFragments();
             selectedAction = 0;
 
@@ -134,7 +132,6 @@ public class ChooseActionActivity extends AppCompatActivity implements Observer 
                 }
             });
         } else if (((int) arg) == IndoorServiceProvider.NOT_CONNECTED) {
-            // ToDo
         }
     }
 }

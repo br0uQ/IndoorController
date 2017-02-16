@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: add english language -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rules">Tasks</string>
     <string name="locations">Orte</string>
@@ -47,4 +47,5 @@
     <string name="example_action_name">Example Action</string>
     <string name="create_new_action">Erstelle neue Action...</string>
     <string name="active">Aktiv:</string>
+    <string name="found_nfc_sensor">NFC Tag gefunden:\nSeriennr:</string>
 </resources>
