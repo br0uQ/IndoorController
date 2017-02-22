@@ -18,13 +18,13 @@ import de.jschmucker.indoorcontroller.model.task.Task;
  * Created by joshua on 04.01.17.
  */
 
-public class TasksAdapter extends BaseAdapter {
+public class MainTasksAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Task> regeln;
 
     private static LayoutInflater inflater = null;
 
-    public TasksAdapter(Context context, ArrayList<Task> regeln) {
+    public MainTasksAdapter(Context context, ArrayList<Task> regeln) {
         this.context = context;
         this.regeln = regeln;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -20,9 +20,10 @@ import android.view.MenuItem;
 
 import de.jschmucker.indoorcontroller.controller.InfoActivity;
 import de.jschmucker.indoorcontroller.controller.SettingsActivity;
-import de.jschmucker.indoorcontroller.controller.location.LocationFragment;
+import de.jschmucker.indoorcontroller.controller.action.MainActionFragment;
+import de.jschmucker.indoorcontroller.controller.location.MainLocationFragment;
 import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.controller.task.TasksFragment;
+import de.jschmucker.indoorcontroller.controller.task.MainTasksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,10 +56,12 @@ public class MainActivity extends AppCompatActivity
     private void saveFragmentSettings() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        if (fragment instanceof TasksFragment) {
+        if (fragment instanceof MainTasksFragment) {
             editor.putString(FRAGMENT_KEY, getString(R.string.rules));
-        } else if (fragment instanceof LocationFragment) {
+        } else if (fragment instanceof MainLocationFragment) {
             editor.putString(FRAGMENT_KEY, getString(R.string.locations));
+        } else if (fragment instanceof MainActionFragment) {
+            editor.putString(FRAGMENT_KEY, getString(R.string.actions));
         }
         editor.commit();
     }
@@ -71,14 +74,17 @@ public class MainActivity extends AppCompatActivity
         String fragmentString = preferences.getString(FRAGMENT_KEY, "");
         if (!fragmentString.matches("")) {
             if (fragmentString.matches(getString(R.string.locations))) {
-                fragment = new LocationFragment();
+                fragment = new MainLocationFragment();
                 setTitle(R.string.locations);
             } else if (fragmentString.matches(getString(R.string.rules))) {
-                fragment = new TasksFragment();
+                fragment = new MainTasksFragment();
                 setTitle(R.string.rules);
+            } else if (fragmentString.matches(getString(R.string.actions))) {
+                fragment = new MainActionFragment();
+                setTitle(getString(R.string.actions));
             }
         } else {
-            fragment = new TasksFragment();
+            fragment = new MainTasksFragment();
         }
 
         // Bind to Service
@@ -136,14 +142,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_rules) {
-            fragment = new TasksFragment();
+            fragment = new MainTasksFragment();
             saveFragmentSettings();
             toolbar.setTitle(R.string.rules);
             setFragment();
         } else if (id == R.id.nav_sensors) {
-            fragment = new LocationFragment();
+            fragment = new MainLocationFragment();
             saveFragmentSettings();
             toolbar.setTitle(R.string.locations);
+            setFragment();
+        } else if (id == R.id.nav_actions) {
+            fragment = new MainActionFragment();
+            saveFragmentSettings();
+            toolbar.setTitle(getString(R.string.actions));
             setFragment();
         } else if (id == R.id.nav_about) {
             openAbout();

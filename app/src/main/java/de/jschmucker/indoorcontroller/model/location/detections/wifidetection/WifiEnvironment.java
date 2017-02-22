@@ -2,6 +2,7 @@ package de.jschmucker.indoorcontroller.model.location.detections.wifidetection;
 
 import java.util.ArrayList;
 
+import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
@@ -20,6 +21,7 @@ public class WifiEnvironment extends Location {
     public WifiEnvironment(String name, ArrayList<WifiSensor> sensoren) {
         wifiSensors = sensoren;
         this.name = name;
+        imageRessourceId = R.drawable.ic_wifis_white24dp;
     }
 
     public ArrayList<WifiSensor> getWifis() {

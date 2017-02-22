@@ -18,14 +18,14 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  * Created by joshua on 15.02.17.
  */
 
-public class TaskLocationAdapter extends BaseAdapter {
+public class MainTaskLocationAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Location> locations;
     private ArrayList<Boolean> active;
 
     private static LayoutInflater inflater = null;
 
-    public TaskLocationAdapter(Context context, ArrayList<Location> locations, ArrayList<Boolean> active) {
+    public MainTaskLocationAdapter(Context context, ArrayList<Location> locations, ArrayList<Boolean> active) {
         this.context = context;
         this.locations = locations;
         this.active = active;

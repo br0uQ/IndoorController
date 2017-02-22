@@ -2,6 +2,8 @@ package de.jschmucker.indoorcontroller.model.location;
 
 import java.util.Observable;
 
+import de.jschmucker.indoorcontroller.R;
+
 /**
  * @author joshua
  * @version 1.0
@@ -10,6 +12,7 @@ import java.util.Observable;
 public abstract class Location extends Observable {
 	protected boolean active;
 	protected String name;
+	protected int imageRessourceId = R.drawable.ic_my_location_black_24dp;
 
 	public Location(){
 
@@ -33,5 +36,9 @@ public abstract class Location extends Observable {
 
 	public void setName(String locationName) {
 		name = locationName;
+	}
+
+	public int getImageRessourceId() {
+		return imageRessourceId;
 	}
 }//end Location

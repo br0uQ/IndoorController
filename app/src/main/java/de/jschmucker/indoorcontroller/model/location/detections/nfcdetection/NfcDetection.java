@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.nfc.tech.Ndef;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
@@ -26,11 +27,20 @@ public class NfcDetection extends LocationDetection {
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
     private Context context;
     private boolean detectionToFragment = false;
+    private boolean detect = false;
+    private volatile HashMap<NfcSpot, Integer> activeSpots;  // key: active nfcspot, value: countdown time
+
+    private Thread detectionThread = null;
+
+    private int timeToSetInactive = 5;   // Time in s after NfcSpot is set inactive after setting active
+
+    private ArrayList<Location> locations;
 
     public NfcDetection(Context context) {
         this.context = context;
         fragment = new NfcDetectionFragment();
         name = context.getString(R.string.nfc_detection_name);
+        activeSpots = new HashMap<>();
     }
 
     @Override
@@ -71,12 +81,56 @@ public class NfcDetection extends LocationDetection {
 
     @Override
     public void startDetection(ArrayList<Location> locations) {
-        // ToDo: Implement Detection
+        this.locations = locations;
+        detect = true;
+
+        if (detectionThread == null) {
+            detectionThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (detect) {
+                        for (HashMap.Entry<NfcSpot, Integer> entry : activeSpots.entrySet()) {
+                            Log.d("NFCDetection", "count down NfcSpot: " + entry.getKey().getName());
+                            checkNfcSpot(entry);
+                        }
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            Log.d(getClass().getSimpleName(), e.toString());
+                        }
+                    }
+
+                    for (NfcSpot nfcSpot : activeSpots.keySet()) {
+                        String log = "Set NfcSpot \"" + nfcSpot.getName() + "\": ";
+                        Log.d(getClass().getSimpleName(), log + "false");
+                        nfcSpot.setActive(false);
+                    }
+                    activeSpots.clear();
+                    detectionThread = null;
+                }
+
+                private void checkNfcSpot(HashMap.Entry<NfcSpot, Integer> entry) {
+                    int time = entry.getValue();
+                    time--;
+                    if (time <= 0) {
+                        NfcSpot nfcSpot = entry.getKey();
+                        String log = "Set NfcSpot \"" + nfcSpot.getName() + "\": ";
+                        Log.d(getClass().getSimpleName(), log + "false");
+                        nfcSpot.setActive(false);
+                        activeSpots.remove(entry.getKey());
+                    } else {
+                        entry.setValue(time);
+                    }
+                }
+            });
+            detectionThread.start();
+        }
     }
 
     @Override
     public void stopDetection() {
-        // ToDo: Implement Detection
+        detect = false;
     }
 
     @Override
@@ -84,11 +138,6 @@ public class NfcDetection extends LocationDetection {
         if (location instanceof NfcSpot) {
             return true;
         } else return false;
-    }
-
-    @Override
-    public int getLocationImage() {
-        return R.drawable.ic_nfc_spot_white24dp;
     }
 
     @Override
@@ -130,8 +179,26 @@ public class NfcDetection extends LocationDetection {
 
             String nfcTagSerialNum = sb.toString();
 
-            ((NfcDetectionFragment) fragment).setNfcSensor(new NfcSensor(nfcTagSerialNum));
+            ((NfcDetectionFragment) fragment).setNfcSensor(new NfcSensor(nfcTagSerialNum), tagFromIntent);
             detectionToFragment = false;
         }
+    }
+
+    public void detectedNfcSensor(NfcSensor foundSensor) {
+        if (detect) {
+            for (Location location : locations) {
+                if (location instanceof NfcSpot) {
+                    final NfcSpot nfcSpot = (NfcSpot) location;
+                    if (nfcSpot.getNfcSensor().getSerialNumber().equals(foundSensor.getSerialNumber())) {
+                        String log = "Set NfcSpot \"" + nfcSpot.getName() + "\": ";
+                        Log.d(getClass().getSimpleName(), log + "true");
+                        nfcSpot.setActive(true);
+                        activeSpots.put(nfcSpot, timeToSetInactive);
+                    }
+                }
+            }
+        }
+
+        //ToDo: setTimer for 5s to set all nfc sensors not active again
     }
 }

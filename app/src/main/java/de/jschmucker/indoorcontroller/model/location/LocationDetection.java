@@ -44,8 +44,6 @@ public abstract class LocationDetection {
 
     public abstract boolean isDetectionOfLocation(Location location);
 
-    public abstract int getLocationImage();
-
     public abstract void setLocationValues(Location location);
 
     public abstract void saveLocationValues(Location location);

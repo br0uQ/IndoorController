@@ -45,12 +45,16 @@ public class IndoorService extends Service {
         locationManagement.startDetection();
 
         /* for test create one location of every type */
-        if (locationManagement.getOrte().size() <= 0) {
+        if (locationManagement.getLocations().size() <= 0) {
             addOrt(new Room("TestRaum", new BeaconSensor[]{new BeaconSensor(), new BeaconSensor(),
                     new BeaconSensor(), new BeaconSensor()}));
             addOrt(new NfcSpot("TestNFCSpot", new NfcSensor("Test")));
             addOrt(new WifiEnvironment("TestWifiUmgebung", new ArrayList<WifiSensor>()));
         }
+
+        actionManagement.loadActions(this);
+
+        taskManagement.loadTasks(this);
     }
 
     @Override
@@ -59,6 +63,10 @@ public class IndoorService extends Service {
 
         locationManagement.saveLocations();
         locationManagement.stopDetection();
+
+        actionManagement.saveActions(this);
+
+        taskManagement.saveTasks(this);
 
         super.onDestroy();
     }
@@ -92,11 +100,11 @@ public class IndoorService extends Service {
     }
 
     public Location getOrt(int locationId) {
-        return locationManagement.getOrte().get(locationId);
+        return locationManagement.getLocations().get(locationId);
     }
 
     public Task getRule(int ruleId) {
-        return taskManagement.getRegeln().get(ruleId);
+        return taskManagement.getTasks().get(ruleId);
     }
 
     public ActionFragment[] getActionFragments() {
@@ -115,10 +123,6 @@ public class IndoorService extends Service {
         taskManagement.addRule(newTask);
     }
 
-    public int getLocationImage(Location location) {
-        return locationManagement.getLocationImage(location);
-    }
-
     public ArrayList<Action> getActions() {
         return actionManagement.getActions();
     }
@@ -129,6 +133,14 @@ public class IndoorService extends Service {
 
     public void removeTask(Task rule) {
         taskManagement.removeTask(rule);
+    }
+
+    public Location getLocation(String name) {
+        return locationManagement.getLocation(name);
+    }
+
+    public Action getAction(String name) {
+        return actionManagement.getAction(name);
     }
 
     public class IndoorBinder extends Binder {

@@ -21,9 +21,9 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LocationFragment extends Fragment {
+public class MainLocationFragment extends Fragment {
 
-    public LocationFragment() {
+    public MainLocationFragment() {
         // Required empty public constructor
     }
 
@@ -41,13 +41,9 @@ public class LocationFragment extends Fragment {
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        ArrayList<Location> locations = activity.getIndoorService().getLocationManagement().getOrte();
-        ArrayList<Integer> imgRes = new ArrayList<>();
-        for (Location location : locations) {
-            imgRes.add(activity.getIndoorService().getLocationImage(location));
-        }
-        LocationAdapter adapter = new LocationAdapter(activity,
-                locations, imgRes);
+        ArrayList<Location> locations = activity.getIndoorService().getLocationManagement().getLocations();
+        MainLocationAdapter adapter = new MainLocationAdapter(activity,
+                locations);
         ListView listView = (ListView) view.findViewById(R.id.location_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

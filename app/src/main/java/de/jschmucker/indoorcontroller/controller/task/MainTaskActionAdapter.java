@@ -17,17 +17,15 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
  * Created by joshua on 15.02.17.
  */
 
-public class TaskActionAdapter extends BaseAdapter {
+public class MainTaskActionAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Action> actions;
-    private boolean deletable;
 
     private static LayoutInflater inflater = null;
 
-    public TaskActionAdapter(Context context, ArrayList<Action> actions) {
+    public MainTaskActionAdapter(Context context, ArrayList<Action> actions) {
         this.context = context;
         this.actions = actions;
-        this.deletable = deletable;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

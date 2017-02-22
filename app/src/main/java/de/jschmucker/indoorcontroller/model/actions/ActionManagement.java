@@ -1,8 +1,11 @@
 package de.jschmucker.indoorcontroller.model.actions;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
+import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.actions.examplecontrol.ExampleActionFragment;
 
 /**
@@ -47,5 +50,26 @@ public class ActionManagement {
 
     public ArrayList<Action> getActions() {
         return actions;
+    }
+
+    public void loadActions(Context context) {
+        for (ActionFragment af : actionFragments) {
+            af.loadActions(context, actions);
+        }
+    }
+
+    public void saveActions(Context context) {
+        for (ActionFragment af : actionFragments) {
+            af.saveActions(context, actions);
+        }
+    }
+
+    public Action getAction(String name) {
+        for (Action action : actions) {
+            if (action.getName().equals(name)) {
+                return action;
+            }
+        }
+        return null;
     }
 }//end Control

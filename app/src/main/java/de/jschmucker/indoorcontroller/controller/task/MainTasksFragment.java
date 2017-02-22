@@ -18,9 +18,9 @@ import de.jschmucker.indoorcontroller.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TasksFragment extends Fragment {
+public class MainTasksFragment extends Fragment {
 
-    public TasksFragment() {
+    public MainTasksFragment() {
         // Required empty public constructor
     }
 
@@ -38,7 +38,7 @@ public class TasksFragment extends Fragment {
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        TasksAdapter adapter = new TasksAdapter(getActivity(), activity.getIndoorService().getTaskManagement().getRegeln());
+        MainTasksAdapter adapter = new MainTasksAdapter(getActivity(), activity.getIndoorService().getTaskManagement().getTasks());
         ListView listView = (ListView) view.findViewById(R.id.rules_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

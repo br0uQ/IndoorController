@@ -81,11 +81,6 @@ public class RoomDetection extends LocationDetection {
     }
 
     @Override
-    public int getLocationImage() {
-        return R.drawable.ic_room_white24dp;
-    }
-
-    @Override
     public void setLocationValues(Location location) {
         RoomDetectionFragment roomDetectionFragment = (RoomDetectionFragment) fragment;
         Room room = (Room) location;

@@ -11,39 +11,33 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.model.IndoorService;
-import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
 import de.jschmucker.indoorcontroller.model.location.Location;
-import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Room;
-import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiEnvironment;
 
 /**
  * Created by jschmucker on 12/12/16.
  */
 
-public class LocationAdapter extends BaseAdapter {
+public class MainLocationAdapter extends BaseAdapter {
     private final String TAG = getClass().getSimpleName();
     private Context context;
-    private ArrayList<Location> orte;
-    private ArrayList<Integer> imgRes;
+    private ArrayList<Location> locations;
 
     private static LayoutInflater inflater = null;
 
-    public LocationAdapter(Context context, ArrayList<Location> orte, ArrayList<Integer> imgRes) {
+    public MainLocationAdapter(Context context, ArrayList<Location> locations) {
         this.context = context;
-        this.orte = orte;
-        this.imgRes = imgRes;
+        this.locations = locations;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return orte.size();
+        return locations.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return orte.get(i);
+        return locations.get(i);
     }
 
     @Override
@@ -58,9 +52,9 @@ public class LocationAdapter extends BaseAdapter {
             v = inflater.inflate(R.layout.location_item, null);
         }
         TextView name = (TextView) v.findViewById(R.id.location_item_name);
-        name.setText(orte.get(i).getName());
+        name.setText(locations.get(i).getName());
         ImageView imageView = (ImageView) v.findViewById(R.id.location_item_icon);
-        imageView.setImageResource(imgRes.get(i));
+        imageView.setImageResource(locations.get(i).getImageRessourceId());
 
         return v;
     }

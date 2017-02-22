@@ -1,5 +1,6 @@
 package de.jschmucker.indoorcontroller.model.location.detections.roomdetection;
 
+import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
@@ -18,6 +19,7 @@ public class Room extends Location {
 			beaconSensors[i] = sensors[i];
 		} */
 		beaconSensors = sensors;
+		imageRessourceId = R.drawable.ic_room_white24dp;
 	}
 
 	public BeaconSensor[] getBeacons() {

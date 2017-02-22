@@ -42,8 +42,8 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
     final ArrayList<Location> chosenLocations = new ArrayList<>();
     private ArrayList<Boolean> chosenLocationsActive = new ArrayList<>();
     private ArrayList<Action> chosenActions = new ArrayList<>();
-    private TaskActionAdapter taskActionAdapter;
-    private TaskLocationAdapter taskLocationAdapter;
+    private MainTaskActionAdapter mainTaskActionAdapter;
+    private MainTaskLocationAdapter mainTaskLocationAdapter;
 
     private IndoorServiceProvider indoorServiceProvider;
 
@@ -126,7 +126,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
                             startActivity(intent);
                         } else {
                             chosenActions.add(actions.get(which));
-                            taskActionAdapter.notifyDataSetChanged();
+                            mainTaskActionAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -141,7 +141,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
         configureLocationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<Location> orte = indoorServiceProvider.getIndoorService().getLocationManagement().getOrte();
+                final ArrayList<Location> orte = indoorServiceProvider.getIndoorService().getLocationManagement().getLocations();
                 if (orte.size() > 0) {
                     String[] liste = new String[orte.size()];
                     for (int i = 0; i < orte.size(); i++) {
@@ -180,7 +180,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
                                             }
                                         }
                                     }
-                                    taskLocationAdapter.notifyDataSetChanged();
+                                    mainTaskLocationAdapter.notifyDataSetChanged();
                                 }
                             });
 
@@ -194,10 +194,10 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
             }
         });
 
-        taskActionAdapter = new TaskActionAdapter(this, chosenActions);
-        actionsList.setAdapter(taskActionAdapter);
-        taskLocationAdapter = new TaskLocationAdapter(this, chosenLocations, chosenLocationsActive);
-        locationList.setAdapter(taskLocationAdapter);
+        mainTaskActionAdapter = new MainTaskActionAdapter(this, chosenActions);
+        actionsList.setAdapter(mainTaskActionAdapter);
+        mainTaskLocationAdapter = new MainTaskLocationAdapter(this, chosenLocations, chosenLocationsActive);
+        locationList.setAdapter(mainTaskLocationAdapter);
 
         indoorServiceProvider = new IndoorServiceProvider();
         indoorServiceProvider.addObserver(this);
@@ -237,6 +237,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
         }
         if (id == R.id.change_ort_menu_delete) {
             indoorServiceProvider.getIndoorService().removeTask(task);
+            finish();
             return true;
         }
 
@@ -272,7 +273,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
                 for (Action a : actions) {
                     chosenActions.add(a);
                 }
-                taskActionAdapter.notifyDataSetChanged();
+                mainTaskActionAdapter.notifyDataSetChanged();
 
                 chosenLocations.clear();
                 chosenLocationsActive.clear();
@@ -280,14 +281,14 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
                     chosenLocationsActive.add(entry.getValue());
                     chosenLocations.add(entry.getKey());
                 }
-                taskLocationAdapter.notifyDataSetChanged();
+                mainTaskLocationAdapter.notifyDataSetChanged();
 
                 name.setText(task.getName());
             } else {
                 Action action = indoorService.getAction();
                 if (action != null) {
                     chosenActions.add(action);
-                    taskActionAdapter.notifyDataSetChanged();
+                    mainTaskActionAdapter.notifyDataSetChanged();
                 }
             }
         } else if (msg == IndoorServiceProvider.NOT_CONNECTED) {

@@ -157,11 +157,6 @@ public class WifiDetection extends LocationDetection {
     }
 
     @Override
-    public int getLocationImage() {
-        return R.drawable.ic_wifis_white24dp;
-    }
-
-    @Override
     public void setLocationValues(Location location) {
         WifiDetectionFragment wifiDetectionFragment = (WifiDetectionFragment) fragment;
         WifiEnvironment environment = (WifiEnvironment) location;

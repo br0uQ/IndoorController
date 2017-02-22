@@ -68,7 +68,7 @@ public class Task implements Observer {
         Log.d(getClass().getSimpleName(), "Task \"" + name + "\": update");
 		if (enabled) {
 			Location source = (Location) o;
-			if (locations.get(source)) {
+			if (locations.get(source) == source.isActive()) {
 				for (Action action : actions) {
 					action.execute(context);
 				}

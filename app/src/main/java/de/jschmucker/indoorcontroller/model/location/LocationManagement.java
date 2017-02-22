@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcDetection;
 import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.RoomDetection;
 import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiDetection;
@@ -21,12 +20,12 @@ public class LocationManagement implements Observer {
     private final String TAG = getClass().getSimpleName();
 
 	private Context context;
-	private ArrayList<Location> orte;
+	private ArrayList<Location> locations;
 	private LocationDetection[] detections;
 
 	public LocationManagement(Context context){
 		this.context = context;
-        orte = new ArrayList<>();
+        locations = new ArrayList<>();
 
 		detections = new LocationDetection[] {
 				new RoomDetection(context),
@@ -44,12 +43,12 @@ public class LocationManagement implements Observer {
 	 * @param location    location
 	 */
 	public void addOrt(Location location){
-		orte.add(location);
+		locations.add(location);
         location.addObserver(this);
 	}
 
-	public ArrayList<Location> getOrte(){
-		return orte;
+	public ArrayList<Location> getLocations(){
+		return locations;
 	}
 
     @Override
@@ -59,19 +58,19 @@ public class LocationManagement implements Observer {
 
     public void loadLocations() {
         for (LocationDetection detection : detections) {
-            detection.loadLoactions(orte);
+            detection.loadLoactions(locations);
         }
     }
 
     public void startDetection() {
         for (LocationDetection detection : detections) {
-            detection.startDetection(orte);
+            detection.startDetection(locations);
         }
     }
 
     public void saveLocations() {
         for (LocationDetection detection : detections) {
-            detection.saveLocations(orte);
+            detection.saveLocations(locations);
             detection.stopDetection();
         }
     }
@@ -81,20 +80,11 @@ public class LocationManagement implements Observer {
     }
 
     public void removeOrt(Location location) {
-        orte.remove(location);
-    }
-
-    public int getLocationImage(Location location) {
-        for (LocationDetection detection : detections) {
-            if (detection.isDetectionOfLocation(location)) {
-                return detection.getLocationImage();
-            }
-        }
-        return R.drawable.ic_my_location_black_24dp;
+        locations.remove(location);
     }
 
     public boolean isNameAvailable(String name) {
-        for (Location location : orte) {
+        for (Location location : locations) {
             if (location.getName().equals(name)) {
                 return false;
             }
@@ -106,6 +96,15 @@ public class LocationManagement implements Observer {
         for (LocationDetection detection : detections) {
             if (detection.isDetectionOfLocation(location)) {
                 return detection;
+            }
+        }
+        return null;
+    }
+
+    public Location getLocation(String name) {
+        for (Location location : locations) {
+            if (location.getName().equals(name)) {
+                return location;
             }
         }
         return null;
