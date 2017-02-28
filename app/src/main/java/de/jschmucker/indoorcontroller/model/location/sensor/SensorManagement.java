@@ -8,11 +8,11 @@ import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Be
 import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiSensor;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:20
  */
-public class SensorManagement {
+class SensorManagement {
 
 	private ArrayList<BeaconSensor> beaconSensors;
 	private ArrayList<NfcSensor> nFCSensors;

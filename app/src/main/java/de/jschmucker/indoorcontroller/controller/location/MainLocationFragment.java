@@ -41,7 +41,7 @@ public class MainLocationFragment extends Fragment {
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        ArrayList<Location> locations = activity.getIndoorService().getLocationManagement().getLocations();
+        ArrayList<Location> locations = activity.getIndoorService().getLocations();
         MainLocationAdapter adapter = new MainLocationAdapter(activity,
                 locations);
         ListView listView = (ListView) view.findViewById(R.id.location_list);
@@ -57,7 +57,7 @@ public class MainLocationFragment extends Fragment {
         return view;
     }
 
-    public void openAddDialog() {
+    private void openAddDialog() {
         Intent intent = new Intent(getActivity(), CreateLocationActivity.class);
         startActivity(intent);
     }

@@ -17,15 +17,13 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  * Created by jschmucker on 12/12/16.
  */
 
-public class MainLocationAdapter extends BaseAdapter {
+class MainLocationAdapter extends BaseAdapter {
     private final String TAG = getClass().getSimpleName();
-    private Context context;
-    private ArrayList<Location> locations;
+    private final ArrayList<Location> locations;
 
     private static LayoutInflater inflater = null;
 
     public MainLocationAdapter(Context context, ArrayList<Location> locations) {
-        this.context = context;
         this.locations = locations;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -54,7 +52,7 @@ public class MainLocationAdapter extends BaseAdapter {
         TextView name = (TextView) v.findViewById(R.id.location_item_name);
         name.setText(locations.get(i).getName());
         ImageView imageView = (ImageView) v.findViewById(R.id.location_item_icon);
-        imageView.setImageResource(locations.get(i).getImageRessourceId());
+        imageView.setImageResource(locations.get(i).getImageResourceId());
 
         return v;
     }

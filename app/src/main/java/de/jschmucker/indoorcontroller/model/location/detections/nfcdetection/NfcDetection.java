@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -17,7 +16,7 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
- * Created by joshua on 01.02.17.
+ * Created by jschmucker on 01.02.17.
  */
 
 public class NfcDetection extends LocationDetection {
@@ -25,14 +24,14 @@ public class NfcDetection extends LocationDetection {
 
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
-    private Context context;
+    private final Context context;
     private boolean detectionToFragment = false;
     private boolean detect = false;
-    private volatile HashMap<NfcSpot, Integer> activeSpots;  // key: active nfcspot, value: countdown time
+    private final HashMap<NfcSpot, Integer> activeSpots;  // key: active nfcspot, value: countdown time
+
+    private volatile int timeToSetInactive = 5;
 
     private Thread detectionThread = null;
-
-    private int timeToSetInactive = 5;   // Time in s after NfcSpot is set inactive after setting active
 
     private ArrayList<Location> locations;
 
@@ -49,12 +48,12 @@ public class NfcDetection extends LocationDetection {
     }
 
     @Override
-    public void saveLocations(ArrayList<Location> orte) {
+    public void saveLocations(ArrayList<Location> locations) {
         SharedPreferences.Editor editor =
                 PreferenceManager.getDefaultSharedPreferences(context).edit();
 
         int count = 0;
-        for (Location location : orte) {
+        for (Location location : locations) {
             if (location instanceof NfcSpot) {
                 String data = NfcSpot.dataToString((NfcSpot) location);
                 editor.putString(KEY_SAVE_OBJECT + count++, data);
@@ -65,7 +64,7 @@ public class NfcDetection extends LocationDetection {
     }
 
     @Override
-    public void loadLoactions(ArrayList<Location> orte) {
+    public void loadLocations(ArrayList<Location> locations) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         int count = preferences.getInt(KEY_SAVE_COUNT, 0);
@@ -74,13 +73,15 @@ public class NfcDetection extends LocationDetection {
             String data = preferences.getString(KEY_SAVE_OBJECT + i, null);
             if (data != null) {
                 NfcSpot nfcSpot = NfcSpot.stringToData(data);
-                orte.add(nfcSpot);
+                locations.add(nfcSpot);
             }
         }
     }
 
     @Override
     public void startDetection(ArrayList<Location> locations) {
+        loadSettings();
+
         this.locations = locations;
         detect = true;
 
@@ -135,9 +136,7 @@ public class NfcDetection extends LocationDetection {
 
     @Override
     public boolean isDetectionOfLocation(Location location) {
-        if (location instanceof NfcSpot) {
-            return true;
-        } else return false;
+        return location instanceof NfcSpot;
     }
 
     @Override
@@ -173,7 +172,7 @@ public class NfcDetection extends LocationDetection {
             for (byte b : extraID) {
                 sb.append(String.format("%02X", b));
                 sb.append(":");
-            };
+            }
 
             sb.deleteCharAt(sb.length() -1);
 
@@ -181,6 +180,26 @@ public class NfcDetection extends LocationDetection {
 
             ((NfcDetectionFragment) fragment).setNfcSensor(new NfcSensor(nfcTagSerialNum), tagFromIntent);
             detectionToFragment = false;
+        }
+    }
+
+    @Override
+    public int getPreferenceResource() {
+        return R.xml.preference_nfc_detection;
+    }
+
+    @Override
+    public void reloadSettings() {
+        loadSettings();
+    }
+
+    private void loadSettings() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String timerCountString = sharedPreferences.getString("nfc_pref_key_timer_count", "");
+        Log.d(getClass().getSimpleName(), "TimerCountString: " + timerCountString);
+        if (!timerCountString.equals("")) {
+            int timerCount = Integer.valueOf(timerCountString); // scan interval in s
+            timeToSetInactive = timerCount;
         }
     }
 
@@ -198,7 +217,5 @@ public class NfcDetection extends LocationDetection {
                 }
             }
         }
-
-        //ToDo: setTimer for 5s to set all nfc sensors not active again
     }
 }

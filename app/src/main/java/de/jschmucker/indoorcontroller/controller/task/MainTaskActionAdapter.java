@@ -14,17 +14,15 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
- * Created by joshua on 15.02.17.
+ * Created by jschmucker on 15.02.17.
  */
 
-public class MainTaskActionAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<Action> actions;
+class MainTaskActionAdapter extends BaseAdapter {
+    private final ArrayList<Action> actions;
 
     private static LayoutInflater inflater = null;
 
     public MainTaskActionAdapter(Context context, ArrayList<Action> actions) {
-        this.context = context;
         this.actions = actions;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

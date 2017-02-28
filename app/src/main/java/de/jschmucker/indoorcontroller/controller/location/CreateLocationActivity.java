@@ -19,6 +19,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.controller.IndoorServiceBound;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
@@ -26,7 +27,6 @@ import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 public class CreateLocationActivity extends AppCompatActivity
         implements IndoorServiceBound, Observer {
     private EditText name;
-    private Spinner ortsTypeChooser;
 
     private ArrayAdapter<String> adapter;
 
@@ -58,12 +58,12 @@ public class CreateLocationActivity extends AppCompatActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ortsName = name.getText().toString();
+                String locationName = name.getText().toString();
                 Log.d("CreateOrt", "clicked save");
-                if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(ortsName)
+                if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(locationName)
                         && indoorServiceProvider.isBound()
                         && (selected != -1)) {
-                    indoorServiceProvider.getIndoorService().addOrt(detections[selected].createLocation(ortsName));
+                    indoorServiceProvider.getIndoorService().addOrt(detections[selected].createLocation(locationName));
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateLocationActivity.this);
@@ -118,15 +118,15 @@ public class CreateLocationActivity extends AppCompatActivity
 
             selected = 0;
 
-            detections = indoorService.getLocationManagement().getLocationDetections();
+            detections = indoorService.getLocationDetections();
 
-            ortsTypeChooser = (Spinner) findViewById(R.id.spinner_orts_type);
+            Spinner locationTypeChooser = (Spinner) findViewById(R.id.spinner_location_type);
             for (LocationDetection detection : detections) {
                 adapter.add(detection.getDetectionName());
             }
-            ortsTypeChooser.setAdapter(adapter);
+            locationTypeChooser.setAdapter(adapter);
 
-            ortsTypeChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            locationTypeChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     actualFragment = detections[position].getFragment();

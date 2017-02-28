@@ -6,22 +6,22 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:20
  */
-public class WifiEnvironment extends Location {
+class WifiEnvironment extends Location {
 
     private ArrayList<WifiSensor> wifiSensors;
 
     /**
      * @param name
-     * @param sensoren sensoren
+     * @param sensors sensors
      */
-    public WifiEnvironment(String name, ArrayList<WifiSensor> sensoren) {
-        wifiSensors = sensoren;
+    public WifiEnvironment(String name, ArrayList<WifiSensor> sensors) {
+        wifiSensors = sensors;
         this.name = name;
-        imageRessourceId = R.drawable.ic_wifis_white24dp;
+        imageResourceId = R.drawable.ic_wifis_white24dp;
     }
 
     public ArrayList<WifiSensor> getWifis() {

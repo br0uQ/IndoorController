@@ -4,11 +4,11 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
-public class NfcSpot extends Location {
+class NfcSpot extends Location {
 
 	private NfcSensor nFCSensor;
 
@@ -16,7 +16,7 @@ public class NfcSpot extends Location {
 		this.name = name;
 		nFCSensor = sensor;
 		active = false;
-		imageRessourceId = R.drawable.ic_nfc_spot_white24dp;
+		imageResourceId = R.drawable.ic_nfc_spot_white24dp;
 	}
 
 	public NfcSensor getNfcSensor() {

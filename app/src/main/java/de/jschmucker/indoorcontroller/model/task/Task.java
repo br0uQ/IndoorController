@@ -13,7 +13,7 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
@@ -23,7 +23,7 @@ public class Task implements Observer {
 	private String name;
 	private boolean enabled;
     private Map<Location, Boolean> locations;
-    private Context context;
+    private final Context context;
 
 	/**
 	 * 

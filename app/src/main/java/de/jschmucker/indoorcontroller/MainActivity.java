@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity
         return indoorService;
     }
 
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private final ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName className,

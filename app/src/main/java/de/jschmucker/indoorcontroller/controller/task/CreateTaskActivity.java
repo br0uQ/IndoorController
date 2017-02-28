@@ -22,26 +22,23 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.controller.IndoorServiceBound;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.task.Task;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
-public class CreateTaskActivity extends AppCompatActivity implements Observer {
+public class CreateTaskActivity extends AppCompatActivity implements Observer, IndoorServiceBound {
     public static final String TASK_ID = "TASK_ID";
     private EditText name;
-    private ImageButton configureLocationList;
-    private ImageButton addAction;
-    private ListView locationList;
-    private ListView actionsList;
 
     private Task task;
     private int taskId;
 
-    final ArrayList<Location> chosenLocations = new ArrayList<>();
-    private ArrayList<Boolean> chosenLocationsActive = new ArrayList<>();
-    private ArrayList<Action> chosenActions = new ArrayList<>();
+    private final ArrayList<Location> chosenLocations = new ArrayList<>();
+    private final ArrayList<Boolean> chosenLocationsActive = new ArrayList<>();
+    private final ArrayList<Action> chosenActions = new ArrayList<>();
     private MainTaskActionAdapter mainTaskActionAdapter;
     private MainTaskLocationAdapter mainTaskLocationAdapter;
 
@@ -93,17 +90,17 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
-        name = (EditText) findViewById(R.id.textedit_regel_name);
+        name = (EditText) findViewById(R.id.textedit_task_name);
 
-        locationList = (ListView) findViewById(R.id.create_regel_ortsliste);
-        actionsList = (ListView) findViewById(R.id.create_regel_actionliste);
+        ListView locationList = (ListView) findViewById(R.id.create_task_ortsliste);
+        ListView actionsList = (ListView) findViewById(R.id.create_task_actionliste);
 
-        addAction = (ImageButton) findViewById(R.id.create_regel_add_action);
+        ImageButton addAction = (ImageButton) findViewById(R.id.create_task_add_action);
         addAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final ArrayList<Action> actions = new ArrayList<Action>();
+                final ArrayList<Action> actions = new ArrayList<>();
                 for (Action a : indoorServiceProvider.getIndoorService().getActions()) {
                     if (!chosenActions.contains(a)) {
                         actions.add(a);
@@ -137,27 +134,25 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
             }
         });
 
-        configureLocationList = (ImageButton) findViewById(R.id.create_regel_configure_ortsliste);
+        ImageButton configureLocationList = (ImageButton) findViewById(R.id.create_task_configure_ortsliste);
         configureLocationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<Location> orte = indoorServiceProvider.getIndoorService().getLocationManagement().getLocations();
-                if (orte.size() > 0) {
-                    String[] liste = new String[orte.size()];
-                    for (int i = 0; i < orte.size(); i++) {
-                        liste[i] = orte.get(i).getName();
+                final ArrayList<Location> locations = indoorServiceProvider.getIndoorService().getLocations();
+                if (locations.size() > 0) {
+                    String[] list = new String[locations.size()];
+                    for (int i = 0; i < locations.size(); i++) {
+                        list[i] = locations.get(i).getName();
                     }
 
-                    final boolean[] checkedItems = new boolean[liste.length];
+                    final boolean[] checkedItems = new boolean[list.length];
                     for (int i = 0; i < checkedItems.length; i++) {
-                        if (chosenLocations.contains(orte.get(i))) {
-                            checkedItems[i] = true;
-                        } else checkedItems[i] = false;
+                        checkedItems[i] = chosenLocations.contains(locations.get(i));
                     }
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateTaskActivity.this);
                     builder.setTitle(getString(R.string.chooseLocations))
-                            .setMultiChoiceItems(liste, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                            .setMultiChoiceItems(list, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                     checkedItems[which] = isChecked;
@@ -168,13 +163,13 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
                                 public void onClick(DialogInterface dialog, int which) {
                                     for (int i = 0; i < checkedItems.length; i++) {
                                         if (checkedItems[i]) {
-                                            if (!chosenLocations.contains(orte.get(i))) {
-                                                chosenLocations.add(orte.get(i));
+                                            if (!chosenLocations.contains(locations.get(i))) {
+                                                chosenLocations.add(locations.get(i));
                                                 chosenLocationsActive.add(true);
                                             }
                                         } else {
-                                            if (chosenLocations.contains(orte.get(i))) {
-                                                int index = chosenLocations.indexOf(orte.get(i));
+                                            if (chosenLocations.contains(locations.get(i))) {
+                                                int index = chosenLocations.indexOf(locations.get(i));
                                                 chosenLocations.remove(index);
                                                 chosenLocationsActive.remove(index);
                                             }
@@ -294,5 +289,10 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer {
         } else if (msg == IndoorServiceProvider.NOT_CONNECTED) {
 
         }
+    }
+
+    @Override
+    public IndoorService getIndoorService() {
+        return indoorServiceProvider.getIndoorService();
     }
 }

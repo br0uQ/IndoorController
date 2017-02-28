@@ -55,7 +55,7 @@ public class NfcDetectedActivity extends AppCompatActivity implements Observer {
             for (byte b : extraID) {
                 sb.append(String.format("%02X", b));
                 sb.append(":");
-            };
+            }
 
             sb.deleteCharAt(sb.length() -1);
 

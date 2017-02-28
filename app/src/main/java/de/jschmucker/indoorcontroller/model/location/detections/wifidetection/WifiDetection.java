@@ -18,19 +18,19 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
- * Created by joshua on 01.02.17.
+ * Created by jschmucker on 01.02.17.
  */
 
 public class WifiDetection extends LocationDetection {
     private final String TAG = getClass().getSimpleName();
-    private Context context;
+    private final Context context;
 
     /* Preferences keys */
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
 
     /* Detection Variables */
-    private static int timer = 5000;
+    private static volatile int timer = 5000; // scan interval in ms
     private static Thread thread;
     private static boolean running = false;
     private static BroadcastReceiver receiver;
@@ -43,16 +43,16 @@ public class WifiDetection extends LocationDetection {
 
     @Override
     public Location createLocation(String name) {
-        return ((WifiDetectionFragment) fragment).createWifiUmgebung(name);
+        return ((WifiDetectionFragment) fragment).createWifiEnvironment(name);
     }
 
     @Override
-    public void saveLocations(ArrayList<Location> orte) {
+    public void saveLocations(ArrayList<Location> locations) {
         SharedPreferences.Editor editor =
                 PreferenceManager.getDefaultSharedPreferences(context).edit();
 
         int count = 0;
-        for (Location location : orte) {
+        for (Location location : locations) {
             if (location instanceof WifiEnvironment) {
                 String data = WifiEnvironment.dataToString((WifiEnvironment) location);
                 editor.putString(KEY_SAVE_OBJECT + count++, data);
@@ -63,7 +63,7 @@ public class WifiDetection extends LocationDetection {
     }
 
     @Override
-    public void loadLoactions(ArrayList<Location> orte) {
+    public void loadLocations(ArrayList<Location> locations) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         int count = preferences.getInt(KEY_SAVE_COUNT, 0);
@@ -73,7 +73,7 @@ public class WifiDetection extends LocationDetection {
             if (data != null) {
                 Log.d(TAG, "Load data from String: " + data);
                 WifiEnvironment wifiEnvironment = WifiEnvironment.stringToData(data);
-                orte.add(wifiEnvironment);
+                locations.add(wifiEnvironment);
             }
         }
     }
@@ -81,6 +81,8 @@ public class WifiDetection extends LocationDetection {
     @Override
     public void startDetection(final ArrayList<Location> locations) {
         Log.d(TAG, "start Wifi detection");
+
+        loadSettings();
 
         final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
@@ -146,14 +148,12 @@ public class WifiDetection extends LocationDetection {
         Log.d(TAG, "stop Wifi detection");
         running = false;
 
-        context.unregisterReceiver(receiver);
+        // context.unregisterReceiver(receiver);
     }
 
     @Override
     public boolean isDetectionOfLocation(Location location) {
-        if (location instanceof WifiEnvironment) {
-            return true;
-        } else return false;
+        return location instanceof WifiEnvironment;
     }
 
     @Override
@@ -171,4 +171,25 @@ public class WifiDetection extends LocationDetection {
     public void saveLocationValues(Location location) {
         ((WifiDetectionFragment) fragment).saveLocationValues((WifiEnvironment) location);
     }
+
+    @Override
+    public int getPreferenceResource() {
+        return R.xml.preference_wifi_detection;
+    }
+
+    @Override
+    public void reloadSettings() {
+        loadSettings();
+    }
+
+    private void loadSettings() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String scanIntervalString = sharedPreferences.getString("wifi_pref_key_scan_interval", "");
+        Log.d(getClass().getSimpleName(), "ScanIntervalString: " + scanIntervalString);
+        if (!scanIntervalString.equals("")) {
+            int scanInterval = Integer.valueOf(scanIntervalString); // scan interval in s
+            timer = scanInterval * 1000;
+        }
+    }
+
 }

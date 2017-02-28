@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,18 +16,16 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
- * Created by joshua on 15.02.17.
+ * Created by jschmucker on 15.02.17.
  */
 
-public class MainTaskLocationAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<Location> locations;
-    private ArrayList<Boolean> active;
+class MainTaskLocationAdapter extends BaseAdapter {
+    private final ArrayList<Location> locations;
+    private final ArrayList<Boolean> active;
 
     private static LayoutInflater inflater = null;
 
     public MainTaskLocationAdapter(Context context, ArrayList<Location> locations, ArrayList<Boolean> active) {
-        this.context = context;
         this.locations = locations;
         this.active = active;
 
@@ -58,7 +57,9 @@ public class MainTaskLocationAdapter extends BaseAdapter {
         actionItemName.setText(locations.get(i).getName());
         final int pos = i;
 
-        //ToDo location images
+        ImageView iconView = (ImageView) v.findViewById(R.id.task_location_item_iconview);
+        iconView.setImageResource(locations.get(i).getImageResourceId());
+
         CheckBox checkBox = (CheckBox) v.findViewById(R.id.task_location_item_checkbox);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

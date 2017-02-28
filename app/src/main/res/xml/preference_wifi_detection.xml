@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/wifi_preferences"
+        android:key="pref_key_wifi_settings" >
+
+        <EditTextPreference
+            android:key="wifi_pref_key_scan_interval"
+            android:title="@string/wifi_pref_scan_interval"
+            android:numeric="integer"
+            android:maxLength="10"
+            android:defaultValue="10"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

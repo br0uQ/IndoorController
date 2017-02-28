@@ -33,12 +33,12 @@ public class MainTasksFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openAddDialog(view);
+                openAddDialog();
             }
         });
 
         MainActivity activity = (MainActivity) getActivity();
-        MainTasksAdapter adapter = new MainTasksAdapter(getActivity(), activity.getIndoorService().getTaskManagement().getTasks());
+        MainTasksAdapter adapter = new MainTasksAdapter(getActivity(), activity.getIndoorService().getTasks());
         ListView listView = (ListView) view.findViewById(R.id.rules_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,7 +53,7 @@ public class MainTasksFragment extends Fragment {
         return view;
     }
 
-    private void openAddDialog(View view) {
+    private void openAddDialog() {
         Intent intent = new Intent(getActivity(), CreateTaskActivity.class);
         startActivity(intent);
     }

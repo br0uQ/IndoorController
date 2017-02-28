@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.model.actions.Action;
 import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
@@ -15,19 +14,13 @@ import de.jschmucker.indoorcontroller.model.actions.ActionManagement;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 import de.jschmucker.indoorcontroller.model.location.LocationManagement;
-import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSpot;
-import de.jschmucker.indoorcontroller.model.location.detections.nfcdetection.NfcSensor;
-import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.BeaconSensor;
-import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Room;
-import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiSensor;
-import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiEnvironment;
 import de.jschmucker.indoorcontroller.model.task.Task;
 import de.jschmucker.indoorcontroller.model.task.TaskManagement;
 
 public class IndoorService extends Service {
     private final IBinder binder = new IndoorBinder();
     private final String TAG = getClass().getSimpleName();
-    public static final String KEY_ORTE = "KEY_ORTE";
+    public static final String KEY_LOCATIONS = "KEY_LOCATIONS";
 
     private LocationManagement locationManagement;
     private TaskManagement taskManagement;
@@ -43,14 +36,6 @@ public class IndoorService extends Service {
         /* Load locations and start the detections */
         locationManagement.loadLocations();
         locationManagement.startDetection();
-
-        /* for test create one location of every type */
-        if (locationManagement.getLocations().size() <= 0) {
-            addOrt(new Room("TestRaum", new BeaconSensor[]{new BeaconSensor(), new BeaconSensor(),
-                    new BeaconSensor(), new BeaconSensor()}));
-            addOrt(new NfcSpot("TestNFCSpot", new NfcSensor("Test")));
-            addOrt(new WifiEnvironment("TestWifiUmgebung", new ArrayList<WifiSensor>()));
-        }
 
         actionManagement.loadActions(this);
 
@@ -74,29 +59,12 @@ public class IndoorService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand");
+
         return START_STICKY;
     }
 
-    public ArrayList<BeaconSensor> getBeacons() {
-        //ToDo
-        return new ArrayList<BeaconSensor>();
-    }
-
-    public void startBeaconScan() {
-        //ToDo
-    }
-
-    public NfcSensor getFoundNfcSensor() {
-        //ToDo
-        return null;
-    }
-
-    public void startSingleNfcScan(Observer observer) {
-        //ToDo
-    }
-
-    public void addOrt(Location neuerLocation) {
-        locationManagement.addOrt(neuerLocation);
+    public void addOrt(Location location) {
+        locationManagement.addOrt(location);
     }
 
     public Location getOrt(int locationId) {
@@ -143,6 +111,26 @@ public class IndoorService extends Service {
         return actionManagement.getAction(name);
     }
 
+    public void removeLocation(Location location) {
+        locationManagement.removeLocation(location);
+    }
+
+    public ArrayList<Location> getLocations() {
+        return locationManagement.getLocations();
+    }
+
+    public LocationDetection[] getLocationDetections() {
+        return locationManagement.getLocationDetections();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return taskManagement.getTasks();
+    }
+
+    public void reloadSettings() {
+        locationManagement.reloadSettings();
+    }
+
     public class IndoorBinder extends Binder {
         public IndoorService getService() {
             return IndoorService.this;
@@ -152,18 +140,6 @@ public class IndoorService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
-    }
-
-    public LocationManagement getLocationManagement() {
-        return locationManagement;
-    }
-
-    public TaskManagement getTaskManagement() {
-        return taskManagement;
-    }
-
-    public ActionManagement getActionManagement() {
-        return actionManagement;
     }
 
     public boolean isLocationNameAvailable(String name) {

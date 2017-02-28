@@ -1,110 +1,297 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".model.location.detections.roomdetection.RoomDetectionFragment"
-    android:background="@drawable/room_border">
+    tools:context=".model.location.detections.roomdetection.RoomDetectionFragment">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:divider="?android:dividerHorizontal"
+            android:showDividers="middle">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/room_beacons"
+                android:id="@+id/room_beacons_desc"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/none"/>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/beaconTopLeft"/>
-
-                <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_ort_raum_spinner_top_left">
-                </Spinner>
+                    android:layout_height="48dp"
+                    android:text="@string/room_values"
+                    android:paddingLeft="72dp"
+                    android:gravity="center_vertical" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/room_length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/room_fragment_textView_room_length"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/length_meters"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="m"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="5"
+                        android:id="@+id/room_fragment_editText_room_length"
+                        android:maxLength="5"
+                        android:layout_toLeftOf="@id/length_meters"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="textEnd" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/room_width"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/room_fragment_textView_room_width"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/width_meters"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="m"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="5"
+                        android:id="@+id/room_fragment_editText_room_width"
+                        android:maxLength="5"
+                        android:layout_toLeftOf="@id/width_meters"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="textEnd"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/beaconTopRight"
-                    android:layout_gravity="end"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/beacon_values"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="72dp" />
 
-                <Spinner
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/beacon1_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/room_fragment_textView_beacon1_distance"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/beacon1_distance_meter"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="m"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="5"
+                        android:id="@+id/room_fragment_editText_beacon1_distance"
+                        android:maxLength="5"
+                        android:layout_toLeftOf="@id/beacon1_distance_meter"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="textEnd"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:id="@+id/create_ort_raum_spinner_top_right">
-                </Spinner>
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Beacon1"
+                        android:id="@+id/button_beacon1"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_beacon_chosen"
+                        android:lines="4"
+                        android:id="@+id/textView_chosen_beacon1" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/beacon2_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/room_fragment_textView_beacon2_distance"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/beacon2_distance_meter"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="m"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="5"
+                        android:id="@+id/room_fragment_editText_beacon2_distance"
+                        android:maxLength="5"
+                        android:layout_toLeftOf="@id/beacon2_distance_meter"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="textEnd" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Beacon2"
+                        android:id="@+id/button_beacon2"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_beacon_chosen"
+                        android:lines="4"
+                        android:id="@+id/textView_chosen_beacon2" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/beacon2_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/room_fragment_textView_beacon3_distance"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/beacon3_distance_meter"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="m"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="5"
+                        android:id="@+id/room_fragment_editText_beacon3_distance"
+                        android:maxLength="5"
+                        android:layout_toLeftOf="@id/beacon3_distance_meter"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="textEnd" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Beacon3"
+                        android:id="@+id/button_beacon3"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_beacon_chosen"
+                        android:lines="4"
+                        android:id="@+id/textView_chosen_beacon3" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/beaconBottomLeft"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_ort_raum_spinner_bottom_left">
-                </Spinner>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/beaconBottomRight"
-                    android:layout_gravity="end"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:id="@+id/create_ort_raum_spinner_bottom_right">
-                </Spinner>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

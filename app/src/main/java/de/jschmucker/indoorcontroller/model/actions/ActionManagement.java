@@ -5,18 +5,17 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.actions.examplecontrol.ExampleActionFragment;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 13-Dez-2016 15:33:51
  */
 public class ActionManagement {
     private Action action;
-    private ArrayList<Action> actions = new ArrayList<>();
-	private ActionFragment[] actionFragments = new ActionFragment[] {
+    private final ArrayList<Action> actions = new ArrayList<>();
+	private final ActionFragment[] actionFragments = new ActionFragment[] {
 			new ExampleActionFragment()
 	};
 

@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 
 /**
- * Created by joshua on 14.02.17.
+ * Created by jschmucker on 14.02.17.
  */
 
 public abstract class ActionFragment extends Fragment {

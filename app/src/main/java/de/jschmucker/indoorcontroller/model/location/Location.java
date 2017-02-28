@@ -5,16 +5,16 @@ import java.util.Observable;
 import de.jschmucker.indoorcontroller.R;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
 public abstract class Location extends Observable {
 	protected boolean active;
 	protected String name;
-	protected int imageRessourceId = R.drawable.ic_my_location_black_24dp;
+	protected int imageResourceId = R.drawable.ic_my_location_black_24dp;
 
-	public Location(){
+	protected Location(){
 
 	}
 
@@ -38,7 +38,7 @@ public abstract class Location extends Observable {
 		name = locationName;
 	}
 
-	public int getImageRessourceId() {
-		return imageRessourceId;
+	public int getImageResourceId() {
+		return imageResourceId;
 	}
 }//end Location

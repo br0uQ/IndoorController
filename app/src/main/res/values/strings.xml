@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IndoorController</string>
+    <string name="app_name">Indoor Controller</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -15,15 +15,15 @@
     <string name="other">Sonstiges</string>
     <string name="discard_label">Abbrechen</string>
     <string name="save_label">Speichern</string>
-    <string name="ortsname">Ortsname</string>
-    <string name="regelname">Taskname</string>
-    <string name="ortsliste">Orstliste</string>
+    <string name="locationname">Ortsname</string>
+    <string name="taskname">Taskname</string>
+    <string name="locationlist">Orstliste</string>
     <string name="actions">Actions</string>
-    <string name="bearbeiten">Bearbeiten</string>
+    <string name="edit">Bearbeiten</string>
     <string name="chooseActions">Wähle Actions</string>
     <string name="chooseLocations">Wähle Orte</string>
     <string name="noelements">Keine Elemente</string>
-    <string name="wifiliste">Wifi-Liste</string>
+    <string name="wifilist">Wifi-Liste</string>
     <string name="beaconTopLeft">Beacon 1</string>
     <string name="beaconTopRight">Beacon 2</string>
     <string name="beaconBottomRight">Beacon 4</string>
@@ -48,4 +48,26 @@
     <string name="create_new_action">Erstelle neue Action...</string>
     <string name="active">Aktiv:</string>
     <string name="found_nfc_sensor">NFC Tag gefunden:\nSeriennr:</string>
+    <string name="room_length">Raumlänge</string>
+    <string name="room_width">Raumbreite</string>
+    <string name="room_values">Raum-Werte</string>
+    <string name="beacon_values">Beacon-Werte</string>
+    <string name="beacon1_distance">Abstand Beacon1 (B1)</string>
+    <string name="beacon2_distance">Abstand Beacon2 (B2)</string>
+    <string name="Beacon">Beacon</string>
+    <string name="choose_beacon">Wähle Beacon</string>
+    <string name="Beacon1">Beacon 1</string>
+    <string name="Beacon2">Beacon 2</string>
+    <string name="Beacon3">Beacon 3</string>
+    <string name="no_beacon_chosen">Kein Beacon ausgewählt\n \n \n </string>
+    <string name="already_message_on_nfc_message">Es sind bereits Daten auf dem NFC Tag gespeichert. Sollen die Daten überschrieben werden?</string>
+    <string name="already_message_on_nfc_title">NFC Tag Daten überschreiben?</string>
+    <string name="none" />
+    <string name="text">Text</string>
+    <string name="wifi_preferences">WiFi Einstellungen</string>
+    <string name="wifi_pref_scan_interval">Wifi Scan Intervall in Sekunden</string>
+    <string name="room_preferences">Beacon Einstellungen</string>
+    <string name="nfc_preferences">NFC Einstellungen</string>
+    <string name="nfc_pref_timer_until_inactive">NFC Tag Timer</string>
+    <string name="nfc_pref_timer_until_incatvie_summary">Zeit bis ein als aktiv markierter NFC Tag wieder inaktiv gesetzt wird (in Sekunden).</string>
 </resources>

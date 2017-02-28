@@ -1,5 +1,6 @@
 package de.jschmucker.indoorcontroller.model.location;
 
+import android.app.Fragment;
 import android.content.Intent;
 
 import java.util.ArrayList;
@@ -29,15 +30,15 @@ public abstract class LocationDetection {
 
     /**
      * Saves all locations in the ArrayList that belong to this detection
-     * @param orte: Locations to be saved
+     * @param locations: Locations to be saved
      */
-    public abstract void saveLocations(ArrayList<Location> orte);
+    public abstract void saveLocations(ArrayList<Location> locations);
 
     /**
      * Loads all locations that are saved and adds them to the ArrayList
-     * @param orte: where the loaded locations should be stored at
+     * @param locations: where the loaded locations should be stored at
      */
-    public abstract void loadLoactions(ArrayList<Location> orte);
+    public abstract void loadLocations(ArrayList<Location> locations);
 
     public abstract void startDetection(ArrayList<Location> locations);
     public abstract void stopDetection();
@@ -54,4 +55,8 @@ public abstract class LocationDetection {
         can override this function
          */
     }
+
+    public abstract int getPreferenceResource();
+
+    public abstract void reloadSettings();
 }

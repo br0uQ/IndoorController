@@ -14,7 +14,8 @@
         <ImageView
 
             android:src="@android:drawable/ic_menu_close_clear_cancel"
-            style="@style/EditEventCustomActionButtonImage" />
+            style="@style/EditEventCustomActionButtonImage"
+            android:contentDescription="@string/none"/>
         <TextView
             android:text="@string/discard_label"
             style="@style/EditEventCustomActionButtonText" />
@@ -28,7 +29,8 @@
 
         <ImageView
             android:src="@drawable/ic_done_white_24dp"
-            style="@style/EditEventCustomActionButtonImage" />
+            style="@style/EditEventCustomActionButtonImage"
+            android:contentDescription="@string/none"/>
         <TextView
             android:text="@string/save_label"
             style="@style/EditEventCustomActionButtonText" />

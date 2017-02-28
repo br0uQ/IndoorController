@@ -2,7 +2,9 @@ package de.jschmucker.indoorcontroller.model.location.detections.nfcdetection;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
@@ -22,14 +24,11 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Locale;
-import java.util.Observable;
-import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.controller.location.CreateLocationActivity;
-import de.jschmucker.indoorcontroller.controller.location.IndoorServiceBound;
-import de.jschmucker.indoorcontroller.model.IndoorService;
+import de.jschmucker.indoorcontroller.controller.IndoorServiceBound;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
@@ -177,8 +176,32 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
             NdefMessage ndefMessage = ndef.getNdefMessage();
             if (ndefMessage == null) {
                 ndef.writeNdefMessage(message);
-            } else if (!ndefMessage.getRecords()[0].getPayload().equals(record.getPayload())) {
-                // ToDo: already ndef Message on the tag. ask whether to overwrite...
+            } else if (!Arrays.equals(ndefMessage.getRecords()[0].getPayload(),
+                    record.getPayload())) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(getString(R.string.already_message_on_nfc_message));
+                builder.setTitle(getString(R.string.already_message_on_nfc_title));
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getActivity().finish();
+                    }
+                });
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            ndef.writeNdefMessage(message);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (FormatException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         }
         ndef.close();

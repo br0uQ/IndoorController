@@ -17,7 +17,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/textedit_change_ort_name"
-        android:hint="@string/ortsname" />
+        android:hint="@string/locationname" />
 
     <FrameLayout
         android:layout_width="match_parent"

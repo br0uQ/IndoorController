@@ -22,7 +22,7 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
 
 /**
- * Created by joshua on 13.02.17.
+ * Created by jschmucker on 13.02.17.
  */
 
 public class ChooseActionActivity extends AppCompatActivity implements Observer {

@@ -15,29 +15,27 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.task.Task;
 
 /**
- * Created by joshua on 04.01.17.
+ * Created by jschmucker on 04.01.17.
  */
 
-public class MainTasksAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<Task> regeln;
+class MainTasksAdapter extends BaseAdapter {
+    private final ArrayList<Task> tasks;
 
     private static LayoutInflater inflater = null;
 
-    public MainTasksAdapter(Context context, ArrayList<Task> regeln) {
-        this.context = context;
-        this.regeln = regeln;
+    public MainTasksAdapter(Context context, ArrayList<Task> tasks) {
+        this.tasks = tasks;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return regeln.size();
+        return tasks.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return regeln.get(position);
+        return tasks.get(position);
     }
 
     @Override
@@ -53,16 +51,16 @@ public class MainTasksAdapter extends BaseAdapter {
         }
 
         TextView name = (TextView) view.findViewById(R.id.rules_item_name);
-        name.setText(regeln.get(position).getName());
+        name.setText(tasks.get(position).getName());
 
         Switch onOff = (Switch) view.findViewById(R.id.rules_item_on_off_switch);
         onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                regeln.get(position).setEnabled(isChecked);
+                tasks.get(position).setEnabled(isChecked);
             }
         });
-        onOff.setChecked(regeln.get(position).isEnabled());
+        onOff.setChecked(tasks.get(position).isEnabled());
 
         return view;
     }

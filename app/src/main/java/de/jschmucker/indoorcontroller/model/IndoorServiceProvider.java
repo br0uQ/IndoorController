@@ -11,7 +11,7 @@ import java.util.Observable;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 
 /**
- * Created by joshua on 14.02.17.
+ * Created by jschmucker on 14.02.17.
  */
 
 public class IndoorServiceProvider extends Observable {
@@ -20,7 +20,7 @@ public class IndoorServiceProvider extends Observable {
     public static final int CONNECTED = 1;
     public static final int NOT_CONNECTED = 0;
 
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private final ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName className,

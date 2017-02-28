@@ -13,18 +13,16 @@ import java.util.ArrayList;
 import de.jschmucker.indoorcontroller.R;
 
 /**
- * Created by joshua on 11.01.17.
+ * Created by jschmucker on 11.01.17.
  */
 
-public class WifiAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<WifiSensor> wifis;
-    private boolean deletable;
+class WifiAdapter extends BaseAdapter {
+    private final ArrayList<WifiSensor> wifis;
+    private final boolean deletable;
 
     private static LayoutInflater inflater = null;
 
     public WifiAdapter(Context context, ArrayList<WifiSensor> wifis, boolean deletable) {
-        this.context = context;
         this.wifis = wifis;
         this.deletable = deletable;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

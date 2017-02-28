@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.jschmucker.indoorcontroller.R;
+import de.jschmucker.indoorcontroller.controller.IndoorServiceBound;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.Location;
@@ -27,7 +29,6 @@ public class ChangeLocationActivity extends AppCompatActivity
     private LocationDetection detection;
 
     private TextView name;
-    private Fragment fragment;
 
     private IndoorServiceProvider indoorServiceProvider;
 
@@ -43,7 +44,9 @@ public class ChangeLocationActivity extends AppCompatActivity
         Intent intent = getIntent();
         locationID = intent.getIntExtra(LOCATION_ID, -1);
         if (locationID == -1) {
-            //ToDo: Opened ChangeLocationActivity without specifying the Location ERROR and close
+            Log.e(getClass().getSimpleName(),
+                    "Opened ChangeLocationActivity without specifying location");
+            finish();
         }
 
         name = (TextView) findViewById(R.id.textedit_change_ort_name);
@@ -69,7 +72,8 @@ public class ChangeLocationActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.change_ort_menu_save) {
             String locationName = name.getText().toString();
-            if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(locationName)) {
+            if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(locationName)
+                    || locationName.equals(location.getName())) {
                 detection.saveLocationValues(location);
                 location.setName(locationName);
 
@@ -78,7 +82,7 @@ public class ChangeLocationActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.change_ort_menu_delete) {
-            indoorServiceProvider.getIndoorService().getLocationManagement().removeOrt(location);
+            indoorServiceProvider.getIndoorService().removeLocation(location);
             finish();
             return true;
         }
@@ -115,7 +119,7 @@ public class ChangeLocationActivity extends AppCompatActivity
 
             name.setText(location.getName());
 
-            fragment = detection.getFragment();
+            Fragment fragment = detection.getFragment();
             detection.setLocationValues(location);
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();

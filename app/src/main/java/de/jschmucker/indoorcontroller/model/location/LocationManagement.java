@@ -12,19 +12,17 @@ import de.jschmucker.indoorcontroller.model.location.detections.roomdetection.Ro
 import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.WifiDetection;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
 public class LocationManagement implements Observer {
     private final String TAG = getClass().getSimpleName();
 
-	private Context context;
-	private ArrayList<Location> locations;
-	private LocationDetection[] detections;
+    private final ArrayList<Location> locations;
+	private final LocationDetection[] detections;
 
 	public LocationManagement(Context context){
-		this.context = context;
         locations = new ArrayList<>();
 
 		detections = new LocationDetection[] {
@@ -58,7 +56,7 @@ public class LocationManagement implements Observer {
 
     public void loadLocations() {
         for (LocationDetection detection : detections) {
-            detection.loadLoactions(locations);
+            detection.loadLocations(locations);
         }
     }
 
@@ -76,10 +74,12 @@ public class LocationManagement implements Observer {
     }
 
     public void stopDetection() {
-
+        for (LocationDetection detection : detections) {
+            detection.stopDetection();
+        }
     }
 
-    public void removeOrt(Location location) {
+    public void removeLocation(Location location) {
         locations.remove(location);
     }
 
@@ -108,5 +108,11 @@ public class LocationManagement implements Observer {
             }
         }
         return null;
+    }
+
+    public void reloadSettings() {
+        for (LocationDetection locationDetection : detections) {
+            locationDetection.reloadSettings();
+        }
     }
 }//end LocationManagement

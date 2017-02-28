@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/nfc_preferences"
+        android:key="pref_key_nfc_settings" >
+
+        <EditTextPreference
+            android:key="nfc_pref_key_timer_count"
+            android:title="@string/nfc_pref_timer_until_inactive"
+            android:summary="@string/nfc_pref_timer_until_incatvie_summary"
+            android:numeric="integer"
+            android:maxLength="10"
+            android:defaultValue="5"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

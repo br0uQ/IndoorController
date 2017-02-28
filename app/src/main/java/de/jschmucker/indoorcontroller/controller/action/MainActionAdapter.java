@@ -14,11 +14,11 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
- * Created by joshua on 22.02.17.
+ * Created by jschmucker on 22.02.17.
  */
 
-public class MainActionAdapter extends BaseAdapter {
-    private ArrayList<Action> actions;
+class MainActionAdapter extends BaseAdapter {
+    private final ArrayList<Action> actions;
 
     private static LayoutInflater inflater = null;
 

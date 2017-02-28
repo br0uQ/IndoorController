@@ -10,11 +10,10 @@ import java.util.Map;
 
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.actions.Action;
-import de.jschmucker.indoorcontroller.model.actions.ActionManagement;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
- * @author joshua
+ * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:20
  */
@@ -28,7 +27,7 @@ public class TaskManagement {
     private final String KEY_SAVE_LOCATION_BOOL = getClass().getName() + "KEY_SAVE_LOCATION_BOOL";
     private final String KEY_SAVE_TASK_ENABLED = getClass().getName() + "KEY_SAVE_TASK_ENABLED";
 
-	private ArrayList<Task> tasks;
+	private final ArrayList<Task> tasks;
 
 	public TaskManagement(){
 		tasks = new ArrayList<>();

@@ -29,19 +29,17 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 
 
 public class WifiDetectionFragment extends LocationDetectionFragment {
-    private ImageButton plusButton;
-    private ListView listView;
-    final ArrayList<WifiSensor> selectedWifis = new ArrayList<>();
+    private final ArrayList<WifiSensor> selectedWifis = new ArrayList<>();
     private final String TAG = getClass().getSimpleName();
 
     private WifiManager wifi;
-    private ArrayList<WifiSensor> wifis = new ArrayList<>();
+    private final ArrayList<WifiSensor> wifis = new ArrayList<>();
     private WifiAdapter adapter;
     private WifiAdapter selectedAdapter;
 
     private BroadcastReceiver receiver;
 
-    Comparator<WifiSensor> wifiComparator = new Comparator<WifiSensor>() {
+    private final Comparator<WifiSensor> wifiComparator = new Comparator<WifiSensor>() {
         @Override
         public int compare(WifiSensor o1, WifiSensor o2) {
             return o1.getSsid().compareToIgnoreCase(o2.getSsid());
@@ -54,9 +52,9 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detection_wifi, container, false);
 
-        listView = (ListView) view.findViewById(R.id.create_ort_wifiliste);
+        ListView listView = (ListView) view.findViewById(R.id.create_location_wifilist);
 
-        plusButton = (ImageButton) view.findViewById(R.id.create_ort_add_wifiliste);
+        ImageButton plusButton = (ImageButton) view.findViewById(R.id.create_ort_add_wifiliste);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +112,6 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
     }
 
     private void openDialog() {
-        final ArrayList<WifiSensor> select = new ArrayList<>();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
@@ -132,9 +129,8 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
         .show();
     }
 
-    public Location createWifiUmgebung(String name) {
-        WifiEnvironment res = new WifiEnvironment(name, selectedWifis);
-        return res;
+    public Location createWifiEnvironment(String name) {
+        return new WifiEnvironment(name, selectedWifis);
     }
 
     @Override

@@ -9,7 +9,7 @@ import de.jschmucker.indoorcontroller.model.location.sensor.LocationSensor;
  * @created 06-Dez-2016 14:18:19
  */
 public class NfcSensor extends LocationSensor {
-	private String serialNumber;
+	private final String serialNumber;
 
 	public NfcSensor(String serialNumber){
         this.serialNumber = serialNumber;

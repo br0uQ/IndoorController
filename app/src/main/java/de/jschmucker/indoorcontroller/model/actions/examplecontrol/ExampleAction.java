@@ -7,12 +7,12 @@ import android.widget.Toast;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
- * Created by joshua on 12.02.17.
+ * Created by jschmucker on 12.02.17.
  */
 
 public class ExampleAction extends Action {
-    String toPrint;
-    private Handler handler;
+    private final String toPrint;
+    private final Handler handler;
 
     public ExampleAction(String name, String text) {
         this.name = name;

@@ -15,7 +15,6 @@ import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 public class MainActionFragment extends Fragment {
-    private ArrayList<Action> actions;
 
     public MainActionFragment() {
         // Required empty public constructor
@@ -28,7 +27,7 @@ public class MainActionFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         IndoorService indoorService = activity.getIndoorService();
 
-        actions = indoorService.getActions();
+        ArrayList<Action> actions = indoorService.getActions();
 
         MainActionAdapter adapter = new MainActionAdapter(getActivity(), actions);
         ListView listView = (ListView) view.findViewById(R.id.action_list);
