@@ -25,6 +25,13 @@ import de.jschmucker.indoorcontroller.controller.location.MainLocationFragment;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.controller.task.MainTasksFragment;
 
+/**
+ * The MainActivity of this app.
+ * Contains three fragments:
+ * The ActionFragment
+ * The LocationFragment
+ * The TaskFragment
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FRAGMENT_KEY = "FRAGMENT_KEY";
@@ -53,6 +60,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * Saves the information which framgent is the actual attached fragment to the SharedPreferences.
+     */
     private void saveFragmentSettings() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -167,6 +177,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Replaces the actual attached fragment with the variable fragment.
+     */
     private void setFragment() {
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
@@ -174,20 +187,32 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
+    /**
+     * Starts the SettingsActivity.
+     */
     private void openSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Starts the InfoActivity.
+     */
     private void openAbout() {
         Intent intent = new Intent(this, InfoActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * @return The IndoorService.
+     */
     public IndoorService getIndoorService() {
         return indoorService;
     }
 
+    /**
+     * ServiceConnection for the IndoorService.
+     */
     private final ServiceConnection mConnection = new ServiceConnection() {
 
         @Override

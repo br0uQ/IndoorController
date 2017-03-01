@@ -14,6 +14,10 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
+/**
+ * Fragment that lists all Actions that are saved in the IndoorService.
+ * The user can delete the Actions here
+ */
 public class MainActionFragment extends Fragment {
 
     public MainActionFragment() {

@@ -18,9 +18,12 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
+ * This Detection uses WiFis to locate the device.
+ * The user can choose WiFis to create a WifiEnvironment.
+ * This WifiEnvironment is active if every chosen WiFi is found in a WiFi scan.
+ * If not the WifiEnvironment is inactiv.
  * Created by jschmucker on 01.02.17.
  */
-
 public class WifiDetection extends LocationDetection {
     private final String TAG = getClass().getSimpleName();
     private final Context context;
@@ -35,6 +38,10 @@ public class WifiDetection extends LocationDetection {
     private static boolean running = false;
     private static BroadcastReceiver receiver;
 
+    /**
+     * Create a new WifiDetection
+     * @param context
+     */
     public WifiDetection(Context context) {
         this.context = context;
         fragment = new WifiDetectionFragment();
@@ -182,6 +189,9 @@ public class WifiDetection extends LocationDetection {
         loadSettings();
     }
 
+    /**
+     * Loads the settings made in the SettingsActivity
+     */
     private void loadSettings() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String scanIntervalString = sharedPreferences.getString("wifi_pref_key_scan_interval", "");

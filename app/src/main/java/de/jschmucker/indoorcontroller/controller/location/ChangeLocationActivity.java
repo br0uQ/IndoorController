@@ -21,6 +21,9 @@ import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
+/**
+ * Activity used to changed the values of a location.
+ */
 public class ChangeLocationActivity extends AppCompatActivity
         implements IndoorServiceBound, Observer {
     public static final String LOCATION_ID = "LOCATION_ID";

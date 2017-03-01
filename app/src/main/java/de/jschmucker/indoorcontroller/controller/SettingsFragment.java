@@ -1,21 +1,20 @@
 package de.jschmucker.indoorcontroller.controller;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
+ * The fragment that includes the preferences of the app.
+ * This fragment is used by the SettingsActivity.
  * Created by joshua on 28.02.17.
  */
-
 public class SettingsFragment extends PreferenceFragment implements Observer {
     private IndoorServiceProvider indoorServiceProvider;
 
@@ -45,6 +44,9 @@ public class SettingsFragment extends PreferenceFragment implements Observer {
         }
     }
 
+    /**
+     * Calls reloadSettings in the IndoorService to refresh the new settings in the server.
+     */
     public void saveSettings() {
         if (indoorServiceProvider.getIndoorService() != null) {
             indoorServiceProvider.getIndoorService().reloadSettings();

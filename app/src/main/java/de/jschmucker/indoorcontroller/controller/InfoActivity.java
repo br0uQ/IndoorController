@@ -1,6 +1,5 @@
 package de.jschmucker.indoorcontroller.controller;
 
-import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +8,9 @@ import android.widget.TextView;
 import de.jschmucker.indoorcontroller.BuildConfig;
 import de.jschmucker.indoorcontroller.R;
 
+/**
+ * Activity to show informations about the app.
+ */
 public class InfoActivity extends AppCompatActivity {
 
     @Override

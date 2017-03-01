@@ -16,21 +16,28 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
+ * Location Adapter for the Task Fragment in the MainActivity
  * Created by jschmucker on 15.02.17.
  */
-
 class MainTaskLocationAdapter extends BaseAdapter {
     private final ArrayList<Location> locations;
     private final ArrayList<Boolean> active;
 
     private static LayoutInflater inflater = null;
 
+    /**
+     * Create a new MainTaskLocationAdapter in the given context and with the given locations and whether they should be active or inactive for the task.
+     * @param context
+     * @param locations Locations to be shown by this adapter
+     * @param active Whether the shown location should be active or inactive
+     */
     public MainTaskLocationAdapter(Context context, ArrayList<Location> locations, ArrayList<Boolean> active) {
         this.locations = locations;
         this.active = active;
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return locations.size();

@@ -13,6 +13,9 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
+ * A Task is defined by a list of Locations and whether they should if active (true) or
+ * inactiv (false) for this task and a list of actions that should be executed if all the locations
+ * are so.
  * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
@@ -25,11 +28,13 @@ public class Task implements Observer {
     private Map<Location, Boolean> locations;
     private final Context context;
 
-	/**
-	 * 
-	 * @param name
-	 * @param actions    actions
-	 */
+    /**
+     * Create a new Task with the given parameters.
+     * @param context
+     * @param name The name of the Task
+     * @param locations The list of the locations for this task and whether they should be active (true)
+     * @param actions The list of actions to be executed by this task if locations are active/inactive
+     */
 	public Task(Context context, String name, Map<Location, Boolean> locations, ArrayList<Action> actions){
 		this.name = name;
 		this.actions = actions;
@@ -43,22 +48,38 @@ public class Task implements Observer {
         this.locations = locations;
 	}
 
+    /**
+     * @return The name of this task
+     */
 	public String getName() {
 		return name;
 	}
 
+    /**
+     * Enables or disables the Task depending on the parameter enabled.
+     * @param enabled
+     */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
+    /**
+     * @return True if the Task is enabled, false if not
+     */
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+    /**
+     * @return The list of actions to be executed by this Task
+     */
 	public ArrayList<Action> getActions() {
 		return actions;
 	}
 
+    /**
+     * @return The list of locations and whether they should be active (true) or inactive (false)
+     */
 	public Map<Location, Boolean> getLocations() {
 		return locations;
 	}
@@ -76,14 +97,26 @@ public class Task implements Observer {
 		}
     }
 
+    /**
+     * Changes the name of the Task to the given parameter.
+     * @param name
+     */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+    /**
+     * Changes the Locations list to the given parameter.
+     * @param locationBooleanMap
+     */
     public void setLocations(Map<Location, Boolean> locationBooleanMap) {
         locations = locationBooleanMap;
     }
 
+    /**
+     * Changes the Actions list to the given parameter.
+     * @param actions
+     */
     public void setActions(ArrayList<Action> actions) {
         this.actions = actions;
     }

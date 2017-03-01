@@ -13,6 +13,7 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
+ * The TaskManagement manages the Tasks.
  * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:20
@@ -29,26 +30,41 @@ public class TaskManagement {
 
 	private final ArrayList<Task> tasks;
 
+    /**
+     * Create a new TaskManagement.
+     */
 	public TaskManagement(){
 		tasks = new ArrayList<>();
 	}
 
-	/**
-	 * 
-	 * @param task    task
-	 */
+    /**
+     * Add the given Task to the Task list.
+     * @param task
+     */
 	public void addRule(Task task){
 		tasks.add(task);
 	}
 
+    /**
+     * @return All tasks
+     */
 	public ArrayList<Task> getTasks() {
 		return tasks;
 	}
 
+    /**
+     * Removes the given Task from the Task list.
+     * @param task
+     */
 	public void removeTask(Task task) {
 		tasks.remove(task);
 	}
 
+    /**
+     * Will be called by the IndoorService to save all Tasks.
+     * Saves all Tasks to the SharedPreferences.
+     * @param indoorService
+     */
 	public void saveTasks(IndoorService indoorService) {
         Log.d(getClass().getSimpleName(), "saveTasks");
 		SharedPreferences.Editor editor =
@@ -102,6 +118,11 @@ public class TaskManagement {
         editor.commit();
 	}
 
+    /**
+     * Will be called by the IndoorService to load all the Tasks saved by the method saveTasks().
+     * Loads all the Tasks from the SharedPreferences of the app.
+     * @param indoorService
+     */
     public void loadTasks(IndoorService indoorService) {
         Log.d(getClass().getSimpleName(), "loadTasks");
         SharedPreferences sharedPreferences =

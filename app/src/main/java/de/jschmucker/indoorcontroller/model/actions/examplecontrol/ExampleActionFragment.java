@@ -18,7 +18,6 @@ import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
 /**
  * Created by jschmucker on 13.02.17.
  */
-
 public class ExampleActionFragment extends ActionFragment {
     private EditText editText;
     private final String KEY_SAVE_NAME = getClass().getName() + "KEY_SAVE_NAME";
@@ -36,6 +35,11 @@ public class ExampleActionFragment extends ActionFragment {
         return view;
     }
 
+    /**
+     * Creates a new ExampleAction with the settings in this fragment and the given name and returns it.
+     * @param name Name of the new ExampleAction
+     * @return The new created ExampleAction
+     */
     public ExampleAction createAction(String name) {
         return new ExampleAction(name, editText.getText().toString());
     }

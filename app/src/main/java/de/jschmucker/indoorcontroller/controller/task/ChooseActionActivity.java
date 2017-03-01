@@ -22,9 +22,9 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
 
 /**
+ * With this Activity a new Action can be created.
  * Created by jschmucker on 13.02.17.
  */
-
 public class ChooseActionActivity extends AppCompatActivity implements Observer {
     private EditText actionNameEditText;
     private Spinner actionTypeSpinner;
@@ -95,6 +95,7 @@ public class ChooseActionActivity extends AppCompatActivity implements Observer 
         indoorServiceProvider.connectToService(this);
     }
 
+    @Override
     public void onStop() {
         indoorServiceProvider.disconnectFromService(this);
         super.onStop();

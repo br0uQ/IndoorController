@@ -7,6 +7,10 @@ import android.os.Bundle;
 
 import de.jschmucker.indoorcontroller.R;
 
+/**
+ * Activity to change the settings of the app.
+ * This includes the settings of the detections.
+ */
 public class SettingsActivity extends AppCompatActivity {
     private SettingsFragment fragment;
 

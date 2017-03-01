@@ -14,6 +14,10 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 
+/**
+ * This activity is used to get the information that an nfc tag is found.
+ * Android only informs Activity about this event.
+ */
 public class NfcDetectedActivity extends AppCompatActivity implements Observer {
     private IndoorServiceProvider indoorServiceProvider;
     private NfcSensor foundSensor = null;
@@ -41,6 +45,10 @@ public class NfcDetectedActivity extends AppCompatActivity implements Observer {
         super.onStop();
     }
 
+    /**
+     * Reads the Nfc Tags information out of the intent and creates a new NfcSensor with that information.
+     * @param intent
+     */
     private void handleNfcIntent(Intent intent) {
         Log.d(getClass().getSimpleName(), "handleNewIntent");
         String action = intent.getAction();

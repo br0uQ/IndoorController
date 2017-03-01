@@ -71,6 +71,9 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         return view;
     }
 
+    /**
+     * Starts the scan for a NFC tag.
+     */
     private void startNfcScan() {
         IndoorServiceBound activity = (IndoorServiceBound) getActivity();
         NfcDetection detection = (NfcDetection) activity
@@ -82,6 +85,12 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         setGuiHasSensor(false);
     }
 
+    /**
+     * Is called if a NFC tag is found. It writes a ndef record to that tag.
+     * This ndef record is needed for the NfcDetectedActivity to be started if android detects such an NFC tag.
+     * @param nfcSensor Sensor that is found
+     * @param tag NFC tag that is found
+     */
     public void setNfcSensor(NfcSensor nfcSensor, Tag tag) {
         foundSensor = nfcSensor;
 
@@ -95,13 +104,15 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
             Log.e(getClass().getSimpleName(), e.toString());
         }
 
-
-
         setGuiHasSensor(true);
 
         //stopForegroundDispatch(getActivity(), nfcAdapter);
     }
 
+    /**
+     * This function is called to changed the GUI of the fragment depending on whether a scan was started or a NFC tag was found
+     * @param b True if sensor was found, false if scan was started
+     */
     private void setGuiHasSensor(boolean b) {
         refreshButton.setEnabled(b);
         if (b) {
@@ -115,10 +126,19 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         }
     }
 
+    /**
+     * Called to set the values of a already created location in the fragment
+     * @param location Location that has to be changed
+     */
     public void saveLocationValues(NfcSpot location) {
         location.setNfcSensor(foundSensor);
     }
 
+    /**
+     * Activate the NFC tag scan for this fragment
+     * @param activity Activity where this fragment is attached to
+     * @param adapter NfcAdapter for the NFC tag scan
+     */
     private static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -128,18 +148,39 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         adapter.enableForegroundDispatch(activity, pendingIntent, null, null);
     }
 
+    /**
+     * stop NFC scan
+     * @param activity
+     * @param adapter
+     */
     private static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         adapter.disableForegroundDispatch(activity);
     }
 
+    /**
+     * Creates a new NfcSpot with the given name and the detected NFC tag
+     * @param name Name of the new NfcSpot
+     * @return New created NfcSpot
+     */
     public Location createLocation(String name) {
         return new NfcSpot(name, foundSensor);
     }
 
+    /**
+     * Set the values of the given NfcSensor in the fragment
+     * @param nfcSensor NfcSensor that contains the values to be set in this fragment
+     */
     public void setNfcValue(NfcSensor nfcSensor) {
         foundSensor = nfcSensor;
     }
 
+    /**
+     * Creates a new ndef record that will be stored on a connected NFC tag.
+     * @param payload String that should be saved as ndef message
+     * @param locale Locale for the record
+     * @param encodeInUtf8 whehter Utf8 should be used
+     * @return A ndef record with the given parameters
+     */
     private NdefRecord createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
         byte[] langBytes = locale.getLanguage().getBytes(Charset.forName("US-ASCII"));
         Charset utfEncoding = encodeInUtf8 ? Charset.forName("UTF-8") : Charset.forName("UTF-16");
@@ -155,6 +196,9 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         return record;
     }
 
+    /**
+     * @return the Locale of device this app is running on
+     */
     @TargetApi(Build.VERSION_CODES.N)
     private Locale getCurrentLocale(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
@@ -165,6 +209,13 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         }
     }
 
+    /**
+     * Writes a ndef record on the given tag
+     * @param record Record that will be written on the tag
+     * @param tag Tag where the record shall be written on
+     * @throws IOException
+     * @throws FormatException
+     */
     private void write(NdefRecord record, Tag tag) throws IOException, FormatException {
 
         NdefRecord[] records = { record };

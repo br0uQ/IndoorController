@@ -11,15 +11,24 @@ import java.util.Observable;
 import de.jschmucker.indoorcontroller.model.IndoorService;
 
 /**
+ * This class can be used to connect to the IndoorService.
+ * To do so:
+ * 1. Create a new IndoorServiceProvider object.
+ * 2. Add an Observer for this IndoorServiceProvider that will be notified if the service is connected.
+ * 3. call connectToService() method.
+ * When the service is connected the update method of the Observer will be called.
+ * The argument parameter in the update method will be either CONNECTED or NOT_CONNECTED.
  * Created by jschmucker on 14.02.17.
  */
-
 public class IndoorServiceProvider extends Observable {
     private IndoorService indoorService;
     private boolean bound;
     public static final int CONNECTED = 1;
     public static final int NOT_CONNECTED = 0;
 
+    /**
+     * ServiceConnection to the IndoorService.
+     */
     private final ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -43,10 +52,17 @@ public class IndoorServiceProvider extends Observable {
         }
     };
 
+    /**
+     * @return True if connected to the Indoorservice, false if not
+     */
     public boolean isBound() {
         return bound;
     }
 
+    /**
+     * Connect to the IndoorService.
+     * @param context
+     */
     public void connectToService(Context context) {
         if (!bound) {
             // Bind to Service
@@ -55,6 +71,10 @@ public class IndoorServiceProvider extends Observable {
         }
     }
 
+    /**
+     * Disconnect from the IndoorService.
+     * @param context
+     */
     public void disconnectFromService(Context context) {
         if (bound) {
             context.unbindService(mConnection);
@@ -62,6 +82,9 @@ public class IndoorServiceProvider extends Observable {
         }
     }
 
+    /**
+     * @return The IndoorService.
+     */
     public IndoorService getIndoorService() {
         return indoorService;
     }

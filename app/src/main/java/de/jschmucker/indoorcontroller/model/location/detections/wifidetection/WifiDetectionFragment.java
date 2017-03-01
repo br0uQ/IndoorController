@@ -27,7 +27,9 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
-
+/**
+ * Fragment for the wifi detection.
+ */
 public class WifiDetectionFragment extends LocationDetectionFragment {
     private final ArrayList<WifiSensor> selectedWifis = new ArrayList<>();
     private final String TAG = getClass().getSimpleName();
@@ -101,16 +103,19 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
         return view;
     }
 
-    public ArrayList<WifiSensor> getSelectedWifis() {
-        return selectedWifis;
-    }
-
+    /**
+     * Set the given WiFi list as selected WiFis
+     * @param wifis
+     */
     public void setWifiList(ArrayList<WifiSensor> wifis) {
         for (WifiSensor wifi : wifis) {
             selectedWifis.add(wifi);
         }
     }
 
+    /**
+     * Opens an AlertDialog to choose a new Wifi to add to the selected WiFi list
+     */
     private void openDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -129,6 +134,11 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
         .show();
     }
 
+    /**
+     * Creates a new WiFiEnvironment with the given name and the selected WiFis.
+     * @param name Name of the WifiEnvironment
+     * @return The created WifiEnvironment
+     */
     public Location createWifiEnvironment(String name) {
         return new WifiEnvironment(name, selectedWifis);
     }
@@ -139,6 +149,10 @@ public class WifiDetectionFragment extends LocationDetectionFragment {
         super.onStop();
     }
 
+    /**
+     * Sets the wifi list of the given WifiEnvironment as selected
+     * @param location
+     */
     public void saveLocationValues(WifiEnvironment location) {
         location.setWifis(selectedWifis);
     }

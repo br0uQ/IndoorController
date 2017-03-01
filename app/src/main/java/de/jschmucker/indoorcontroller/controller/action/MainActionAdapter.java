@@ -15,6 +15,7 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
  * Created by jschmucker on 22.02.17.
+ * Adapter to list Actions in the MainActivity
  */
 
 class MainActionAdapter extends BaseAdapter {
@@ -22,6 +23,11 @@ class MainActionAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
+    /**
+     * Create a new MainActionAdapter in the given context and with the given actions to be shown.
+     * @param context
+     * @param actions Actions to be shown by this adapter
+     */
     public MainActionAdapter(Context context, ArrayList<Action> actions) {
         this.actions = actions;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

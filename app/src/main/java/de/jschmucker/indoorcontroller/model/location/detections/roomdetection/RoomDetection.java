@@ -34,9 +34,11 @@ import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
+ * The RoomDetection is a detection using Eddystone Bluetooth Beacons.
+ * The user attaches three beacons in a specified room that will be used to detect whether the users device is in this room or not.
+ * Uses the AltBeacon library
  * Created by jschmucker on 01.02.17.
  */
-
 public class RoomDetection extends LocationDetection implements BeaconConsumer, RangeNotifier {
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";
     private final String KEY_SAVE_OBJECT = getClass().getName() + "KEY_SAVE_OBJECT";
@@ -45,6 +47,10 @@ public class RoomDetection extends LocationDetection implements BeaconConsumer, 
     private BeaconManager mBeaconManager;
     private ArrayList<Location> locations;
 
+    /**
+     * Create a new RoomDetection
+     * @param context
+     */
     public RoomDetection(Context context) {
         this.context = context;
         name = context.getString(R.string.room_detection_name);
@@ -133,21 +139,33 @@ public class RoomDetection extends LocationDetection implements BeaconConsumer, 
         loadSettings();
     }
 
+    /**
+     * Loads the settings that can be changed in the SettingsActivity
+     */
     private void loadSettings() {
         // load Settings
         // atm no settings
     }
 
-    /*
-                     C
-        -------------x-----
-       |       distanceC   |
-       |                   |
-       |      P x          |
-       |         distanceB x B
-       |  distanceA        |
-        ----x--------------
-            A
+    /**
+     * Checks whether point P is in the given Rect using three other points and the points distances to them
+     *               C
+     * -------------x-----
+     * |       distanceC   |
+     * |                   |
+     * |      P x          |
+     * |         distanceB x B
+     * |  distanceA        |
+     * ----x--------------
+     *    A
+     * @param rect The Rect for which the point P will be checked to be in
+     * @param a Point A
+     * @param b Point B
+     * @param c Point C
+     * @param distanceA Distance of point P to point A
+     * @param distanceB Distance of point P to point B
+     * @param distanceC Distance of point P to point C
+     * @return True if point P is in the Rect, false if not
      */
     private boolean contains(Rect rect,
                                    Point a,
@@ -228,6 +246,12 @@ public class RoomDetection extends LocationDetection implements BeaconConsumer, 
         }
     }
 
+    /**
+     * Checks whether the device is in or out of the given room.
+     * Afterwards it sets the room active/inactive depending on the result.
+     * @param room The room where the device is in or isn't
+     * @param beaconDistanceMap Combination of identifiers that define a BeaconSensor and the distance to that beacon
+     */
     private void checkRoom(Room room, Map<List<Identifier>, Double> beaconDistanceMap) {
         double distances[] = new double[3];
 

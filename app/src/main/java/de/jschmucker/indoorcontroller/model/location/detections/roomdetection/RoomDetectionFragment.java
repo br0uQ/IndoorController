@@ -39,6 +39,10 @@ import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
+/**
+ * The fragment for the RoomDetection
+ * Implements BeaconComsumer and RangeNotifier for the Eddystone Bluetooth BeaconDetection
+ */
 public class RoomDetectionFragment extends LocationDetectionFragment implements BeaconConsumer, RangeNotifier {
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     private EditText editTextRoomWidth;
@@ -150,10 +154,18 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         super.onPause();
     }
 
+    /**
+     * Set the values of the given room for loading the GUI
+     * @param room
+     */
     public void setRoomValues(Room room) {
         this.room = room;
     }
 
+    /**
+     * Saves the settings made by the user in this fragment into the given room
+     * @param room
+     */
     public void saveLocationValues(Room room) {
         // values
         int roomLength;
@@ -187,6 +199,9 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         room.setRect(new Rect(0, 0, roomLength, roomWidth));
     }
 
+    /**
+     * Starts the BeaconDetection for this fragment
+     */
     private void setupBeaconDetection() {
         mBeaconManager = BeaconManager.getInstanceForApplication(getActivity());
         // Detect the URL frame:
@@ -246,6 +261,11 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
 
     }
 
+    /**
+     * Creates a new Room with the settings made by the user in this fragment
+     * @param name Name of the new Room
+     * @return The created Room. Returns null if settings are not valid
+     */
     public Location createRoom(String name) {
         Room room;
 
@@ -281,10 +301,18 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         return room;
     }
 
+    /**
+     * Adapter class for the Identifiers of the detected beacons
+     */
     private class IdentifierListAdapter extends BaseAdapter {
         private final ArrayList<List<Identifier>> identifierList;
         private final LayoutInflater inflater;
 
+        /**
+         * Create a new IdentifierListAdapter with the given list of identifiers
+         * @param context
+         * @param identifierList List of identifiers
+         */
         IdentifierListAdapter(Context context, ArrayList<List<Identifier>> identifierList) {
             this.identifierList = identifierList;
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -322,6 +350,10 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         }
     }
 
+    /**
+     * Opens an AlertDialog to choose a Beacon for the specified BeaconSensor
+     * @param index Specifies the BeaconSensor that will be chosen. (0 = Beacon1, 1 = Beacon2, 2 = Beacon3)
+     */
     private void chooseBeacon(int index) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -351,6 +383,16 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
                 .show();
     }
 
+    /**
+     * Creates a maximal four lines String from the given identifiers.
+     * The String is in the following form (depending on how many identifiers the beacon has; max. 3):
+     * Beacon:
+     * Id1:
+     * Id2:
+     * Id3:
+     * @param identifiers Identifiers that will be parsed into a String
+     * @return String parsed from the identifiers
+     */
     private String beaconStringFromIdentifierList(List<Identifier> identifiers) {
         String text = "Beacon:\n";
         int i = 1;

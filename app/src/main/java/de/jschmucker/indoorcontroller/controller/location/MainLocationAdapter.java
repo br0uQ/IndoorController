@@ -15,6 +15,7 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 
 /**
  * Created by jschmucker on 12/12/16.
+ * Adapter to list Locations in the MainActivity
  */
 
 class MainLocationAdapter extends BaseAdapter {
@@ -23,6 +24,11 @@ class MainLocationAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
+    /**
+     * Create a new MainLocationAdapter in the given context and with the given locations to be shown.
+     * @param context
+     * @param locations Locations to be shown by this adapter
+     */
     public MainLocationAdapter(Context context, ArrayList<Location> locations) {
         this.locations = locations;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

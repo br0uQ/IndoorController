@@ -15,14 +15,19 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.task.Task;
 
 /**
+ * Adapter for the Task Fragment in the MainActivity listing all Tasks that are saved in the IndoorController and whether they are activated.
  * Created by jschmucker on 04.01.17.
  */
-
 class MainTasksAdapter extends BaseAdapter {
     private final ArrayList<Task> tasks;
 
     private static LayoutInflater inflater = null;
 
+    /**
+     * Create a new MainTaskAdapter in the given context and with the given tasks to be shown.
+     * @param context
+     * @param tasks Tasks to be shown by this adapter
+     */
     public MainTasksAdapter(Context context, ArrayList<Task> tasks) {
         this.tasks = tasks;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -13,15 +13,21 @@ import java.util.ArrayList;
 import de.jschmucker.indoorcontroller.R;
 
 /**
+ * Adapter for listing Wifis
  * Created by jschmucker on 11.01.17.
  */
-
 class WifiAdapter extends BaseAdapter {
     private final ArrayList<WifiSensor> wifis;
     private final boolean deletable;
 
     private static LayoutInflater inflater = null;
 
+    /**
+     * Create a new WifiAdapter with the given parameters
+     * @param context
+     * @param wifis Wifi that will be listed
+     * @param deletable Defines whether this adapter will have a delete button for each element
+     */
     public WifiAdapter(Context context, ArrayList<WifiSensor> wifis, boolean deletable) {
         this.wifis = wifis;
         this.deletable = deletable;

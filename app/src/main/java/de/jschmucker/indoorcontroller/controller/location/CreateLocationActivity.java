@@ -24,6 +24,9 @@ import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.IndoorServiceProvider;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
+/**
+ * Activity to create a new location.
+ */
 public class CreateLocationActivity extends AppCompatActivity
         implements IndoorServiceBound, Observer {
     private EditText name;
@@ -106,6 +109,7 @@ public class CreateLocationActivity extends AppCompatActivity
         indoorServiceProvider.disconnectFromService(this);
     }
 
+    @Override
     public IndoorService getIndoorService() {
         return indoorServiceProvider.getIndoorService();
     }

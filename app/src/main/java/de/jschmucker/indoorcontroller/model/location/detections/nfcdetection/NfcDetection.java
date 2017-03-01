@@ -16,9 +16,10 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetection;
 
 /**
+ * The NfcDetection can detect NFC tags to create NfcSpots.
+ * An NfcSpot is a location where a NFC tag is placed.
  * Created by jschmucker on 01.02.17.
  */
-
 public class NfcDetection extends LocationDetection {
     private final String TAG = getClass().getSimpleName();
 
@@ -35,6 +36,10 @@ public class NfcDetection extends LocationDetection {
 
     private ArrayList<Location> locations;
 
+    /**
+     * Create a new NfcDetection
+     * @param context
+     */
     public NfcDetection(Context context) {
         this.context = context;
         fragment = new NfcDetectionFragment();
@@ -203,6 +208,10 @@ public class NfcDetection extends LocationDetection {
         }
     }
 
+    /**
+     * This function is called when the NfcDetectedActivity detected a NFC tag.
+     * @param foundSensor The sensor that the NfcDetectedActivity found
+     */
     public void detectedNfcSensor(NfcSensor foundSensor) {
         if (detect) {
             for (Location location : locations) {

@@ -19,7 +19,9 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment to list all the Locations that are saved in the IndoorService.
+ * The user can start changing a location here, which includes deleting it.
+ * Also the user can start the creation of a new location here.
  */
 public class MainLocationFragment extends Fragment {
 

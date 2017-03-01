@@ -14,14 +14,19 @@ import de.jschmucker.indoorcontroller.R;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
+ * Action Adapter for the Task Fragment in the MainActivity.
  * Created by jschmucker on 15.02.17.
  */
-
 class MainTaskActionAdapter extends BaseAdapter {
     private final ArrayList<Action> actions;
 
     private static LayoutInflater inflater = null;
 
+    /**
+     * Create a new MainTaskActionAdapter in the given context and with the given actions to be shown.
+     * @param context
+     * @param actions Actions to be shown by this adapter
+     */
     public MainTaskActionAdapter(Context context, ArrayList<Action> actions) {
         this.actions = actions;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

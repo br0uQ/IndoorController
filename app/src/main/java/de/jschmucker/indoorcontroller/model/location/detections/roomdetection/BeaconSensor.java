@@ -7,39 +7,32 @@ import org.altbeacon.beacon.Identifier;
 
 import java.util.List;
 
-import de.jschmucker.indoorcontroller.model.location.sensor.LocationSensor;
-
 /**
+ * A BeaconSensor contains the identifier list of a Eddystone Bluetooth Beacon and the coordinates in the Room it belongs to
  * @author jschmucker
  * @version 1.0
  * @created 06-Dez-2016 14:18:19
  */
-public class BeaconSensor extends LocationSensor {
+public class BeaconSensor {
 
 	private final List<Identifier> identifierList;
     private final Point coordinates; // Coordinates of the Beacon in the Rectangle of the room
 
+    /**
+     * Create a new BeaconSensor with the given identifiers and its coordinates in the room it belongs to
+     * @param identifierList Identifiers of the Eddystone Bluetooth Beacon it belongs to
+     * @param coordinates Position in the room this BeaconSensor belongs to
+     */
 	public BeaconSensor(List<Identifier> identifierList, Point coordinates) {
         this.identifierList = identifierList;
         this.coordinates = coordinates;
     }
 
-    public String getIdentifierAsString() {
-        StringBuilder sb = new StringBuilder();
-        int id = 1;
-        for (Identifier identifier : identifierList) {
-            sb.append("Id");
-            sb.append(id++);
-            sb.append(": ");
-            sb.append(identifier.toHexString());
-            sb.append("\n");
-        }
-        // delete last newline
-        sb.deleteCharAt(sb.length() -1);
-
-        return sb.toString();
-    }
-
+    /**
+     * Check whether the identifiers of this BeaconSensor math with the given identifiers
+     * @param identifierList Identifiers that shall be compared to the identifiers of this BeaconSensor
+     * @return True if the identifier match, false if not
+     */
     public boolean matchesIdentifier(List<Identifier> identifierList) {
         boolean ret = true;
         if (identifierList.size() == this.identifierList.size()) {
@@ -55,10 +48,16 @@ public class BeaconSensor extends LocationSensor {
         return ret;
     }
 
+    /**
+     * @return The Position of this BeaconSensor in the room it belongs to
+     */
     public Point getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * @return The identifiers of this BeaconSensor
+     */
     public List<Identifier> getIdentifiers() {
         return identifierList;
     }

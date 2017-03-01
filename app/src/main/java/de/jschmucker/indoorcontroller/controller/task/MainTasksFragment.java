@@ -16,7 +16,9 @@ import de.jschmucker.indoorcontroller.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * The Fragment of the MainActivity that lists all the tasks that are saved in the IndoorController.
+ * The user can start changing (including deleting) a task and creating a new task here.
+ * The user can also activate or deactivate a task here
  */
 public class MainTasksFragment extends Fragment {
 
@@ -53,6 +55,9 @@ public class MainTasksFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Starts an Activity create a new task
+     */
     private void openAddDialog() {
         Intent intent = new Intent(getActivity(), CreateTaskActivity.class);
         startActivity(intent);

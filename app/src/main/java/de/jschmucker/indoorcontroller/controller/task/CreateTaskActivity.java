@@ -29,6 +29,12 @@ import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.task.Task;
 import de.jschmucker.indoorcontroller.model.actions.Action;
 
+/**
+ * With this Activity a new Task can be created.
+ * The Task contains to parts:
+ * 1. A list of locations and whether they should be active or inactive
+ * 2. A list of action to be activated when all locations are active/inactive (depending on what the user chose)
+ */
 public class CreateTaskActivity extends AppCompatActivity implements Observer, IndoorServiceBound {
     public static final String TASK_ID = "TASK_ID";
     private EditText name;
@@ -261,7 +267,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer, I
             IndoorService indoorService = indoorServiceProvider.getIndoorService();
 
             if (taskId != -1) {
-                task = indoorService.getRule(taskId);
+                task = indoorService.getTask(taskId);
 
                 chosenActions.clear();
                 ArrayList<Action> actions = task.getActions();
