@@ -203,8 +203,7 @@ public class NfcDetection extends LocationDetection {
         String timerCountString = sharedPreferences.getString("nfc_pref_key_timer_count", "");
         Log.d(getClass().getSimpleName(), "TimerCountString: " + timerCountString);
         if (!timerCountString.equals("")) {
-            int timerCount = Integer.valueOf(timerCountString); // scan interval in s
-            timeToSetInactive = timerCount;
+            timeToSetInactive = Integer.valueOf(timerCountString);
         }
     }
 

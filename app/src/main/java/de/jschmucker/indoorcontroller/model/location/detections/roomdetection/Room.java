@@ -16,7 +16,6 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  * A room is a location defined by its room size (length, width) and three Eddystone Bluetooth Beacons that are placed in this room
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:19
  */
 class Room extends Location {
 

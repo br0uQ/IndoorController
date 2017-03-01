@@ -41,20 +41,18 @@ import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
 /**
  * The fragment for the RoomDetection
- * Implements BeaconComsumer and RangeNotifier for the Eddystone Bluetooth BeaconDetection
+ * Implements BeaconConsumer and RangeNotifier for the Eddystone Bluetooth BeaconDetection
  */
 public class RoomDetectionFragment extends LocationDetectionFragment implements BeaconConsumer, RangeNotifier {
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     private EditText editTextRoomWidth;
-    private EditText editTextRoomLenght;
+    private EditText editTextRoomLength;
     private EditText editTextDistanceB1;
     private EditText editTextDistanceB2;
     private EditText editTextDistanceB3;
     private TextView textViewChosenB1;
     private TextView textViewChosenB2;
     private TextView textViewChosenB3;
-
-    private RoomDetection roomDetection;
 
     private Room room = null; // if the fragment is used to change a rooms settings
 
@@ -74,7 +72,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
 
         IndoorServiceBound activity = (IndoorServiceBound) getActivity();
         IndoorService indoorService = activity.getIndoorService();
-        roomDetection = (RoomDetection) indoorService.getLocationDetection(new Room(null, null, null));
+        RoomDetection roomDetection = (RoomDetection) indoorService.getLocationDetection(new Room(null, null, null));
 
         editTextDistanceB1 = (EditText) view.findViewById(R.id.room_fragment_editText_beacon1_distance);
         editTextDistanceB2 = (EditText) view.findViewById(R.id.room_fragment_editText_beacon2_distance);
@@ -84,7 +82,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         textViewChosenB2 = (TextView) view.findViewById(R.id.textView_chosen_beacon2);
         textViewChosenB3 = (TextView) view.findViewById(R.id.textView_chosen_beacon3);
 
-        editTextRoomLenght = (EditText) view.findViewById(R.id.room_fragment_editText_room_length);
+        editTextRoomLength = (EditText) view.findViewById(R.id.room_fragment_editText_room_length);
         editTextRoomWidth = (EditText) view.findViewById(R.id.room_fragment_editText_room_width);
 
         Button beacon1 = (Button) view.findViewById(R.id.button_beacon1);
@@ -123,7 +121,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
 
         if (room != null) {
             // load settings from room
-            editTextRoomLenght.setText(String.valueOf(room.getRect().width()));
+            editTextRoomLength.setText(String.valueOf(room.getRect().width()));
             editTextRoomWidth.setText(String.valueOf(room.getRect().height()));
             editTextDistanceB1.setText(String.valueOf(room.getBeacons()[0].getCoordinates().x));
             editTextDistanceB2.setText(String.valueOf(room.getBeacons()[1].getCoordinates().y));
@@ -174,7 +172,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         int b2distance;
         int b3distance;
 
-        if (editTextRoomLenght.getText().toString().equals("")
+        if (editTextRoomLength.getText().toString().equals("")
                 || editTextRoomWidth.getText().toString().equals("")
                 || editTextDistanceB1.getText().toString().equals("")
                 || editTextDistanceB2.getText().toString().equals("")
@@ -184,7 +182,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
                 || (identifiersBeacon1 == null)) {
             return;
         }
-        roomLength = (int) (Double.valueOf(editTextRoomLenght.getText().toString()) * 100);
+        roomLength = (int) (Double.valueOf(editTextRoomLength.getText().toString()) * 100);
         roomWidth = (int) (Double.valueOf(editTextRoomWidth.getText().toString()) * 100);
         b1distance = (int) (Double.valueOf(editTextDistanceB1.getText().toString()) * 100);
         b2distance = (int) (Double.valueOf(editTextDistanceB2.getText().toString()) * 100);
@@ -276,7 +274,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
         int b2distance;
         int b3distance;
 
-        if (editTextRoomLenght.getText().toString().equals("")
+        if (editTextRoomLength.getText().toString().equals("")
                 || editTextRoomWidth.getText().toString().equals("")
                 || editTextDistanceB1.getText().toString().equals("")
                 || editTextDistanceB2.getText().toString().equals("")
@@ -286,7 +284,7 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
                 || (identifiersBeacon1 == null)) {
             return null;
         }
-        roomLength = (int) (Double.valueOf(editTextRoomLenght.getText().toString()) * 100);
+        roomLength = (int) (Double.valueOf(editTextRoomLength.getText().toString()) * 100);
         roomWidth = (int) (Double.valueOf(editTextRoomWidth.getText().toString()) * 100);
         b1distance = (int) (Double.valueOf(editTextDistanceB1.getText().toString()) * 100);
         b2distance = (int) (Double.valueOf(editTextDistanceB2.getText().toString()) * 100);

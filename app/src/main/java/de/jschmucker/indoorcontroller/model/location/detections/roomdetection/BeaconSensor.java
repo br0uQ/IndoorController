@@ -11,7 +11,6 @@ import java.util.List;
  * A BeaconSensor contains the identifier list of a Eddystone Bluetooth Beacon and the coordinates in the Room it belongs to
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:19
  */
 public class BeaconSensor {
 

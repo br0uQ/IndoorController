@@ -21,7 +21,7 @@ import de.jschmucker.indoorcontroller.model.location.LocationDetection;
  * This Detection uses WiFis to locate the device.
  * The user can choose WiFis to create a WifiEnvironment.
  * This WifiEnvironment is active if every chosen WiFi is found in a WiFi scan.
- * If not the WifiEnvironment is inactiv.
+ * If not the WifiEnvironment is inactive.
  * Created by jschmucker on 01.02.17.
  */
 public class WifiDetection extends LocationDetection {
@@ -36,7 +36,6 @@ public class WifiDetection extends LocationDetection {
     private static volatile int timer = 5000; // scan interval in ms
     private static Thread thread;
     private static boolean running = false;
-    private static BroadcastReceiver receiver;
 
     /**
      * Create a new WifiDetection
@@ -93,7 +92,7 @@ public class WifiDetection extends LocationDetection {
 
         final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
-        receiver = new BroadcastReceiver() {
+        BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "onReceive");

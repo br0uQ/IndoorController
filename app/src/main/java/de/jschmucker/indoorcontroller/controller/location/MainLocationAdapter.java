@@ -19,7 +19,6 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  */
 
 class MainLocationAdapter extends BaseAdapter {
-    private final String TAG = getClass().getSimpleName();
     private final ArrayList<Location> locations;
 
     private static LayoutInflater inflater = null;

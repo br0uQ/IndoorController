@@ -4,9 +4,8 @@ package de.jschmucker.indoorcontroller.model.location.detections.wifidetection;
  * WifiSensor that belongs to one wifi access point
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:20
  */
-public class WifiSensor {
+class WifiSensor {
 	private final String ssid;
 	private final String bssid;
 

@@ -16,6 +16,7 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 import de.jschmucker.indoorcontroller.model.actions.ActionFragment;
 
 /**
+ * Fragment for the ExampleAction
  * Created by jschmucker on 13.02.17.
  */
 public class ExampleActionFragment extends ActionFragment {

@@ -178,7 +178,7 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
      * Creates a new ndef record that will be stored on a connected NFC tag.
      * @param payload String that should be saved as ndef message
      * @param locale Locale for the record
-     * @param encodeInUtf8 whehter Utf8 should be used
+     * @param encodeInUtf8 whether Utf8 should be used
      * @return A ndef record with the given parameters
      */
     private NdefRecord createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
@@ -191,9 +191,8 @@ public class NfcDetectionFragment extends LocationDetectionFragment {
         data[0] = (byte) status;
         System.arraycopy(langBytes, 0, data, 1, langBytes.length);
         System.arraycopy(textBytes, 0, data, 1 + langBytes.length, textBytes.length);
-        NdefRecord record = new NdefRecord(NdefRecord.TNF_WELL_KNOWN,
+        return new NdefRecord(NdefRecord.TNF_WELL_KNOWN,
                 NdefRecord.RTD_TEXT, new byte[0], data);
-        return record;
     }
 
     /**

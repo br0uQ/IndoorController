@@ -16,7 +16,6 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  * The TaskManagement manages the Tasks.
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:20
  */
 public class TaskManagement {
     private final String KEY_SAVE_COUNT = getClass().getName() + "KEY_SAVE_COUNT";

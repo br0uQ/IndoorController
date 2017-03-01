@@ -15,7 +15,6 @@ import de.jschmucker.indoorcontroller.model.location.detections.wifidetection.Wi
  * The LocationManagement manages the Locations including the LocationDetections.
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:19
  */
 public class LocationManagement implements Observer {
     private final String TAG = getClass().getSimpleName();

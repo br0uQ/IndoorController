@@ -22,7 +22,8 @@ public class InfoActivity extends AppCompatActivity {
         String versionName = BuildConfig.VERSION_NAME;
 
         TextView version = (TextView) findViewById(R.id.info_textView_version);
-        version.setText("Version: " + versionName);
+        String versionText = "Version: " + versionName;
+        version.setText(versionText);
 
 
         ActionBar actionBar = getSupportActionBar();

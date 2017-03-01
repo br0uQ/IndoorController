@@ -14,11 +14,10 @@ import de.jschmucker.indoorcontroller.model.actions.Action;
 
 /**
  * A Task is defined by a list of Locations and whether they should if active (true) or
- * inactiv (false) for this task and a list of actions that should be executed if all the locations
+ * inactive (false) for this task and a list of actions that should be executed if all the locations
  * are so.
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:19
  */
 public class Task implements Observer {
 

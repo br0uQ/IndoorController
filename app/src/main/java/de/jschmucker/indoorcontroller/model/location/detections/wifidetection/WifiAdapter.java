@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import de.jschmucker.indoorcontroller.R;
 
 /**
- * Adapter for listing Wifis
+ * Adapter for listing WiFis
  * Created by jschmucker on 11.01.17.
  */
 class WifiAdapter extends BaseAdapter {

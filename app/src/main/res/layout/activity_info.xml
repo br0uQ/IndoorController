@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,7 +14,6 @@
         android:text="Indoor Controller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
         android:textAppearance="@android:style/TextAppearance.Material.Headline"
         android:textAlignment="center" />
 
@@ -30,14 +28,12 @@
         android:text="Contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
     <TextView
         android:text="joshua.schmucker@gmail.com"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
         android:textAppearance="@android:style/TextAppearance.Material.Body1"
         android:autoLink="email" />
 
@@ -45,14 +41,12 @@
         android:text="SourceCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
     <TextView
         android:text="https://github.com/br0uQ/IndoorController"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
         android:textAppearance="@android:style/TextAppearance.Material.Body1"
         android:autoLink="web" />
 </LinearLayout>

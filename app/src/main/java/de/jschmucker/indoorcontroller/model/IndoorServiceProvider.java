@@ -53,7 +53,7 @@ public class IndoorServiceProvider extends Observable {
     };
 
     /**
-     * @return True if connected to the Indoorservice, false if not
+     * @return True if connected to the IndoorService, false if not
      */
     public boolean isBound() {
         return bound;

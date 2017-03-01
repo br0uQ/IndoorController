@@ -12,7 +12,6 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  * If not it is set inactive.
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:20
  */
 class WifiEnvironment extends Location {
 

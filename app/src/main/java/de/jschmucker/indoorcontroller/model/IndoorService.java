@@ -19,13 +19,12 @@ import de.jschmucker.indoorcontroller.model.task.TaskManagement;
 
 /**
  * The IndoorService is the Interface for all Activities to the model.
- * It conaints the LocationsManagement, the TaskManagement and the ActionManagement.
+ * It contains the LocationsManagement, the TaskManagement and the ActionManagement.
  * It starts and stops the Detections.
  */
 public class IndoorService extends Service {
     private final IBinder binder = new IndoorBinder();
     private final String TAG = getClass().getSimpleName();
-    public static final String KEY_LOCATIONS = "KEY_LOCATIONS";
 
     private LocationManagement locationManagement;
     private TaskManagement taskManagement;

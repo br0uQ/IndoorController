@@ -7,7 +7,6 @@ import de.jschmucker.indoorcontroller.model.location.Location;
  * NfcSpot is a location that can be set active by detecting the NFC tag that NfcSpot belongs to
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:19
  */
 class NfcSpot extends Location {
 

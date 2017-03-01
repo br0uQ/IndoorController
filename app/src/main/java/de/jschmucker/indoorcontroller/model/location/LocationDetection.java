@@ -29,7 +29,7 @@ public abstract class LocationDetection {
     /**
      * Creates a new Location and returns it
      * @param name Name of the new Location to create
-     * @return: Location created with the settings in the fragment
+     * @return Location created with the settings in the fragment
      */
     public abstract Location createLocation(String name);
 

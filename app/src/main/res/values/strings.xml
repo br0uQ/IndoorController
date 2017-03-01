@@ -4,10 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-
     <!-- TODO: add english language -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rules">Tasks</string>
     <string name="locations">Orte</string>
     <string name="settings">Einstellungen</string>
@@ -19,33 +16,24 @@
     <string name="taskname">Taskname</string>
     <string name="locationlist">Orstliste</string>
     <string name="actions">Actions</string>
-    <string name="edit">Bearbeiten</string>
     <string name="chooseActions">Wähle Actions</string>
     <string name="chooseLocations">Wähle Orte</string>
     <string name="noelements">Keine Elemente</string>
     <string name="wifilist">Wifi-Liste</string>
-    <string name="beaconTopLeft">Beacon 1</string>
-    <string name="beaconTopRight">Beacon 2</string>
-    <string name="beaconBottomRight">Beacon 4</string>
-    <string name="beaconBottomLeft">Beacon 3</string>
-    <string name="chooseNfcTag">Wähle einen NFC Tag aus</string>
-    <string name="searchingNfcTag">Suche nach NFC Tag...</string>
+    <string name="searchingNfcTag">Suche nach NFC Tag…</string>
     <string name="new_search">Neu suchen</string>
-    <string name="chooseWifis">Wähle WIFI aus der Liste aus</string>
     <string name="error">Fehler</string>
     <string name="no_name_error">Kein Name eingegeben oder Name schon vorhanden. Bitte geben Sie einen Namen für diesen Ort ein</string>
     <string name="ok">OK</string>
-    <string name="title_activity_change_ort">ChangeLocationActivity</string>
     <string name="room_detection_name">Raum</string>
     <string name="nfc_detection_name">NFC Spot</string>
     <string name="wifi_detection_name">Wifi Umgebung</string>
-    <string name="refresh">Neu scannen</string>
     <string name="scanning_for_wifis">Suche nach Wifis</string>
     <string name="example_action_desc">Hiermit wird bei Aktivierung ein frei wählbarer Text angezeigt.</string>
     <string name="example_action_choose_text">Text der angezeigt werden soll:</string>
     <string name="actionname">Actionname</string>
     <string name="example_action_name">Example Action</string>
-    <string name="create_new_action">Erstelle neue Action...</string>
+    <string name="create_new_action">Erstelle neue Action…</string>
     <string name="active">Aktiv:</string>
     <string name="found_nfc_sensor">NFC Tag gefunden:\nSeriennr:</string>
     <string name="room_length">Raumlänge</string>
@@ -54,7 +42,6 @@
     <string name="beacon_values">Beacon-Werte</string>
     <string name="beacon1_distance">Abstand Beacon1 (B1)</string>
     <string name="beacon2_distance">Abstand Beacon2 (B2)</string>
-    <string name="Beacon">Beacon</string>
     <string name="choose_beacon">Wähle Beacon</string>
     <string name="Beacon1">Beacon 1</string>
     <string name="Beacon2">Beacon 2</string>

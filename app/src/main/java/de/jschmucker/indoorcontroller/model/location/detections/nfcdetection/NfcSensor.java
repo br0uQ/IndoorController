@@ -4,7 +4,6 @@ package de.jschmucker.indoorcontroller.model.location.detections.nfcdetection;
  * A NfcSensor is a class that contains the information of a NFC tag so tags can be compared
  * @author jschmucker
  * @version 1.0
- * @created 06-Dez-2016 14:18:19
  */
 public class NfcSensor {
 	private final String serialNumber;
