@@ -36,8 +36,8 @@
     <string name="create_new_action">Erstelle neue Action…</string>
     <string name="active">Aktiv:</string>
     <string name="found_nfc_sensor">NFC Tag gefunden:\nSeriennr:</string>
-    <string name="room_length">Raumlänge</string>
-    <string name="room_width">Raumbreite</string>
+    <string name="room_length">Raumlänge (l)</string>
+    <string name="room_width">Raumbreite (w)</string>
     <string name="room_values">Raum-Werte</string>
     <string name="beacon_values">Beacon-Werte</string>
     <string name="beacon1_distance">Abstand Beacon1 (B1)</string>
