@@ -51,7 +51,7 @@ public class LocationManagement implements Observer {
 	 * Add a new Location.
 	 * @param location The Location to be added
 	 */
-	public void addOrt(Location location){
+	public void addLocation(Location location){
 		locations.add(location);
         location.addObserver(this);
 	}

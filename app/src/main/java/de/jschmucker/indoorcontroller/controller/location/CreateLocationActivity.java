@@ -66,7 +66,7 @@ public class CreateLocationActivity extends AppCompatActivity
                 if (indoorServiceProvider.getIndoorService().isLocationNameAvailable(locationName)
                         && indoorServiceProvider.isBound()
                         && (selected != -1)) {
-                    indoorServiceProvider.getIndoorService().addOrt(detections[selected].createLocation(locationName));
+                    indoorServiceProvider.getIndoorService().addLocation(detections[selected].createLocation(locationName));
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateLocationActivity.this);

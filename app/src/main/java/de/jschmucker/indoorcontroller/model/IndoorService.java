@@ -39,11 +39,9 @@ public class IndoorService extends Service {
 
         /* Load locations and start the detections */
         locationManagement.loadLocations();
-        locationManagement.startDetection();
-
         actionManagement.loadActions(this);
-
         taskManagement.loadTasks(this);
+        locationManagement.startDetection();
     }
 
     @Override
@@ -71,8 +69,8 @@ public class IndoorService extends Service {
      * Add the given Location to the LocationManagement.
      * @param location
      */
-    public void addOrt(Location location) {
-        locationManagement.addOrt(location);
+    public void addLocation(Location location) {
+        locationManagement.addLocation(location);
     }
 
     /**
@@ -80,7 +78,7 @@ public class IndoorService extends Service {
      * @param locationId Location id of the Location to return
      * @return The Location with the given location id.
      */
-    public Location getOrt(int locationId) {
+    public Location getLocation(int locationId) {
         return locationManagement.getLocations().get(locationId);
     }
 
@@ -120,7 +118,7 @@ public class IndoorService extends Service {
      * @param newTask
      */
     public void addTask(Task newTask) {
-        taskManagement.addRule(newTask);
+        taskManagement.addTask(newTask);
     }
 
     /**

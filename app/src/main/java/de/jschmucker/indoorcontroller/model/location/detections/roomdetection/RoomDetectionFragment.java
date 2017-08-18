@@ -34,8 +34,6 @@ import java.util.Collection;
 import java.util.List;
 
 import de.jschmucker.indoorcontroller.R;
-import de.jschmucker.indoorcontroller.controller.IndoorServiceBound;
-import de.jschmucker.indoorcontroller.model.IndoorService;
 import de.jschmucker.indoorcontroller.model.location.Location;
 import de.jschmucker.indoorcontroller.model.location.LocationDetectionFragment;
 
@@ -69,10 +67,6 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detection_room, container, false);
-
-        IndoorServiceBound activity = (IndoorServiceBound) getActivity();
-        IndoorService indoorService = activity.getIndoorService();
-        RoomDetection roomDetection = (RoomDetection) indoorService.getLocationDetection(new Room(null, null, null));
 
         editTextDistanceB1 = (EditText) view.findViewById(R.id.room_fragment_editText_beacon1_distance);
         editTextDistanceB2 = (EditText) view.findViewById(R.id.room_fragment_editText_beacon2_distance);
@@ -121,11 +115,11 @@ public class RoomDetectionFragment extends LocationDetectionFragment implements 
 
         if (room != null) {
             // load settings from room
-            editTextRoomLength.setText(String.valueOf(room.getRect().width()));
-            editTextRoomWidth.setText(String.valueOf(room.getRect().height()));
-            editTextDistanceB1.setText(String.valueOf(room.getBeacons()[0].getCoordinates().x));
-            editTextDistanceB2.setText(String.valueOf(room.getBeacons()[1].getCoordinates().y));
-            editTextDistanceB3.setText(String.valueOf(room.getBeacons()[2].getCoordinates().x));
+            editTextRoomLength.setText(String.valueOf(room.getRect().width() / 100.0));
+            editTextRoomWidth.setText(String.valueOf(room.getRect().height() / 100.0));
+            editTextDistanceB1.setText(String.valueOf(room.getBeacons()[0].getCoordinates().x / 100.0));
+            editTextDistanceB2.setText(String.valueOf(room.getBeacons()[1].getCoordinates().y / 100.0));
+            editTextDistanceB3.setText(String.valueOf(room.getBeacons()[2].getCoordinates().x / 100.0));
             identifiersBeacon1 = room.getBeacons()[0].getIdentifiers();
             textViewChosenB1.setText(beaconStringFromIdentifierList(identifiersBeacon1));
             identifiersBeacon2 = room.getBeacons()[1].getIdentifiers();

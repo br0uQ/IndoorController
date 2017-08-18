@@ -102,7 +102,7 @@ public class ChangeLocationActivity extends AppCompatActivity
 
     @Override
     protected void onPause() {
-        super.onStop();
+        super.onPause();
 
         // unbind from service
         indoorServiceProvider.disconnectFromService(this);
@@ -117,7 +117,7 @@ public class ChangeLocationActivity extends AppCompatActivity
     public void update(Observable o, Object arg) {
         if (((int) arg) == IndoorServiceProvider.CONNECTED) {
             IndoorService indoorService = indoorServiceProvider.getIndoorService();
-            location = indoorService.getOrt(locationID);
+            location = indoorService.getLocation(locationID);
             detection = indoorService.getLocationDetection(location);
 
             name.setText(location.getName());

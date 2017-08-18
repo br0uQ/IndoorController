@@ -40,7 +40,7 @@ public class TaskManagement {
      * Add the given Task to the Task list.
      * @param task
      */
-	public void addRule(Task task){
+	public void addTask(Task task){
 		tasks.add(task);
 	}
 

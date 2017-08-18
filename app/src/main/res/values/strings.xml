@@ -42,6 +42,7 @@
     <string name="beacon_values">Beacon-Werte</string>
     <string name="beacon1_distance">Abstand Beacon1 (B1)</string>
     <string name="beacon2_distance">Abstand Beacon2 (B2)</string>
+    <string name="beacon3_distance">Abstand Beacon3 (B3)</string>
     <string name="choose_beacon">Wähle Beacon</string>
     <string name="Beacon1">Beacon 1</string>
     <string name="Beacon2">Beacon 2</string>
