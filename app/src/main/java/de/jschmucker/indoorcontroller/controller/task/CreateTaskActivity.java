@@ -62,6 +62,7 @@ public class CreateTaskActivity extends AppCompatActivity implements Observer, I
             getSupportActionBar().setDisplayShowCustomEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setCustomView(R.layout.abort_save_actionbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
             View v = getSupportActionBar().getCustomView();
 
