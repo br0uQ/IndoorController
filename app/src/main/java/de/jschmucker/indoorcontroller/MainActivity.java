@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FRAGMENT_KEY = "FRAGMENT_KEY";
 
-    private Fragment fragment;
+    private Fragment fragment = new MainTasksFragment();
     private IndoorService indoorService;
     private boolean bound = false;
 
